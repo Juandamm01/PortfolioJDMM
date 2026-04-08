@@ -1,0 +1,31 @@
+---
+import '../styles/navbar.css';
+---
+
+<nav class="navbar" id="main-nav">
+    <div class="logo">
+       <span class="logo-icon nav-anim">JD</span> <span class="logo-text nav-anim">Software Developer</span>
+    </div>
+    <ul class="nav-links">
+        <li class="active nav-anim"><a href="#home">Home</a></li>
+        <li class="nav-anim"><a href="#about">About</a></li>
+        <li class="nav-anim"><a href="#project">Project</a></li>
+        <li class="nav-anim"><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+
+<script is:inline>
+    // Se ejecuta al cargar para darle el efecto dinámico exclusivo al Navbar
+    document.addEventListener("DOMContentLoaded", () => {
+        if(typeof anime !== 'undefined') {
+            anime({
+                targets: '.nav-anim',
+                translateY: [-20, 0],
+                opacity: [0, 1],
+                delay: anime.stagger(100, {start: 200}),
+                easing: 'easeOutElastic(1, .8)'
+            });
+        }
+    });
+</script>

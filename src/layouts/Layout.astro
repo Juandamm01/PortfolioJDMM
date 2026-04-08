@@ -1,0 +1,18 @@
+---
+import '../styles/global.css';
+import dartVaderIcon from '../assets/DartVader.png';
+---
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<!-- Modified the title and favicon as requested -->
+		<link rel="icon" type="image/png" href={dartVaderIcon.src} />
+		<meta name="generator" content={Astro.generator} />
+		<title>Portfolio Juan David Martinez</title>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
