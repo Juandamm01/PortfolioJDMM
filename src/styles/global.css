@@ -6,6 +6,7 @@
 @import "./techstack.css";
 @import "./experience.css";
 @import "./navbar.css";
+@import "./certifications.css";
 
 html {
     scroll-behavior: smooth;

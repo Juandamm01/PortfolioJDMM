@@ -1,0 +1,86 @@
+---
+// Certifications component - Reverting to official Astro Assets method
+import { Image } from 'astro:assets';
+import crehanaImg from '../assets/Certificaciones/Crehana.jpg';
+import cunImg from '../assets/Certificaciones/CUN.jpg';
+import kotlinImg from '../assets/Certificaciones/Kotlin.jpg';
+---
+
+<section id="certifications" class="cert-section">
+    <div class="cert-header cert-anim">
+        <div class="badge" data-i18n="cert_badge">Reconocimientos</div>
+        <h2 class="glitch-text" data-i18n="cert_title">Mis <br/> <span class="text-cyan">Certificaciones</span></h2>
+    </div>
+
+    <div class="cert-container">
+        <!-- Cert 1: Crehana -->
+        <article class="cert-card cert-anim">
+            <div class="cert-image-wrapper">
+                <Image 
+                    src={crehanaImg} 
+                    alt="Git & GitHub Certification" 
+                    class="cert-image" 
+                    format="jpg"
+                    quality="high"
+                />
+            </div>
+            <div class="cert-info">
+                <span class="cert-date" data-i18n="cert1_date">Abril 2025</span>
+                <h3 data-i18n="cert1_title">Control de versiones con Git y GitHub</h3>
+                <span class="entity" data-i18n="cert1_entity">Crehana / TecMD</span>
+                <p class="description" data-i18n="cert1_desc">
+                    Earned a professional certification in version control systems, focusing on Git and GitHub workflows. Mastered essential collaborative development skills, including branching strategies, repository management, pull requests, and conflict resolution. This certification validates my ability to manage complex codebases and collaborate effectively within agile software development teams.
+                </p>
+            </div>
+        </article>
+
+        <!-- Cert 2: Udemy -->
+        <article class="cert-card cert-anim">
+            <div class="cert-image-wrapper">
+                <Image 
+                    src={kotlinImg} 
+                    alt="Kotlin Certification" 
+                    class="cert-image" 
+                    format="jpg"
+                    quality="high"
+                />
+            </div>
+            <div class="cert-info">
+                <span class="cert-date" data-i18n="cert2_date">Julio 2025</span>
+                <h3 data-i18n="cert2_title">Kotlin: Apps desde Cero</h3>
+                <span class="entity" data-i18n="cert2_entity">Udemy</span>
+                <p class="description" data-i18n="cert2_desc">
+                    Comprehensive development of 6 native mobile applications using modern Android architecture. Deep dive into Kotlin, Jetpack Compose, API integration, and state management for scalable and robust mobile solutions.
+                </p>
+            </div>
+        </article>
+
+        <!-- Cert 3: CUN/MinTIC -->
+        <article class="cert-card cert-anim">
+            <div class="cert-image-wrapper">
+                <Image 
+                    src={cunImg} 
+                    alt="CUN/MinTIC Certification" 
+                    class="cert-image" 
+                    format="jpg"
+                    quality="high"
+                />
+            </div>
+            <div class="cert-info">
+                <span class="cert-date" data-i18n="cert3_date">Agosto 2025</span>
+                <h3 data-i18n="cert3_title">Programación Nivel Explorador</h3>
+                <span class="entity" data-i18n="cert3_entity">Ministerio TIC / CUN</span>
+                <p class="description" data-i18n="cert3_desc">
+                    The Explorer Talento Tech course introduces students to the fundamentals of web development, including HTML, CSS, JavaScript, and basic programming with Python using the Flask framework, developing programming logic and practical projects.
+                </p>
+            </div>
+        </article>
+    </div>
+</section>
+
+<script>
+    import { initCertificationsInteractive } from '../logic/certifications.js';
+    document.addEventListener('DOMContentLoaded', () => {
+        initCertificationsInteractive();
+    });
+</script>

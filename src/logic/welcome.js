@@ -50,7 +50,22 @@ export function initWelcomeInteractive() {
             exp2_b3: "Coordinación de proyectos y adaptación tecnológica.",
             edu_badge: "Formación",
             edu_title: "Educación",
-            edu1_degree: "Tecnología en Desarrollo de Software"
+            edu1_degree: "Tecnología en Desarrollo de Software",
+            // Certifications
+            cert_badge: "Reconocimientos",
+            cert_title: 'Mis <br/> <span class="text-cyan">Certificaciones</span>',
+            cert1_title: "Control de versiones con Git y GitHub",
+            cert1_entity: "Crehana / TecMD",
+            cert1_desc: "Certificación profesional en sistemas de control de versiones, enfocado en flujos de trabajo de Git y GitHub. Dominio de estrategias de ramificación, gestión de repositorios, Pull Requests y resolución de conflictos. Valida mi capacidad para gestionar bases de código complejas y colaborar en equipos ágiles.",
+            cert1_date: "Abril 2025",
+            cert2_title: "Kotlin: Apps desde Cero",
+            cert2_entity: "Udemy",
+            cert2_desc: "Desarrollo integral de 6 aplicaciones móviles nativas bajo la arquitectura moderna de Android. Aprendizaje profundo de Kotlin, Jetpack Compose, integración de APIs y gestión de estado para aplicaciones robustas y escalables.",
+            cert2_date: "Julio 2025",
+            cert3_title: "Programación Nivel Explorador",
+            cert3_entity: "Ministerio TIC / CUN",
+            cert3_desc: "El curso Explorador de Talento Tech introduce los fundamentos del desarrollo web, incluyendo HTML, CSS, JavaScript y programación básica con Python utilizando el framework Flask, desarrollando lógica de programación y proyectos prácticos.",
+            cert3_date: "Agosto 2025",
         },
         en: {
             nav_role: "Software Developer",
@@ -101,7 +116,22 @@ export function initWelcomeInteractive() {
             exp2_b3: "Project coordination and technological adaptation.",
             edu_badge: "Formation",
             edu_title: "Education",
-            edu1_degree: "Software Development Technology"
+            edu1_degree: "Software Development Technology",
+            // Certifications
+            cert_badge: "Achievements",
+            cert_title: 'My <br/> <span class="text-cyan">Certifications</span>',
+            cert1_title: "Version Control with Git & GitHub",
+            cert1_entity: "Crehana / TecMD",
+            cert1_desc: "Earned a professional certification in version control systems, focusing on Git and GitHub workflows. Mastered essential collaborative development skills, including branching strategies, repository management, pull requests, and conflict resolution. This certification validates my ability to manage complex codebases and collaborate effectively within agile software development teams.",
+            cert1_date: "April 2025",
+            cert2_title: "Kotlin: Apps from Scratch",
+            cert2_entity: "Udemy",
+            cert2_desc: "Comprehensive development of 6 native mobile applications using modern Android architecture. Deep dive into Kotlin, Jetpack Compose, API integration, and state management for scalable and robust mobile solutions.",
+            cert2_date: "July 2025",
+            cert3_title: "Explorer Level Programming",
+            cert3_entity: "Ministerio TIC / CUN",
+            cert3_desc: "The Explorer Talento Tech course introduces students to the fundamentals of web development, including HTML, CSS, JavaScript, and basic programming with Python using the Flask framework, developing programming logic and practical projects.",
+            cert3_date: "August 2025",
         }
     };
 
