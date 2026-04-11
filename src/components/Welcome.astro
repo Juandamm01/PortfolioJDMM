@@ -16,8 +16,13 @@ import Navbar from './Navbar.astro';
     <div class="lightning-container" id="lightning-container">
         <!-- SVG Lightning Path animado con AnimeJS -->
         <svg viewBox="0 0 200 1000" preserveAspectRatio="none" id="lightning" class="lightning-svg">
-            <path d="M 100 0 L 80 150 L 130 220 L 70 380 L 150 500 L 40 680 L 110 820 L 80 1000" stroke="#00f3ff" stroke-width="3" fill="none" class="lightning-path" style="filter: drop-shadow(0 0 12px #00f3ff);"/>
-            <path d="M 100 0 L 80 150 L 130 220 L 70 380 L 150 500 L 40 680 L 110 820 L 80 1000" stroke="#ffffff" stroke-width="1" fill="none" class="lightning-core" style="filter: drop-shadow(0 0 6px #fff);"/>
+            <path d="M 100 0 L 80 150 L 130 220 L 70 380 L 150 500 L 40 680 L 110 820 L 80 1000" stroke="#00f3ff" stroke-width="4" fill="none" class="lightning-path" style="filter: drop-shadow(0 0 20px #00f3ff) drop-shadow(0 0 10px #00f3ff);"/>
+            <path d="M 100 0 L 80 150 L 130 220 L 70 380 L 150 500 L 40 680 L 110 820 L 80 1000" stroke="#ffffff" stroke-width="2" fill="none" class="lightning-core" style="filter: drop-shadow(0 0 8px #fff);"/>
+            <!-- Branches for a more realistic lightning effect -->
+            <path d="M 80 150 L 40 220 L 30 300" stroke="#00f3ff" stroke-width="2" fill="none" class="lightning-path" style="filter: drop-shadow(0 0 12px #00f3ff);"/>
+            <path d="M 130 220 L 170 300 L 190 350" stroke="#00f3ff" stroke-width="2" fill="none" class="lightning-path" style="filter: drop-shadow(0 0 12px #00f3ff);"/>
+            <path d="M 150 500 L 180 580" stroke="#00f3ff" stroke-width="2" fill="none" class="lightning-path" style="filter: drop-shadow(0 0 12px #00f3ff);"/>
+            <path d="M 40 680 L 10 750" stroke="#00f3ff" stroke-width="2" fill="none" class="lightning-path" style="filter: drop-shadow(0 0 12px #00f3ff);"/>
         </svg>
 
         <!-- Lottie Player de partículas -->
@@ -35,23 +40,15 @@ import Navbar from './Navbar.astro';
     <main class="hero-section">
         <!-- Left Side: Content -->
         <div class="hero-content">
-            <div class="badge entrance-anim">A developer, guided by the Force.</div>
+            <div class="badge entrance-anim" data-i18n="badge">Un desarrollador, guiado por la Fuerza.</div>
             
-            <h1 class="glitch-text entrance-anim">WELCOME TO MY <br/> <span class="text-cyan">PORTFOLIO</span></h1>
+            <h1 class="glitch-text entrance-anim" data-i18n="title">BIENVENIDO A MI <br/> <span class="text-cyan">PORTAFOLIO</span></h1>
             
             <h2 class="entrance-anim"><span id="typed-text"></span><span class="blinking-cursor">|</span></h2>
             
-            <p class="description entrance-anim">
-                I am a 5th-semester Software Development student with experience in Fullstack projects using Next.js, React.js, Javascript, Kotlin, and Flutter. I am passionate about building functional web and mobile applications with good user experience. I am looking for an opportunity to grow as a Fullstack developer and contribute my skills to real projects.
+            <p class="description entrance-anim" data-i18n="description">
+                Soy un estudiante de 5º semestre de Desarrollo de Software con experiencia en proyectos Fullstack usando Next.js, React.js, Javascript, Kotlin y Flutter. Me apasiona construir aplicaciones web y móviles funcionales con buena experiencia de usuario. Busco una oportunidad para crecer como desarrollador Front-End y aportar mis habilidades en proyectos reales.
             </p>
-            
-            <div class="tech-stack entrance-anim">
-                <span class="tech-pill">JavaScript</span>
-                <span class="tech-pill">React.js</span>
-                <span class="tech-pill">Next.js</span>
-                <span class="tech-pill">Kotlin</span>
-                <span class="tech-pill">Flutter</span>
-            </div>
             
             <div class="social-links entrance-anim">
                 <a class="social-icon" href="https://github.com/Juandamm01" target="_blank" aria-label="GitHub">
@@ -74,7 +71,7 @@ import Navbar from './Navbar.astro';
                 <div class="id-card" id="developer-card">
                     <div class="card-header">
                         <span class="logo-icon small">JD</span> 
-                        <span class="header-title">SOFTWARE DEV</span>
+                        <span class="header-title" data-i18n="id_header">DESARROLLO DE SOFTWARE</span>
                     </div>
                     <div class="card-body">
                         <!-- Eliminado el texto vertical JUAN. El wrapper ahora ocupa todo el tamaño -->
@@ -84,7 +81,7 @@ import Navbar from './Navbar.astro';
                     </div>
                     <div class="card-footer">
                         <div class="footer-name">JUAN DAVID M.</div>
-                        <div class="footer-role">FRONT END DEVELOPER</div>
+                        <div class="footer-role" data-i18n="id_role">DESARROLLADOR FRONT END</div>
                     </div>
                 </div>
             </div>
@@ -93,91 +90,10 @@ import Navbar from './Navbar.astro';
 </div>
 
 
-<script is:inline>
+<script>
+    import { initWelcomeInteractive } from '../logic/welcome.js';
+    
     document.addEventListener("DOMContentLoaded", () => {
-        // --- 1. Typing Effect ---
-        const textToType = "Software Developer";
-        const typedTextSpan = document.getElementById("typed-text");
-        let i = 0;
-        
-        function typeWriter() {
-            if (i < textToType.length) {
-                typedTextSpan.innerHTML += textToType.charAt(i);
-                i++;
-                setTimeout(typeWriter, Math.random() * 50 + 50); 
-            }
-        }
-        setTimeout(typeWriter, 1200);
-
-        if(typeof anime !== 'undefined') {
-            // --- 2. Anime.js Lightning Animation Effect ---
-            const pathElement = document.querySelector('.lightning-path');
-            if (pathElement) {
-                const pathLength = anime.setDashoffset(pathElement);
-                
-                anime({
-                    targets: ['.lightning-path', '.lightning-core'],
-                    strokeDashoffset: [pathLength, 0],
-                    easing: 'easeOutElastic(1, .8)',
-                    duration: 1500,
-                    direction: 'alternate',
-                    loop: true,
-                    opacity: [0, 1, 0.2, 1, 0],
-                    delay: function(el, i) { return i * 100; }
-                });
-
-                // Random jitter
-                setInterval(() => {
-                    const svgPaths = document.querySelectorAll('.lightning-path, .lightning-core');
-                    svgPaths.forEach(path => {
-                        path.style.opacity = Math.random() > 0.7 ? '1' : '0.3';
-                    });
-                }, 150);
-            }
-
-            // --- 3. Anime.js Entrance Animations ---
-            anime({
-                targets: '.entrance-anim',
-                translateY: [40, 0],
-                opacity: [0, 1],
-                delay: anime.stagger(150, {start: 600}), 
-                easing: 'easeOutQuart',
-                duration: 1000
-            });
-
-            // --- 4. ID Card Swinging Animation ---
-            anime({
-                targets: '.id-card-wrapper',
-                rotateZ: ['-5deg', '5deg'],
-                translateY: ['-8px', '8px'],
-                duration: 4000,
-                direction: 'alternate',
-                loop: true,
-                easing: 'easeInOutSine',
-                transformOrigin: 'top center'
-            });
-        }
-
-        // --- 5. Interactive hover 3D tilt effect ---
-        const card = document.getElementById('developer-card');
-        if (card) {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const rotateX = ((y - centerY) / centerY) * -12; 
-                const rotateY = ((x - centerX) / centerX) * 12;
-                
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-            });
-        }
+        initWelcomeInteractive();
     });
 </script>

@@ -4,28 +4,22 @@ import '../styles/navbar.css';
 
 <nav class="navbar" id="main-nav">
     <div class="logo">
-       <span class="logo-icon nav-anim">JD</span> <span class="logo-text nav-anim">Software Developer</span>
+       <span class="logo-icon nav-anim">JD</span> <span class="logo-text nav-anim" data-i18n="nav_role">Desarrollador de Software</span>
     </div>
     <ul class="nav-links">
-        <li class="active nav-anim"><a href="#home">Home</a></li>
-        <li class="nav-anim"><a href="#about">About</a></li>
-        <li class="nav-anim"><a href="#project">Project</a></li>
-        <li class="nav-anim"><a href="#contact">Contact</a></li>
+        <li class="active nav-anim"><a href="#home" data-i18n="nav_home">Inicio</a></li>
+        <li class="nav-anim"><a href="#about" data-i18n="nav_about">Sobre Mí</a></li>
+        <li class="nav-anim"><a href="#project" data-i18n="nav_project">Proyectos</a></li>
+        <li class="nav-anim"><a href="#contact" data-i18n="nav_contact">Contacto</a></li>
     </ul>
+    <button id="lang-toggle" class="lang-btn nav-anim" aria-label="Toggle Language">EN</button>
 </nav>
 
 
-<script is:inline>
-    // Se ejecuta al cargar para darle el efecto dinámico exclusivo al Navbar
+<script>
+    import { initNavbarInteractive } from '../logic/navbar.js';
+    
     document.addEventListener("DOMContentLoaded", () => {
-        if(typeof anime !== 'undefined') {
-            anime({
-                targets: '.nav-anim',
-                translateY: [-20, 0],
-                opacity: [0, 1],
-                delay: anime.stagger(100, {start: 200}),
-                easing: 'easeOutElastic(1, .8)'
-            });
-        }
+        initNavbarInteractive();
     });
 </script>

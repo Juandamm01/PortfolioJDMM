@@ -1,0 +1,116 @@
+---
+// TechStack component
+import awsImg from '../assets/AWS.png';
+import astroImg from '../assets/Astro.png';
+import antiImg from '../assets/Antigravity.png';
+import dribbleImg from '../assets/Dribble.png';
+---
+
+<section id="techstack" class="stack-section">
+    <div class="projects-header project-anim">
+        <div class="badge" data-i18n="stack_badge">Tecnologías</div>
+        <h2 class="glitch-text" data-i18n="stack_title">Mi <br/> <span class="text-cyan">Stack</span></h2>
+    </div>
+
+    <div class="stack-grid">
+        <!-- Frontend -->
+        <article class="stack-card project-anim" style="animation-delay: 100ms;">
+            <h3 class="stack-category" data-i18n="cat_front">Frontend</h3>
+            <div class="stack-items">
+                <span class="stack-item"><i class="devicon-react-original colored"></i> React</span>
+                <span class="stack-item"><i class="devicon-html5-plain colored"></i> HTML</span>
+                <span class="stack-item"><i class="devicon-css3-plain colored"></i> CSS</span>
+            </div>
+        </article>
+
+        <!-- Backend -->
+        <article class="stack-card project-anim" style="animation-delay: 200ms;">
+            <h3 class="stack-category" data-i18n="cat_back">Backend</h3>
+            <div class="stack-items">
+                <span class="stack-item"><i class="devicon-nodejs-plain colored"></i> Node.js</span>
+                <span class="stack-item"><i class="devicon-express-original" style="color: white;"></i> Express.js</span>
+            </div>
+        </article>
+
+        <!-- Languages -->
+        <article class="stack-card project-anim" style="animation-delay: 300ms;">
+            <h3 class="stack-category" data-i18n="cat_dev">Lenguajes</h3>
+            <div class="stack-items">
+                <span class="stack-item"><i class="devicon-javascript-plain colored"></i> JavaScript</span>
+                <span class="stack-item"><i class="devicon-typescript-plain colored"></i> TypeScript</span>
+                <span class="stack-item"><i class="devicon-cplusplus-plain colored"></i> C++</span>
+            </div>
+        </article>
+
+        <!-- Frameworks -->
+        <article class="stack-card project-anim" style="animation-delay: 400ms;">
+            <h3 class="stack-category" data-i18n="cat_frame">Frameworks</h3>
+            <div class="stack-items">
+                <span class="stack-item"><i class="devicon-nextjs-plain" style="color: white;"></i> Next.js</span>
+                <span class="stack-item"><img src={astroImg.src} alt="Astro" class="sicon" /> Astro</span>
+                <span class="stack-item"><i class="devicon-flutter-plain colored"></i> Flutter</span>
+            </div>
+        </article>
+
+        <!-- Databases -->
+        <article class="stack-card project-anim" style="animation-delay: 500ms;">
+            <h3 class="stack-category" data-i18n="cat_db">Bases de Datos</h3>
+            <div class="stack-items">
+                <span class="stack-item"><i class="devicon-postgresql-plain colored"></i> PostgreSQL</span>
+                <span class="stack-item"><i class="devicon-mongodb-plain colored"></i> MongoDB</span>
+            </div>
+        </article>
+
+        <!-- Tools -->
+        <article class="stack-card project-anim" style="animation-delay: 600ms;">
+            <h3 class="stack-category" data-i18n="cat_tools">Herramientas</h3>
+            <div class="stack-items">
+                <span class="stack-item"><i class="devicon-git-plain colored"></i> Git</span>
+                <span class="stack-item"><i class="devicon-github-original" style="color: white;"></i> GitHub</span>
+                <span class="stack-item"><i class="devicon-postman-plain colored"></i> Postman</span>
+                <span class="stack-item"><i class="devicon-prisma-original" style="color: white;"></i> Prisma</span>
+                <span class="stack-item">
+                    <svg class="sicon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#00E699" d="M10.368 21.77c-4.866 1.318-9.778-1.565-10.967-6.526C-1.789 10.283 1.27 5.41 6.136 4.09l10.362-2.804c4.866-1.318 9.778 1.565 10.967 6.527 1.19 4.962-1.87 9.834-6.735 11.154L10.368 21.77Zm5.994-8.555c2.432-.659 3.857-3.279 3.187-5.85-.67-2.572-3.189-4.093-5.622-3.434l-5.181 1.402c-2.432.659-3.857 3.28-3.187 5.851l-.046.013c.671 2.572 3.19 4.093 5.622 3.434l5.227-1.416Z"/></svg>
+                    Neon
+                </span>
+                <span class="stack-item"><img src={antiImg.src} alt="Antigravity" class="sicon" /> Antigravity</span>
+            </div>
+        </article>
+
+        <!-- Cloud -->
+        <article class="stack-card project-anim" style="animation-delay: 700ms;">
+            <h3 class="stack-category" data-i18n="cat_cloud">Cloud</h3>
+            <div class="stack-items">
+                <span class="stack-item"><img src={awsImg.src} alt="AWS" class="sicon" /> AWS</span>
+            </div>
+        </article>
+
+        <!-- Design -->
+        <article class="stack-card project-anim" style="animation-delay: 800ms;">
+            <h3 class="stack-category" data-i18n="cat_design">Diseño</h3>
+            <div class="stack-items">
+                <span class="stack-item"><img src={dribbleImg.src} alt="Dribbble" class="sicon" /> Dribbble</span>
+            </div>
+        </article>
+    </div>
+</section>
+
+<style>
+.stack-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+.stack-item i {
+    font-size: 1.1rem;
+    line-height: 1;
+}
+.sicon {
+    width: 1.2rem;
+    height: 1.2rem;
+    object-fit: contain;
+    flex-shrink: 0;
+    display: inline-block;
+    vertical-align: middle;
+}
+</style>
