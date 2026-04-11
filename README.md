@@ -1,135 +1,135 @@
 # 🌌 Portfolio — Juan David Martinez Medina
 
-> *"Un desarrollador, guiado por la Fuerza."*
+> *"A developer, guided by the Force."*
 
-Portafolio personal construido con **Astro**, con animaciones premium usando **Anime.js**, sistema de internacionalización dinámico (ES/EN), y un diseño tipo "slide" donde cada sección ocupa exactamente una pantalla completa.
+Personal portfolio built with **Astro**, featuring premium animations powered by **Anime.js**, a dynamic internationalization system (ES/EN), and a cinematic "slide" design where each section fills exactly one full screen.
 
 ---
 
-## ✨ Características
+## ✨ Features
 
-- **Scroll-Snap cinematográfico** — cada sección encaja perfectamente en pantalla
-- **Navbar inteligente** — desaparece al bajar, reaparece al subir, con efecto glassmorphism
-- **Animaciones Enter/Leave** — cada sección re-anima al volver a ella
-- **Parallax en el Hero** — el contenido reacciona al scroll con profundidad
-- **Rayo animado** (Welcome) — efecto SVG con Anime.js en bucle
-- **ID Card 3D** — tarjeta de presentación con tilt interactivo al mouse y animación de péndulo
-- **Sable de luz Jedi** (Proyectos) — easter egg Star Wars que se enciende al llegar a la sección
-- **Proyectos Destacados** — tarjetas con imágenes reales, tech stack y links a GitHub
-- **Tech Stack visual** — íconos de Devicon + SVGs propios con pop-in animado
-- **i18n dinámico** — cambio instantáneo Español / Inglés sin recargar la página
-- **Tipado animado** — efecto typewriter en el título del Hero
-- **Favicon personalizado** — logo de Darth Vader 🎭
+- **Cinematic Scroll-Snap** — each section locks perfectly into view
+- **Smart Navbar** — hides on scroll down, reappears on scroll up, with glassmorphism effect
+- **Enter/Leave Animations** — every section re-animates each time you return to it
+- **Hero Parallax** — content reacts to scroll with depth effect
+- **Animated Lightning** (Welcome) — SVG effect with looping Anime.js animation
+- **3D ID Card** — interactive business card with mouse tilt and pendulum swing
+- **Jedi Lightsaber** (Projects) — Star Wars easter egg that ignites when you arrive at the section
+- **Featured Projects** — cards with real screenshots, tech stack and GitHub links
+- **Visual Tech Stack** — Devicon icons + custom SVGs with staggered pop-in animation
+- **Dynamic i18n** — instant Spanish / English toggle without page reload
+- **Typewriter Effect** — animated typing in the Hero title
+- **Custom Favicon** — Darth Vader logo 🎭
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Categoría | Tecnologías |
-|-----------|------------|
+| Category | Technologies |
+|----------|-------------|
 | **Framework** | Astro |
-| **Animaciones** | Anime.js |
-| **Íconos** | Devicon CDN |
-| **Fuentes** | Google Fonts — Inter |
-| **Estilos** | Vanilla CSS (modular) |
-| **Lenguaje** | JavaScript (ES Modules) |
+| **Animations** | Anime.js |
+| **Icons** | Devicon CDN |
+| **Fonts** | Google Fonts — Inter |
+| **Styles** | Vanilla CSS (modular) |
+| **Language** | JavaScript (ES Modules) |
 
 ---
 
-## 📁 Estructura del Proyecto
+## 📁 Project Structure
 
 ```
 src/
-├── assets/           # Imágenes de proyectos y logos
+├── assets/           # Project images and logos
 ├── components/
-│   ├── Welcome.astro         # Sección Hero (pantalla 1)
-│   ├── Navbar.astro          # Navegación fija
-│   ├── FeaturedProjects.astro # Proyectos destacados (pantalla 2)
-│   └── TechStack.astro       # Stack tecnológico (pantalla 3)
+│   ├── Welcome.astro          # Hero section (screen 1)
+│   ├── Navbar.astro           # Fixed navigation bar
+│   ├── FeaturedProjects.astro # Featured projects (screen 2)
+│   └── TechStack.astro        # Technology stack (screen 3)
 ├── layouts/
-│   └── Layout.astro          # Layout base con CDNs
-├── logic/            # Toda la lógica JS modularizada
-│   ├── welcome.js    # Animaciones Hero + i18n + typewriter
+│   └── Layout.astro           # Base layout with CDN links
+├── logic/            # All JS logic — fully modularized
+│   ├── welcome.js    # Hero animations + i18n + typewriter
 │   ├── navbar.js     # Scroll hide/show + glassmorphism
-│   └── projects.js   # Animaciones Enter/Leave por sección
+│   └── projects.js   # Section Enter/Leave animations
 ├── pages/
-│   └── index.astro   # Página principal
+│   └── index.astro   # Main page
 └── styles/
-    ├── global.css    # Estilos globales + diseño de cada sección
-    └── navbar.css    # Estilos específicos del navbar
+    ├── global.css    # Global styles + per-section design
+    └── navbar.css    # Navbar-specific styles
 ```
 
 ---
 
-## 🚀 Instalación y uso local
+## 🚀 Local Setup
 
 ```bash
-# Clonar el repositorio
+# Clone the repository
 git clone https://github.com/Juandamm01/PortfolioJDMM.git
 
-# Entrar al directorio
+# Navigate to the directory
 cd PortfolioJDMM
 
-# Instalar dependencias
+# Install dependencies
 npm install
 
-# Iniciar servidor de desarrollo
+# Start development server
 npm run dev
 ```
 
-Abre [http://localhost:4321](http://localhost:4321) en tu navegador.
+Open [http://localhost:4321](http://localhost:4321) in your browser.
 
 ---
 
-## 🌐 Secciones
+## 🌐 Sections
 
 ### 1. 🏠 Welcome — Hero Section
-Presentación principal con animación de rayo tipo Star Wars, tarjeta de identificación 3D interactiva con efecto tilt, efecto de escritura animado y parallax al hacer scroll.
+Main presentation with a Star Wars-style lightning animation, an interactive 3D ID card with mouse tilt, an animated typewriter effect, and scroll parallax depth.
 
-### 2. 💼 Proyectos Destacados
-- **Dra. Camila Henao Odontología** — Web clínica dental con Next.js, Framer Motion y GSAP *(En desarrollo)*
-- **Bioconstructores Asociados SAS** — Plataforma empresarial Fullstack con React, Next.js, TypeScript y AWS S3
+### 2. 💼 Featured Projects
+- **Dra. Camila Henao Odontología** — Dental clinic website with Next.js, Framer Motion and GSAP *(In Development)*
+- **Bioconstructores Asociados SAS** — Fullstack enterprise platform with React, Next.js, TypeScript and AWS S3
 
-### 3. ⚙️ Mi Stack
-Visualización categorizada de todas mis tecnologías con íconos, animaciones escalonadas y efecto hover neon.
-
----
-
-## 📐 Principios de código aplicados
-
-- **Clean Code** — Cero JavaScript inline en los `.astro`. Toda la lógica vive en `src/logic/`
-- **Separación de responsabilidades** — HTML, CSS y JS en archivos independientes
-- **CSS centralizado** — Todos los estilos en `global.css` y `navbar.css`, nunca inline
-- **Modularidad** — Cada componente es autocontenido y reutilizable
+### 3. ⚙️ My Stack
+Categorized visualization of all technologies with icons, staggered animations, and neon hover effects.
 
 ---
 
-## 📱 Compatibilidad
+## 📐 Code Principles Applied
 
-| Dispositivo | Estado |
-|-------------|--------|
-| Desktop | ✅ Óptimo |
-| Tablet | ✅ Responsive |
-| Móvil | ✅ Adaptado |
+- **Clean Code** — Zero inline JavaScript in `.astro` files. All logic lives in `src/logic/`
+- **Separation of Concerns** — HTML, CSS and JS in independent, focused files
+- **Centralized CSS** — All styles in `global.css` and `navbar.css`, never inline
+- **Modularity** — Each component is self-contained and reusable
 
 ---
 
-## 🌍 Idiomas soportados
+## 📱 Compatibility
 
-| Idioma | Código |
+| Device | Status |
 |--------|--------|
-| 🇨🇴 Español | `es` (por defecto) |
-| 🇺🇸 Inglés | `en` |
-
-El cambio de idioma es instantáneo y sin recarga de página, usando un sistema i18n propio basado en atributos `data-i18n`.
+| Desktop | ✅ Optimized |
+| Tablet | ✅ Responsive |
+| Mobile | ✅ Adapted |
 
 ---
 
-## 👨‍💻 Autor
+## 🌍 Supported Languages
+
+| Language | Code |
+|----------|------|
+| 🇨🇴 Spanish | `es` (default) |
+| 🇺🇸 English | `en` |
+
+Language switching is instant and requires no page reload, powered by a custom i18n system based on `data-i18n` attributes.
+
+---
+
+## 👨‍💻 Author
 
 **Juan David Martinez Medina**  
-Estudiante de 5º semestre de Desarrollo de Software  
-Apasionado por el Frontend avanzado, las interfaces interactivas y las experiencias de usuario de alto nivel.
+5th-semester Software Development student  
+Passionate about advanced Frontend, interactive interfaces, and high-level user experiences.
 
 [![GitHub](https://img.shields.io/badge/GitHub-Juandamm01-181717?style=for-the-badge&logo=github)](https://github.com/Juandamm01)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-juan--david19-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/juan-david19)
@@ -137,5 +137,5 @@ Apasionado por el Frontend avanzado, las interfaces interactivas y las experienc
 ---
 
 <div align="center">
-  <sub>Construido con 💙 y la Fuerza · © 2026 Juan David Martinez Medina</sub>
+  <sub>"Do or do not. There is no try." · © 2026 Juan David Martinez Medina</sub>
 </div>
