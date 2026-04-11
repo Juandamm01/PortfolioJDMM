@@ -1,5 +1,13 @@
-# Ignore CSS and Logic JS from language statistics to highlight Astro
-src/styles/*.css linguist-vendored
+# Ensure Astro is > 50% by hiding heavy CSS and JS files
 src/logic/*.js linguist-vendored
+src/styles/welcome.css linguist-vendored
+src/styles/projects.css linguist-vendored
+src/styles/global.css linguist-vendored
+src/styles/techstack.css linguist-vendored
+
+# Keep navbar.css and experience.css visible (small amount of CSS)
+# *.astro files will dominate the statistics
+
 *.json linguist-vendored
 *.svg linguist-vendored
+package-lock.json linguist-vendored
