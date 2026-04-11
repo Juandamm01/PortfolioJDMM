@@ -1,0 +1,5 @@
+# Ignore CSS and Logic JS from language statistics to highlight Astro
+src/styles/*.css linguist-vendored
+src/logic/*.js linguist-vendored
+*.json linguist-vendored
+*.svg linguist-vendored
