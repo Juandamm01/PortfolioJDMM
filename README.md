@@ -1,37 +1,40 @@
-# 🛸 Personal Portfolio - High Performance Astro Website
+# 🌌 JDMM Portfolio - Astro Dark-Side Edition
 
-A cutting-edge, personal portfolio built with **Astro**, featuring a Star Wars-inspired aesthetic. This project showcases advanced frontend logic, 3D interactivity, and a robust fullstack architecture.
+A high-performance personal portfolio built with **Astro**, featuring a futuristic "Star Wars" aesthetic, procedural animations, and a sleek dark-mode interface.
 
-## 🚀 Technical Highlights
+![Portfolio Preview](file:///C:/Users/Juan%20David/.gemini/antigravity/brain/e68fc1a2-f512-4823-a32b-7b5f61d93621/portfolio_dark_preview_1775899074374.png)
 
-*   **Framework:** [Astro.build](https://astro.build/) (Optimized for speed with partial hydration).
-*   **Styling:** Vanilla CSS with a **Modular Architecture** (styles split by component for maximum maintainability).
-*   **Animations Engine:**
-    *   **GSAP:** Orchestrating scroll-triggered animations and entry sequences.
-    *   **Anime.js:** Powering the procedural lightning background and 3D perspective physics.
-    *   **Framer Motion:** Smooth transitions for dynamic UI elements.
-*   **Fullstack Integration:**
-    *   **ORM:** Prisma.
-    *   **Database:** Neon (Serverless PostgreSQL).
-    *   **Storage:** AWS S3 for high-availability asset management.
-*   **Logic:** Modern JavaScript (ES6+) with a custom i18n engine for seamless English/Spanish switching.
+## 🚀 Built With
+
+*   **Framework:** [Astro](https://astro.build/) (Static Site Generation for peak performance).
+*   **Styling:** Vanilla CSS (Modular architecture).
+*   **Animations:** [Anime.js](https://animejs.com/) via CDN (Powering the lightning FX and 3D card physics).
+*   **Interactivity:** Vanilla JavaScript ES6+.
+*   **Assets:** Lottie Framework for lightweight particle effects.
 
 ## 🌟 Key Features
 
-*   **3D Developer ID Card:** Interactive perspective tracking that reacts to mouse movement.
-*   **Adaptive Architecture:** Fully responsive design from mobile to ultra-wide displays.
-*   **SEO Optimized:** Semantic HTML5 and dynamic meta-tags for better search engine indexing.
-*   **Performance First:** Zero-JS by default approach, reaching peak performance in Lighthouse scores.
+*   **3D Interactive ID Card:** A custom-built developer badge with perspective tracking and hover physics.
+*   **Procedural Lightning Background:** CPU-efficient SVG lightning paths animated dynamically.
+*   **Modular Styles:** CSS architecture split by sections (Hero, Projects, Experience, Tech) for clean maintenance.
+*   **Custom i18n Engine:** Seamless English/Spanish switching without page reloads using a client-side dictionary.
+*   **Lightsaber UI:** Unique hover effects and section separators inspired by the Jedi/Sith aesthetic.
+
+## 🛠️ Project Structure
+
+The project follows a clean, component-based organization:
+- `/src/components`: Astro components for each section.
+- `/src/styles`: Modularized CSS files.
+- `/src/logic`: Interaction logic and translations.
 
 ---
 
 ## 👨‍💻 Author
 
-**Juan David Martinez Medina**  
-*Software Development Student & Fullstack Enthusiast*
+**Juan David Martinez Medina**
 
-*   **GitHub:** [Juandamm01](https://github.com/Juandamm01)
-*   **LinkedIn:** [Juan David Martinez](https://www.linkedin.com/in/juan-david19)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/juan-david19)
+[![GitHub](https://img.shields.io/badge/GitHub-101217?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Juandamm01)
 
 ---
-*"The Force is strong with this code."* 🌌
+*"The Force is strong with this build."* 🛸
