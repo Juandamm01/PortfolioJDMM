@@ -1,0 +1,205 @@
+/* Featured Projects Styles */
+.projects-section {
+    padding: 4rem 2rem 1.5rem 2rem;
+    min-height: 100vh;
+    height: 100vh;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.projects-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Reduced from 2rem to save space */
+}
+
+.projects-header {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+/* Lightsaber Background Effect */
+.lightsaber-bg {
+    position: absolute;
+    top: 55%;
+    left: -5%;
+    width: 110%;
+    height: 10px;
+    transform: rotate(35deg);
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+    opacity: 0.15;
+}
+
+.saber-hilt {
+    width: 120px;
+    height: 16px;
+    background: linear-gradient(to bottom, #777, #333, #777);
+    border-radius: 4px;
+    border-right: 4px solid #111;
+    position: relative;
+    box-shadow: inset 0 0 5px #000;
+}
+
+.hilt-detail {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    width: 30px;
+    height: 100%;
+    background: repeating-linear-gradient(90deg, #111, #111 2px, transparent 2px, transparent 5px);
+}
+
+.saber-blade {
+    flex: 1;
+    height: 8px;
+    background: #fff;
+    box-shadow: 0 0 10px var(--cyan), 0 0 20px var(--cyan), 0 0 40px var(--cyan), 0 0 60px var(--cyan);
+    border-radius: 0 10px 10px 0;
+    transform-origin: left;
+    transform: scaleX(0);
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.project-card {
+    background: rgba(13, 19, 35, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1);
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.project-card:hover {
+    border-color: var(--cyan);
+    box-shadow: 0 15px 40px rgba(0, 243, 255, 0.15);
+    transform: translateY(-5px) scale(1.01) !important;
+}
+
+.project-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 140px; /* Reduced to fit 100vh */
+    overflow: hidden;
+}
+
+.project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-image {
+    transform: scale(1.05);
+}
+
+.project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(5, 9, 20, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(2px);
+}
+
+.project-card:hover .project-overlay {
+    opacity: 1;
+}
+
+.project-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    background: var(--cyan);
+    color: var(--bg-dark);
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 8px;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.project-link svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+.project-card:hover .project-link {
+    transform: translateY(0);
+}
+
+.project-link:hover {
+    background: var(--white);
+    box-shadow: 0 0 15px var(--white);
+}
+
+.project-content {
+    padding: 1.25rem; /* Increased from 1rem */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-content h3 {
+    font-size: 1.15rem; /* Slightly smaller */
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    color: var(--white);
+}
+
+.project-content .description {
+    font-size: 0.8rem; /* Smaller */
+    flex: 1;
+    min-height: 0;
+    margin-bottom: 0.7rem;
+    line-height: 1.35;
+    color: var(--gray);
+}
+
+.small-stack {
+    margin-bottom: 0;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.small-stack .tech-pill {
+    padding: 0.3rem 0.6rem; /* More compact */
+    font-size: 0.75rem;
+    background: rgba(0, 243, 255, 0.05);
+    border: 1px solid rgba(0, 243, 255, 0.2);
+}
+
+@media (max-width: 768px) {
+    .projects-section {
+        padding: 4rem 1rem 2rem 1rem;
+    }
+}

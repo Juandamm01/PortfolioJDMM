@@ -1,0 +1,139 @@
+---
+// Experience & Education component
+---
+
+<section id="experience" class="exp-section">
+    <!-- Header ALWAYS visible, no animation class -->
+    <div class="exp-main-header exp-main-anim">
+        <div class="badge" data-i18n="exp_badge">Trayectoria</div>
+        <h2 class="glitch-text" data-i18n="exp_title">
+            Experiencia & <span class="text-cyan">Estudios</span>
+        </h2>
+    </div>
+
+    <!-- Two columns -->
+    <div class="exp-body">
+        <!-- EXPERIENCE column -->
+        <div class="exp-col">
+            <h3 class="exp-col-label" data-i18n="exp_col_label_prof">
+                💼 Experiencia Profesional
+            </h3>
+
+            <div class="exp-timeline">
+                <!-- Job 1 -->
+                <article class="exp-card exp-card-anim">
+                    <div class="exp-dot"></div>
+                    <div class="exp-card-inner">
+                        <div class="exp-meta">
+                            <span class="exp-period">Sep 2025 – Nov 2025</span>
+                            <span class="exp-tag" data-i18n="exp_tag_onsite"
+                                >Presencial</span
+                            >
+                        </div>
+                        <h3 data-i18n="exp1_role">
+                            Monitor de Lógica de Programación
+                        </h3>
+                        <p class="exp-company">
+                            📍 Corporación Universitaria Minuto de Dios —
+                            Villavicencio, Meta
+                        </p>
+                        <ul class="exp-bullets">
+                            <li data-i18n="exp1_b1">
+                                Soporte técnico en lógica algorítmica con <strong
+                                    >C++</strong
+                                >.
+                            </li>
+                            <li data-i18n="exp1_b2">
+                                Tutorías prácticas sobre condicionales, ciclos y
+                                arreglos.
+                            </li>
+                            <li data-i18n="exp1_b3">
+                                Fortalecimiento de liderazgo académico y
+                                comunicación.
+                            </li>
+                        </ul>
+                        <div class="exp-tech">
+                            <span class="tech-pill">C++</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Job 2 -->
+                <article class="exp-card exp-card-anim">
+                    <div class="exp-dot active"></div>
+                    <div class="exp-card-inner">
+                        <div class="exp-meta">
+                            <span class="exp-period">Feb 2026 – Presente</span>
+                            <span
+                                class="exp-tag active"
+                                data-i18n="exp_tag_present">Activo</span
+                            >
+                        </div>
+                        <h3 data-i18n="exp2_role">
+                            Desarrollador Web Fullstack
+                        </h3>
+                        <p class="exp-company">
+                            📍 Bioconstructores Asociados SAS — Villavicencio,
+                            Meta
+                        </p>
+                        <ul class="exp-bullets">
+                            <li data-i18n="exp2_b1">
+                                Desarrollé sitio web con <strong>Next.js</strong
+                                >, <strong>React.js</strong>, <strong
+                                    >Prisma</strong
+                                > y <strong>Neon</strong>.
+                            </li>
+                            <li data-i18n="exp2_b2">
+                                Animaciones con <strong>Framer Motion</strong> y <strong
+                                    >GSAP</strong
+                                >.
+                            </li>
+                            <li data-i18n="exp2_b3">
+                                Coordinación de proyectos y adaptación
+                                tecnológica.
+                            </li>
+                        </ul>
+                        <div class="exp-tech">
+                            <span class="tech-pill">Next.js</span>
+                            <span class="tech-pill">React</span>
+                            <span class="tech-pill">TypeScript</span>
+                            <span class="tech-pill">Prisma</span>
+                            <span class="tech-pill">Neon</span>
+                            <span class="tech-pill">AWS</span>
+                            <span class="tech-pill">GSAP</span>
+                            <span class="tech-pill">Framer Motion</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <!-- EDUCATION column -->
+        <div class="edu-col">
+            <h3 class="exp-col-label" data-i18n="exp_col_label_edu">
+                🎓 Educación
+            </h3>
+
+            <article class="edu-card exp-card-anim">
+                <div class="edu-icon">🎓</div>
+                <div>
+                    <h3 data-i18n="edu1_degree">
+                        Tecnología en Desarrollo de Software
+                    </h3>
+                    <p class="exp-company">
+                        Corporación Universitaria Minuto de Dios
+                    </p>
+                    <p class="exp-company">Villavicencio, Meta</p>
+                    <span class="exp-period">Feb 2024 – Actualidad</span>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<script>
+    import { initExperienceInteractive } from "../logic/experience.js";
+    document.addEventListener("DOMContentLoaded", () => {
+        initExperienceInteractive();
+    });
+</script>

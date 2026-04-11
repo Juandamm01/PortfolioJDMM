@@ -21,7 +21,7 @@ export function initWelcomeInteractive() {
             project1_title: "Dra. Camila Henao Odontología",
             project1_desc: 'Desarrollo moderno y dinámico para clínica dental. Frontend construido en Next.js con animaciones fluidas a medida usando Framer Motion y GSAP para una experiencia interactiva inmersiva. <span class="text-cyan">(En Desarrollo)</span>',
             project2_title: "Bioconstructores Asociados SAS",
-            project2_desc: "Panel de administración y landing corporativa Fullstack. Frontend ágil en React y Next.js, con Backend robusto en TypeScript. Incorpora almacenamiento escalable de imágenes con infraestructura AWS S3 nativa.",
+            project2_desc: "Panel de administración y landing corporativa Fullstack. Desarrollada con Next.js, React.js, Prisma, Neon y animaciones avanzadas con Framer Motion y GSAP. Incorpora infraestructura de backend robusta y almacenamiento escalable.",
             // Tech Stack
             stack_badge: "Tecnologías",
             stack_title: 'Mi <br/><span class="text-cyan">Stack</span>',
@@ -32,7 +32,25 @@ export function initWelcomeInteractive() {
             cat_db: "Bases de Datos",
             cat_tools: "Herramientas",
             cat_cloud: "Cloud",
-            cat_design: "Diseño"
+            cat_design: "Diseño",
+            // Experience
+            exp_badge: "Trayectoria",
+            exp_title: 'Experiencia & <span class="text-cyan">Estudios</span>',
+            exp_col_label_prof: "💼 Experiencia Profesional",
+            exp_col_label_edu: "🎓 Educación",
+            exp_tag_onsite: "Presencial",
+            exp_tag_present: "Activo",
+            exp1_role: "Monitor de Lógica de Programación",
+            exp1_b1: "Soporte técnico en lógica algorítmica con <strong>C++</strong>.",
+            exp1_b2: "Tutorías prácticas sobre condicionales, ciclos y arreglos.",
+            exp1_b3: "Fortalecimiento de liderazgo académico y comunicación.",
+            exp2_role: "Desarrollador Web Fullstack",
+            exp2_b1: "Desarrollé sitio web con <strong>Next.js</strong>, <strong>React.js</strong>, <strong>Prisma</strong> y <strong>Neon</strong>.",
+            exp2_b2: "Animaciones con <strong>Framer Motion</strong> y <strong>GSAP</strong>.",
+            exp2_b3: "Coordinación de proyectos y adaptación tecnológica.",
+            edu_badge: "Formación",
+            edu_title: "Educación",
+            edu1_degree: "Tecnología en Desarrollo de Software"
         },
         en: {
             nav_role: "Software Developer",
@@ -54,7 +72,7 @@ export function initWelcomeInteractive() {
             project1_title: "Dr. Camila Henao Clinic",
             project1_desc: 'Modern and dynamic development for a dental clinic. Frontend built in Next.js with custom fluid animations using Framer Motion and GSAP for an immersive interactive experience. <span class="text-cyan">(In Development)</span>',
             project2_title: "Bioconstructores Asociados SAS",
-            project2_desc: "Fullstack corporate landing and admin dashboard. Agile frontend with React and Next.js, backed by a robust TypeScript backend. Includes scalable native image storage via AWS S3 architecture.",
+            project2_desc: "Fullstack corporate landing and admin dashboard. Developed with Next.js, React.js, Prisma, Neon, and advanced animations with Framer Motion and GSAP. Features robust backend infrastructure and scalable storage.",
             // Tech Stack
             stack_badge: "Technologies",
             stack_title: 'My <br/><span class="text-cyan">Stack</span>',
@@ -65,7 +83,25 @@ export function initWelcomeInteractive() {
             cat_db: "Databases",
             cat_tools: "Tools",
             cat_cloud: "Cloud",
-            cat_design: "Design"
+            cat_design: "Design",
+            // Experience
+            exp_badge: "Path",
+            exp_title: 'Experience & <span class="text-cyan">Studios</span>',
+            exp_col_label_prof: "💼 Professional Experience",
+            exp_col_label_edu: "🎓 Education",
+            exp_tag_onsite: "On-site",
+            exp_tag_present: "Present",
+            exp1_role: "Programming Logic Mentor",
+            exp1_b1: "Technical support in algorithmic logic with <strong>C++</strong>.",
+            exp1_b2: "Practical tutoring on conditionals, loops, and arrays.",
+            exp1_b3: "Strengthening academic leadership and communication.",
+            exp2_role: "Fullstack Web Developer",
+            exp2_b1: "Developed website with <strong>Next.js</strong>, <strong>React.js</strong>, <strong>Prisma</strong>, and <strong>Neon</strong>.",
+            exp2_b2: "Animations with <strong>Framer Motion</strong> and <strong>GSAP</strong>.",
+            exp2_b3: "Project coordination and technological adaptation.",
+            edu_badge: "Formation",
+            edu_title: "Education",
+            edu1_degree: "Software Development Technology"
         }
     };
 
