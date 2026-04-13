@@ -1,0 +1,59 @@
+---
+import { Image } from 'astro:assets';
+import flutterBadge from '../assets/badges/FlutterBadge.png';
+import gitGithubBadge from '../assets/badges/GitGitHubBadge.png';
+---
+
+<section id="badges" class="badges-section">
+    <div class="badges-header badges-anim">
+        <div class="badge" data-i18n="badges_badge">Reconocimientos Digitales</div>
+        <h2 class="glitch-text" data-i18n="badges_title">Mis <br/> <span class="text-cyan">Badges</span></h2>
+    </div>
+
+    <div class="badges-container">
+        <!-- Badge 1: Flutter -->
+        <article class="badge-item badges-anim">
+            <div class="badge-card">
+                <div class="badge-image-container">
+                    <Image 
+                        src={flutterBadge} 
+                        alt="Flutter Badge" 
+                        class="badge-img" 
+                        format="png"
+                        quality="high"
+                    />
+                </div>
+                <div class="badge-content">
+                    <h3 data-i18n="badge1_title">Compila apps con Flutter</h3>
+                    <p data-i18n="badge1_desc">Aprende a crear apps web, para dispositivos móviles y de escritorio atractivas y compiladas de forma nativa a partir de una sola base de código con Flutter.</p>
+                </div>
+            </div>
+        </article>
+
+        <!-- Badge 2: Git/GitHub -->
+        <article class="badge-item badges-anim">
+            <div class="badge-card">
+                <div class="badge-image-container">
+                    <Image 
+                        src={gitGithubBadge} 
+                        alt="Git/GitHub Badge" 
+                        class="badge-img" 
+                        format="png"
+                        quality="high"
+                    />
+                </div>
+                <div class="badge-content">
+                    <h3 data-i18n="badge2_title">Administración del trabajo con GitHub Projects</h3>
+                    <p data-i18n="badge2_desc">Aprenda a usar GitHub Projects para crear incidencias, dividirlos en tareas, realizar un seguimiento de las relaciones, agregar campos personalizados y tener conversaciones.</p>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
+
+<script>
+    import { initBadgesInteractive } from '../logic/badges.js';
+    document.addEventListener('DOMContentLoaded', () => {
+        initBadgesInteractive();
+    });
+</script>
