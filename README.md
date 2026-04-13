@@ -22,20 +22,25 @@
 
 ## 🛠️ Tech Stack
 
-### **Frontend**
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
-![Astro](https://img.shields.io/badge/Astro-0C1222?style=for-the-badge&logo=astro&logoColor=FF5D01)
-![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+### **💻 Frontend & Mobile**
+- **Core**: React, HTML, CSS
+- **Frameworks**: Next.js, Astro, Flutter
+- **Mobile Native**: Kotlin
 
-### **Mobile**
-![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
-![Kotlin](https://img.shields.io/badge/Kotlin-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white)
+### **⚙️ Backend & Languages**
+- **Backend**: Node.js, Express.js
+- **Languages**: JavaScript, TypeScript, C++
 
-### **Backend & DB**
-![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
-![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+### **🗄️ Databases & Cloud**
+- **Databases**: PostgreSQL, MongoDB
+- **Cloud**: AWS (Amazon Web Services)
+- **ORM**: Prisma, Neon (Serverless Postgres)
+
+### **🛠️ Herramientas & Diseño**
+- **Version Control**: Git, GitHub
+- **API Testing**: Postman
+- **AI Tools**: Antigravity
+- **Design**: Dribbble
 
 ---
 
