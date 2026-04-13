@@ -47,9 +47,9 @@
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 2.5rem;
+    gap: 1.5rem;
     background: rgba(13, 19, 35, 0.6);
-    padding: 0.8rem 2.5rem;
+    padding: 0.8rem 1.8rem;
     border-radius: 50px;
     border: 1px solid rgba(0, 243, 255, 0.2);
     backdrop-filter: blur(12px);

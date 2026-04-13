@@ -7,6 +7,8 @@
 @import "./experience.css";
 @import "./navbar.css";
 @import "./certifications.css";
+@import "./badges.css";
+@import "./footer.css";
 
 html {
     scroll-behavior: smooth;
@@ -103,4 +105,21 @@ body {
   width: 200px;
   transform: rotate(15deg);
   opacity: 0.8;
+}
+
+.final-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 2rem;
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .final-section {
+        justify-content: center;
+        gap: 1rem;
+        padding-top: 2rem;
+    }
 }

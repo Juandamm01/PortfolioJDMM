@@ -124,7 +124,7 @@ export function initProjectsInteractive() {
 
     // ─── Observar ENTRADA y SALIDA de cada sección ───────────────────────
     const projectSection = document.getElementById('project');
-    const stackSection = document.getElementById('techstack');
+    const stackSection = document.getElementById('tech');
 
     // Reset inicial
     if (projectSection) leaveProjects(projectSection);
@@ -136,11 +136,11 @@ export function initProjectsInteractive() {
 
             if (entry.isIntersecting) {
                 if (section.id === 'project') enterProjects(section);
-                if (section.id === 'techstack') enterStack(section);
+                if (section.id === 'tech') enterStack(section);
             } else {
                 // Al SALIR, reseteamos para que la próxima vez vuelva a animar
                 if (section.id === 'project') leaveProjects(section);
-                if (section.id === 'techstack') leaveStack(section);
+                if (section.id === 'tech') leaveStack(section);
             }
         });
     }, {
