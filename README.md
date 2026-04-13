@@ -96,5 +96,4 @@ src/
 
 ---
 
-*Haciendo que la web sea un lugar más interactivo, una línea de código a la vez.*
 **Que la Fuerza te acompañe. ✨**
