@@ -248,7 +248,9 @@
     order: 1;
   }
   .glitch-text {
-    font-size: 2.22rem;
+    font-size: 1.8rem;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
   }
   .hero-content h2 {
     font-size: 1.4rem;
@@ -263,19 +265,19 @@
   }
 
   .id-card-wrapper {
-    transform: scale(0.85);
-    transform-origin: top center;
-    margin-top: -0.5rem;
+    transform: scale(0.9);
+    transform-origin: center;
+    margin: 0 auto;
   }
-  .lanyard-string { height: 30px; }
-  .id-card { width: 220px; }
-  .card-header { padding: 0.8rem; }
-  .header-title { font-size: 0.75rem; }
-  .card-body { padding: 1rem; }
-  .photo-wrapper { width: 100px; height: 100px; }
-  .card-footer { padding: 1rem; }
-  .footer-name { font-size: 1.1rem; }
-  .footer-role { font-size: 0.7rem; }
+  .lanyard-string { height: 20px; }
+  .id-card { width: 200px; }
+  .card-header { padding: 0.6rem; }
+  .header-title { font-size: 0.65rem; letter-spacing: 1px; }
+  .card-body { padding: 0.8rem; }
+  .photo-wrapper { width: 90px; height: 90px; }
+  .card-footer { padding: 0.8rem; }
+  .footer-name { font-size: 1rem; }
+  .footer-role { font-size: 0.6rem; }
   
   .lightning-svg {
     right: -10%;

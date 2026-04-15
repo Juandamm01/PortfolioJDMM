@@ -200,6 +200,22 @@
 
 @media (max-width: 768px) {
     .projects-section {
-        padding: 4rem 1rem 2rem 1rem;
+        height: auto;
+        min-height: 100vh;
+        padding: 5rem 1.2rem 3rem 1.2rem;
+    }
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .project-image-wrapper {
+        height: 185px;
+    }
+    .project-overlay {
+        opacity: 1;
+        background: rgba(5, 9, 20, 0.4);
+    }
+    .project-link {
+        transform: translateY(0);
     }
 }

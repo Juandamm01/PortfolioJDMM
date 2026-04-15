@@ -11,8 +11,8 @@
 @import "./footer.css";
 
 html {
-    scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
 }
 
 :root {
@@ -23,7 +23,7 @@ html {
   --cyan-glow: rgba(0, 243, 255, 0.6);
   --white: #ffffff;
   --gray: #a1a1aa;
-  
+
   /* Layout */
   --max-width: 1200px;
 }
@@ -38,7 +38,8 @@ body {
   background-color: var(--bg-dark);
   color: var(--white);
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  overflow-x: hidden; /* Avoid horizontal scroll from animations */
+  overflow-x: hidden;
+  /* Avoid horizontal scroll from animations */
 }
 
 /* Typography Utilities */
@@ -52,11 +53,16 @@ body {
   color: var(--cyan);
   font-weight: bold;
 }
-@keyframes blink { 50% { opacity: 0; } }
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
 
 /* Glitch Heading (Basic version) */
 .glitch-text {
-  font-size: 2.8rem;
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
   font-weight: 900;
   line-height: 1.1;
   margin: 0.5rem 0;
@@ -84,6 +90,7 @@ body {
   flex-direction: column;
   scroll-snap-align: start;
   scroll-snap-stop: always;
+  overflow-x: hidden;
 }
 
 /* Lightning Background */
@@ -97,6 +104,7 @@ body {
   overflow: hidden;
   pointer-events: none;
 }
+
 .lightning-svg {
   position: absolute;
   top: -10%;
@@ -108,18 +116,18 @@ body {
 }
 
 .final-section {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding-top: 2rem;
-    gap: 1rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 2rem;
+  gap: 1rem;
 }
 
 @media (max-width: 768px) {
-    .final-section {
-        justify-content: center;
-        gap: 1rem;
-        padding-top: 2rem;
-    }
+  .final-section {
+    justify-content: center;
+    gap: 1rem;
+    padding-top: 2rem;
+  }
 }

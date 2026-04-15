@@ -219,8 +219,32 @@
 
 @media (max-width: 768px) {
     .exp-section {
-        grid-template-columns: 1fr;
         height: auto;
+        min-height: 100vh;
+        padding: 5.5rem 1.2rem 4rem 1.2rem;
         overflow-y: auto;
+    }
+    .exp-body {
+        grid-template-columns: 1fr !important;
+        gap: 2rem;
+        overflow: visible;
+    }
+    .exp-card-inner {
+        padding: 0.8rem 1rem;
+    }
+    .exp-bullets li {
+        font-size: 0.75rem;
+    }
+    .exp-period {
+        font-size: 0.65rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .exp-section .glitch-text {
+        font-size: 1.6rem;
+    }
+    .exp-main-header .badge {
+        font-size: 0.7rem;
     }
 }

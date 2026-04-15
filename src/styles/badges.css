@@ -116,45 +116,43 @@
 
 @media (max-width: 768px) {
     .badges-section {
-        padding: 1rem 1.5rem;
+        height: auto;
+        min-height: 100vh;
+        padding: 5rem 1.2rem 6rem 1.2rem;
     }
     
     .badges-header {
-        margin-bottom: 1.5rem;
+        margin-bottom: 2rem;
     }
 
-    .glitch-text {
-        font-size: 2rem;
-    }
-    
     .badges-container {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 1rem;
     }
 
     .badge-card {
-        padding: 1.5rem;
+        padding: 1rem;
         flex-direction: row;
         text-align: left;
-        gap: 1.5rem;
+        gap: 1rem;
     }
 
     .badge-image-container {
-        width: 80px;
-        height: 80px;
+        width: 50px;
+        height: 50px;
         margin-bottom: 0;
         flex-shrink: 0;
     }
 
     .badge-content h3 {
-        font-size: 1.1rem;
-        margin-bottom: 0.3rem;
+        font-size: 0.95rem;
+        margin-bottom: 0.2rem;
     }
 
     .badge-content p {
-        font-size: 0.85rem;
+        font-size: 0.75rem;
         color: var(--gray);
-        line-height: 1.5;
+        line-height: 1.4;
         text-align: left;
     }
 }

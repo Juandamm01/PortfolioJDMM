@@ -1,8 +1,8 @@
 /* Tech Stack Styles */
 .stack-section {
-    padding: 4.5rem 2rem 1rem 2rem;
+    padding: 5rem 1.5rem 3rem 1.5rem;
     min-height: 100vh;
-    height: 100vh;
+    height: auto;
     max-width: var(--max-width);
     margin: 0 auto;
     position: relative;
@@ -12,7 +12,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    overflow: hidden;
     box-sizing: border-box;
 }
 
@@ -23,8 +22,8 @@
 
 .stack-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.2rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
     width: 100%;
 }
 
@@ -35,7 +34,8 @@
     border-radius: 12px;
     padding: 1.2rem;
     transition: all 0.3s ease;
-    opacity: 0; /* for scroll animation */
+    opacity: 0;
+    /* for scroll animation */
 }
 
 .stack-card:hover {
@@ -76,6 +76,24 @@
 }
 
 @media (max-width: 768px) {
+    .stack-section {
+        padding-top: 6rem;
+    }
+    .stack-grid {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    }
+    .stack-card {
+        padding: 1rem;
+    }
+    .stack-category {
+        font-size: 0.8rem;
+    }
+    .stack-item {
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
     .stack-grid {
         grid-template-columns: 1fr;
     }
