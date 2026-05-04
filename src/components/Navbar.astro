@@ -1,11 +1,18 @@
 ---
-import '../styles/navbar.css';
+import { Image } from 'astro:assets';
+import navbarImg from '../assets/photos/portfolio.jpg';
 ---
 
 <nav class="navbar" id="main-nav">
-    <div class="logo">
-       <span class="logo-icon nav-anim">JD</span> <span class="logo-text nav-anim" data-i18n="nav_role">Desarrollador de Software</span>
-    </div>
+    <a href="#home" class="logo" aria-label="Inicio — Juan David Martínez">
+        <span class="logo-thumb nav-anim" aria-hidden="true">
+            <Image src={navbarImg} alt="" class="logo-mark" width={88} height={110} loading="eager" />
+        </span>
+        <span class="logo-text-wrap nav-anim">
+            <span class="logo-text-strong" data-i18n="nav_logo_strong">JUAN DAVID</span>
+            <span class="logo-text-muted" data-i18n="nav_logo_muted">MARTÍNEZ</span>
+        </span>
+    </a>
     <ul class="nav-links">
         <li class="active nav-anim"><a href="#home" data-i18n="nav_home">Inicio</a></li>
         <li class="nav-anim"><a href="#project" data-i18n="nav_project">Proyectos</a></li>
