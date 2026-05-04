@@ -2,13 +2,11 @@
 .projects-section {
     padding: 4rem 2rem 1.5rem 2rem;
     min-height: 100vh;
-    height: 100vh;
+    height: auto;
     max-width: var(--max-width);
     margin: 0 auto;
     position: relative;
     z-index: 10;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -72,9 +70,11 @@
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
     width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
 }
 
 .project-card {
@@ -99,7 +99,7 @@
 .project-image-wrapper {
     position: relative;
     width: 100%;
-    height: 140px; /* Reduced to fit 100vh */
+    aspect-ratio: 16/9;
     overflow: hidden;
 }
 
@@ -209,7 +209,8 @@
         gap: 2rem;
     }
     .project-image-wrapper {
-        height: 185px;
+        aspect-ratio: 16/9;
+        height: auto;
     }
     .project-overlay {
         opacity: 1;

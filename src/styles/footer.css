@@ -3,7 +3,6 @@
     background: #03060d;
     position: relative;
     overflow: hidden;
-    scroll-snap-align: start;
 }
 
 .footer-container {

@@ -2,13 +2,11 @@
 .cert-section {
     padding: 4rem 4% 2rem; /* More top padding to avoid cutting badge */
     min-height: 100vh;
-    height: 100vh;
+    height: auto;
     width: 100%;
     margin: 0 auto;
     position: relative;
     z-index: 10;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
     display: flex;
     flex-direction: column;
     justify-content: flex-start; /* Changed to start to control padding better */
@@ -32,9 +30,9 @@
 .cert-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    gap: 1.5rem;
     width: 100%;
-    max-width: 1700px;
+    max-width: 800px;
     margin: 0 auto;
     flex: 1;
     min-height: 0;
@@ -61,7 +59,8 @@
 .cert-image-wrapper {
     position: relative;
     width: 100%;
-    height: 160px;
+    aspect-ratio: 16/9;
+    height: auto;
     overflow: hidden;
     background: #fff;
     display: flex;
@@ -121,7 +120,7 @@
 @media (max-height: 900px) {
     .cert-section { padding-top: 3rem; }
     .cert-header { margin-bottom: 1rem; }
-    .cert-image-wrapper { height: 140px; }
+    .cert-image-wrapper { aspect-ratio: 16/9; height: auto; }
     .cert-info { padding: 1.2rem; }
 }
 

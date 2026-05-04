@@ -7,28 +7,29 @@ export function initBadgesInteractive() {
     const animTargets = section.querySelectorAll('.badges-anim');
     if (animTargets.length === 0) return;
 
+    const ease = 'cubicBezier(0.22, 1, 0.36, 1)';
+
     const playEntrance = () => {
-        // Reset to hidden before triggering stagger
-        window.anime.set(animTargets, { opacity: 0, translateY: 60, scale: 0.9 });
-        
+        window.anime.set(animTargets, { opacity: 0, translateY: 32, scale: 0.97 });
         window.anime({
             targets: animTargets,
-            translateY: [60, 0],
+            translateY: [32, 0],
             opacity: [0, 1],
-            scale: [0.9, 1],
-            delay: window.anime.stagger(250, {start: 200}),
-            easing: 'easeOutElastic(1, .8)',
-            duration: 1800
+            scale: [0.97, 1],
+            delay: window.anime.stagger(100, { start: 80 }),
+            easing: ease,
+            duration: 720
         });
     };
 
+    let played = false;
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                playEntrance();
-            }
+            if (!entry.isIntersecting || played) return;
+            played = true;
+            playEntrance();
         });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
 
     observer.observe(section);
 

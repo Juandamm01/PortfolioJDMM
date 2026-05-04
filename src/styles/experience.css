@@ -1,16 +1,13 @@
 /* EXPERIENCE & EDUCATION SECTION */
 .exp-section {
     min-height: 100vh;
-    height: 100vh;
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 3.5rem 1.5rem 0.5rem 1.5rem;
+    padding: 3.5rem 1.5rem 2.5rem 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    overflow: hidden;
+    overflow: visible;
     box-sizing: border-box;
     position: relative;
     z-index: 10;
@@ -39,7 +36,7 @@
     align-items: start;
     flex: 1;
     min-height: 0;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .exp-col,
@@ -219,10 +216,9 @@
 
 @media (max-width: 768px) {
     .exp-section {
-        height: auto;
         min-height: 100vh;
         padding: 5.5rem 1.2rem 4rem 1.2rem;
-        overflow-y: auto;
+        overflow: visible;
     }
     .exp-body {
         grid-template-columns: 1fr !important;
