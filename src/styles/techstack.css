@@ -7,8 +7,6 @@
     margin: 0 auto;
     position: relative;
     z-index: 10;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -49,30 +47,54 @@
     font-size: 0.9rem;
     margin-bottom: 1rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.08em;
     display: flex;
     align-items: center;
     gap: 0.5rem;
     font-weight: 700;
+    line-height: 1.3;
 }
 
 .stack-items {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.7rem;
+    gap: 0.65rem 0.85rem;
+    align-content: flex-start;
 }
 
 .stack-item {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    font-size: 0.85rem;
+    gap: 0.45rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: 0.02em;
     color: var(--gray);
     transition: color 0.3s ease;
 }
 
 .stack-item:hover {
     color: var(--white);
+}
+
+.stack-item--wip {
+    flex-wrap: wrap;
+    row-gap: 0.35rem;
+}
+
+.stack-wip-badge {
+    font-size: 0.62rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.2rem 0.45rem;
+    margin-left: 0.15rem;
+    border-radius: 4px;
+    color: var(--cyan);
+    background: rgba(0, 243, 255, 0.12);
+    border: 1px solid rgba(0, 243, 255, 0.35);
+    line-height: 1.2;
 }
 
 @media (max-width: 768px) {

@@ -4,6 +4,7 @@ import awsImg from '../assets/AWS.png';
 import astroImg from '../assets/Astro.png';
 import antiImg from '../assets/Antigravity.png';
 import dribbleImg from '../assets/Dribble.png';
+import stitchImg from '../assets/stitch.png';
 ---
 
 <section id="tech" class="stack-section">
@@ -49,6 +50,7 @@ import dribbleImg from '../assets/Dribble.png';
                 <span class="stack-item"><i class="devicon-nextjs-plain" style="color: white;"></i> Next.js</span>
                 <span class="stack-item"><img src={astroImg.src} alt="Astro" class="sicon" /> Astro</span>
                 <span class="stack-item"><i class="devicon-flutter-plain colored"></i> Flutter</span>
+                <span class="stack-item"><i class="devicon-react-original colored"></i> React Native</span>
             </div>
         </article>
 
@@ -74,6 +76,9 @@ import dribbleImg from '../assets/Dribble.png';
                     Neon
                 </span>
                 <span class="stack-item"><img src={antiImg.src} alt="Antigravity" class="sicon" /> Antigravity</span>
+                <span class="stack-item">
+                    <img src="https://cdn.simpleicons.org/cursor/ffffff" alt="" class="sicon" width="24" height="24" loading="lazy" decoding="async" /> Cursor
+                </span>
             </div>
         </article>
 
@@ -82,6 +87,15 @@ import dribbleImg from '../assets/Dribble.png';
             <h3 class="stack-category" data-i18n="cat_cloud">Cloud</h3>
             <div class="stack-items">
                 <span class="stack-item"><img src={awsImg.src} alt="AWS" class="sicon" /> AWS</span>
+                <span class="stack-item"><i class="devicon-vercel-plain" style="color: #ffffff;"></i> Vercel</span>
+                <span class="stack-item">
+                    <img src="https://cdn.simpleicons.org/railway/ffffff" alt="" class="sicon" width="24" height="24" loading="lazy" decoding="async" /> Railway
+                </span>
+                <span class="stack-item stack-item--wip">
+                    <i class="devicon-docker-plain colored"></i>
+                    Docker
+                    <span class="stack-wip-badge" data-i18n="docker_wip">En proceso</span>
+                </span>
             </div>
         </article>
 
@@ -90,17 +104,15 @@ import dribbleImg from '../assets/Dribble.png';
             <h3 class="stack-category" data-i18n="cat_design">Diseño</h3>
             <div class="stack-items">
                 <span class="stack-item"><img src={dribbleImg.src} alt="Dribbble" class="sicon" /> Dribbble</span>
+                <span class="stack-item">
+                    <img src={stitchImg.src} alt="Google Stitch" class="sicon" /> Google Stitch
+                </span>
             </div>
         </article>
     </div>
 </section>
 
 <style>
-.stack-item {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-}
 .stack-item i {
     font-size: 1.1rem;
     line-height: 1;
