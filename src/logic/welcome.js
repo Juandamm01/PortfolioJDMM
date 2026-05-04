@@ -3,6 +3,8 @@ export function initWelcomeInteractive() {
     const translations = {
         es: {
             nav_role: "Desarrollador de Software",
+            nav_logo_strong: "JUAN DAVID",
+            nav_logo_muted: "MARTÍNEZ",
             nav_home: "Inicio",
             nav_project: "Proyectos",
             nav_stack: "Stack",
@@ -12,10 +14,11 @@ export function initWelcomeInteractive() {
             badge: "Un desarrollador, guiado por la Fuerza.",
             title: 'BIENVENIDO A MI <br/> <span class="text-cyan">PORTAFOLIO</span>',
             typed: "Desarrollador de Software",
-            description: "Soy un estudiante de 5º semestre de Desarrollo de Software con experiencia en proyectos Fullstack usando Next.js, React.js, Javascript, Kotlin y Flutter. Me apasiona construir aplicaciones web y móviles funcionales con buena experiencia de usuario. Busco una oportunidad para crecer como desarrollador Front-End y aportar mis habilidades en proyectos reales.",
+            description: "Soy un estudiante de 5º semestre de Desarrollo de Software con experiencia en proyectos Fullstack usando Next.js, React.js, Javascript y Flutter. Me apasiona construir aplicaciones web y móviles funcionales con buena experiencia de usuario. Enfocado en optimizar interfaces y aportar soluciones técnicas escalables como desarrollador Front-End en proyectos profesionales.",
             id_header: "DESARROLLO DE SOFTWARE",
             id_role: "DESARROLLADOR FRONT END",
             scroll_down: "Desliza abajo",
+            download_cv: "Descargar CV",
             // Featured Projects
             projects_badge: "Mi Trabajo",
             projects_title: 'Proyectos <br/> <span class="text-cyan">Destacados</span>',
@@ -35,6 +38,7 @@ export function initWelcomeInteractive() {
             cat_tools: "Herramientas",
             cat_cloud: "Cloud",
             cat_design: "Diseño",
+            docker_wip: "En proceso",
             // Experience
             exp_badge: "Trayectoria",
             exp_title: 'Experiencia & <span class="text-cyan">Estudios</span>',
@@ -72,9 +76,9 @@ export function initWelcomeInteractive() {
             badges_badge: "Reconocimientos Digitales",
             badges_title: 'Mis <br/> <span class="text-cyan">Badges</span>',
             badge1_title: "Compila apps con Flutter",
-            badge1_desc: "Aprende a crear apps web, para dispositivos móviles y de escritorio atractivas y compiladas de forma nativa a partir de una sola base de código con Flutter.",
+            badge1_desc: "Aprendí a crear apps web, para dispositivos móviles y de escritorio atractivas y compiladas de forma nativa a partir de una sola base de código con Flutter.",
             badge2_title: "Administración del trabajo con GitHub Projects",
-            badge2_desc: "Aprenda a usar GitHub Projects para crear incidencias, dividirlos en tareas, realizar un seguimiento de las relaciones, agregar campos personalizados y tener conversaciones.",
+            badge2_desc: "Aprendí a usar GitHub Projects para crear incidencias, dividirlos en tareas, realizar un seguimiento de las relaciones, agregar campos personalizados y tener conversaciones.",
             // Footer
             footer_cta: "¿TRABAJAMOS <br/><span class='text-cyan'>JUNTOS?</span>",
             footer_quote: "Construyendo el futuro de la web y el desarrollo móvil, una línea de código a la vez.",
@@ -87,6 +91,8 @@ export function initWelcomeInteractive() {
         },
         en: {
             nav_role: "Software Developer",
+            nav_logo_strong: "JUAN DAVID",
+            nav_logo_muted: "MARTINEZ",
             nav_home: "Home",
             nav_project: "Projects",
             nav_stack: "Stack",
@@ -96,10 +102,11 @@ export function initWelcomeInteractive() {
             badge: "A developer, guided by the Force.",
             title: 'WELCOME TO MY <br/> <span class="text-cyan">PORTFOLIO</span>',
             typed: "Software Developer",
-            description: "I am a 5th-semester Software Development student with experience in Fullstack projects using Next.js, React.js, Javascript, Kotlin, and Flutter. I am passionate about building functional web and mobile applications with good user experience. I am looking for an opportunity to grow as a Front-End developer and contribute my skills to real projects.",
+            description: "I am a 5th-semester Software Development student with experience in Fullstack projects using Next.js, React.js, Javascript, and Flutter. I am passionate about building functional web and mobile applications with good user experience. Focused on optimizing interfaces and providing scalable technical solutions as a Front-End developer in professional projects.",
             id_header: "SOFTWARE DEV",
             id_role: "FRONT END DEVELOPER",
             scroll_down: "Scroll down",
+            download_cv: "Download CV",
             // Featured Projects
             projects_badge: "My Work",
             projects_title: 'Featured <br/> <span class="text-cyan">Projects</span>',
@@ -119,6 +126,7 @@ export function initWelcomeInteractive() {
             cat_tools: "Tools",
             cat_cloud: "Cloud",
             cat_design: "Design",
+            docker_wip: "In progress",
             // Experience
             exp_badge: "Path",
             exp_title: 'Experience & <span class="text-cyan">Studios</span>',
@@ -156,9 +164,9 @@ export function initWelcomeInteractive() {
             badges_badge: "Digital Badges",
             badges_title: 'My <br/> <span class="text-cyan">Badges</span>',
             badge1_title: "Build apps with Flutter",
-            badge1_desc: "Learn to build beautiful, natively compiled applications for mobile, web, and desktop from a single codebase using Flutter.",
+            badge1_desc: "Learned to build beautiful, natively compiled applications for mobile, web, and desktop from a single codebase using Flutter.",
             badge2_title: "Manage work with GitHub Projects",
-            badge2_desc: "Learn how to use GitHub Projects to create issues, break them into tasks, track relationships, add custom fields, and have conversations.",
+            badge2_desc: "Learned how to use GitHub Projects to create issues, break them into tasks, track relationships, add custom fields, and have conversations.",
             // Footer
             footer_cta: "LET'S WORK <br/><span class='text-cyan'>TOGETHER?</span>",
             footer_quote: "Building the future of web and mobile development, one line of code at a time.",
@@ -191,6 +199,11 @@ export function initWelcomeInteractive() {
         if (typedTextSpan) {
             typedTextSpan.innerHTML = "";
             startTypeWriter();
+        }
+
+        const cvBtn = document.getElementById('download-cv-btn');
+        if (cvBtn) {
+            cvBtn.href = currentLang === 'es' ? '/pdf/JUAN_DAVID_MARTINEZ_CV_ES.pdf' : '/pdf/JUAN_DAVID_MARTINEZ_CV_EN.pdf';
         }
     }
 
@@ -250,19 +263,19 @@ export function initWelcomeInteractive() {
         // --- 3. Anime.js Entrance Animations ---
         window.anime({
             targets: '.entrance-anim',
-            translateY: [40, 0],
+            translateY: [28, 0],
             opacity: [0, 1],
-            delay: window.anime.stagger(150, {start: 600}), 
-            easing: 'easeOutQuart',
-            duration: 1000
+            delay: window.anime.stagger(100, { start: 480 }),
+            easing: 'cubicBezier(0.22, 1, 0.36, 1)',
+            duration: 780
         });
 
-        // --- 4. ID Card Swinging Animation ---
+        // --- 4. ID Card Swinging Animation (más sutil) ---
         window.anime({
             targets: '.id-card-wrapper',
-            rotateZ: ['-5deg', '5deg'],
-            translateY: ['-8px', '8px'],
-            duration: 4000,
+            rotateZ: ['-3deg', '3deg'],
+            translateY: ['-5px', '5px'],
+            duration: 5200,
             direction: 'alternate',
             loop: true,
             easing: 'easeInOutSine',

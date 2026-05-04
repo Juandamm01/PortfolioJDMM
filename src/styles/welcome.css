@@ -5,9 +5,10 @@
   justify-content: space-between;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 5rem 2rem 1.5rem 2rem; /* Tighter padding */
-  flex: 1;
-  gap: 2rem;
+  padding: 4.5rem 2rem 0 2rem;
+  height: calc(100vh - 80px);
+  min-height: 500px;
+  gap: 1.5rem;
 }
 
 .hero-content {
@@ -16,19 +17,19 @@
 }
 
 .hero-content h2 {
-  font-size: 1.7rem;
+  font-size: 1.3rem;
   font-weight: 600;
   color: var(--gray);
-  margin-bottom: 0.8rem;
-  min-height: 2.5rem;
+  margin-bottom: 0.5rem;
+  min-height: 1.8rem;
 }
 
 .description {
-  font-size: 1rem;
+  font-size: 0.88rem;
   line-height: 1.5;
   color: var(--gray);
-  margin-bottom: 1.2rem;
-  min-height: 140px;
+  margin-bottom: 1rem;
+  max-width: 500px;
 }
 
 .tech-stack {
@@ -77,6 +78,37 @@
   fill: currentColor;
 }
 .social-icon:hover {
+  background: var(--cyan);
+  border-color: var(--cyan);
+  color: var(--bg-dark);
+  box-shadow: 0 0 15px var(--cyan-glow);
+  transform: translateY(-3px);
+}
+
+.cv-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 1.2rem;
+  height: 45px;
+  border-radius: 25px;
+  background: var(--bg-panel);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--white);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.cv-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.cv-btn:hover {
   background: var(--cyan);
   border-color: var(--cyan);
   color: var(--bg-dark);
@@ -160,8 +192,8 @@
 
 .photo-wrapper {
   position: relative;
-  width: 140px;
-  height: 140px;
+  width: 150px;
+  height: 210px;
   perspective: 1000px;
 }
 
@@ -169,7 +201,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top center;
+  object-position: top;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -194,79 +226,36 @@
   letter-spacing: 1px;
 }
 
-/* Scroll indicator */
-.scroll-indicator {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--gray);
-  font-size: 0.8rem;
-  opacity: 0.6;
-}
-
-.mouse {
-  width: 20px;
-  height: 35px;
-  border: 2px solid var(--gray);
-  border-radius: 10px;
-  position: relative;
-}
-
-.wheel {
-  width: 2px;
-  height: 6px;
-  background: var(--gray);
-  position: absolute;
-  top: 6px;
-  left: 50%;
-  transform: translateX(-50%);
-  animation: scroll-wheel 2s infinite;
-}
-
-@keyframes scroll-wheel {
-  0% { transform: translateX(-50%) translateY(0); opacity: 1; }
-  100% { transform: translateX(-50%) translateY(15px); opacity: 0; }
-}
-
 /* Responsive */
 @media (max-width: 968px) {
   .hero-section {
     flex-direction: column;
     text-align: center;
-    padding-top: 6rem;
-    gap: 3rem;
+    padding-top: 5rem;
+    gap: 1.5rem;
   }
-  .hero-content {
-    order: 2;
-  }
-  .hero-visuals {
-    order: 1;
+  .social-links {
+    justify-content: center;
   }
   .glitch-text {
-    font-size: 1.8rem;
-    line-height: 1.2;
-    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+    line-height: 1.1;
+    margin-bottom: 0.3rem;
   }
   .hero-content h2 {
-    font-size: 1.4rem;
-    min-height: 1.5rem;
+    font-size: 1.2rem;
+    min-height: 1.4rem;
   }
   .description {
-    font-size: 0.8rem;
-    margin-bottom: 0.6rem;
-    line-height: 1.4;
-    max-width: 95%;
-    min-height: 90px;
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+    max-width: 100%;
   }
 
   .id-card-wrapper {
-    transform: scale(0.9);
-    transform-origin: center;
+    transform: scale(0.65);
+    transform-origin: top center;
     margin: 0 auto;
   }
   .lanyard-string { height: 20px; }
@@ -274,16 +263,16 @@
   .card-header { padding: 0.6rem; }
   .header-title { font-size: 0.65rem; letter-spacing: 1px; }
   .card-body { padding: 0.8rem; }
-  .photo-wrapper { width: 90px; height: 90px; }
+  .photo-wrapper { width: 90px; height: 126px; }
   .card-footer { padding: 0.8rem; }
   .footer-name { font-size: 1rem; }
   .footer-role { font-size: 0.6rem; }
   
   .lightning-svg {
-    right: -10%;
-    width: 150%;
+    right: 0;
+    width: 100%;
     transform: none;
-    opacity: 0.2;
+    opacity: 0.1;
   }
 }
 
