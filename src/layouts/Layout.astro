@@ -1,5 +1,5 @@
 ---
-import '../styles/global.css';
+ import '../styles/global.css';
 import dartVaderIcon from '../assets/DartVader.png';
 ---
 <!doctype html>
@@ -15,5 +15,42 @@ import dartVaderIcon from '../assets/DartVader.png';
 	</head>
 	<body>
 		<slot />
+
+		<!-- Lenis Smooth Scroll -->
+		<script is:inline src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+		<script is:inline>
+			document.addEventListener("DOMContentLoaded", () => {
+				if (typeof Lenis !== 'undefined') {
+					const lenis = new Lenis({
+						duration: 1.4,
+						easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+						smooth: true,
+						smoothTouch: false,
+					});
+
+					function raf(time) {
+						lenis.raf(time);
+						requestAnimationFrame(raf);
+					}
+					requestAnimationFrame(raf);
+
+					document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+						anchor.addEventListener('click', function (e) {
+							e.preventDefault();
+							const targetId = this.getAttribute('href');
+							if (targetId === '#') return;
+							const targetElement = document.querySelector(targetId);
+							if (targetElement) {
+								lenis.scrollTo(targetElement, {
+									duration: 1.5,
+									easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+									offset: -80
+								});
+							}
+						});
+					});
+				}
+			});
+		</script>
 	</body>
 </html>

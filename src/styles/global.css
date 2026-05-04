@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
 
 /* Components */
 @import "./welcome.css";
@@ -11,8 +11,9 @@
 @import "./footer.css";
 
 html {
-  scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
+  scroll-padding-top: 4.75rem;
+  /* overflow-x en html (no en body): si body tiene overflow-x hidden, muchos navegadores fuerzan overflow-y auto y aparecen dos barras */
+  overflow-x: hidden;
 }
 
 :root {
@@ -37,9 +38,7 @@ html {
 body {
   background-color: var(--bg-dark);
   color: var(--white);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  overflow-x: hidden;
-  /* Avoid horizontal scroll from animations */
+  font-family: 'Poppins', system-ui, -apple-system, sans-serif;
 }
 
 /* Typography Utilities */
@@ -62,7 +61,7 @@ body {
 
 /* Glitch Heading (Basic version) */
 .glitch-text {
-  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
   font-weight: 900;
   line-height: 1.1;
   margin: 0.5rem 0;
@@ -88,9 +87,6 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-  overflow-x: hidden;
 }
 
 /* Lightning Background */
@@ -129,5 +125,11 @@ body {
     justify-content: center;
     gap: 1rem;
     padding-top: 2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
