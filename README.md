@@ -4,7 +4,7 @@
   # Juan David Martínez
   **Desarrollador Fullstack | Frontend & Backend**
 
-  [![Portfolio](https://img.shields.io/badge/Visitar-Portafolio-00f3ff?style=for-the-badge&logo=vercel)](https://github.com/Juandamm01)
+  [![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:juandamm099@gmail.com)
   [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/juan-david19/)
 </div>
 
@@ -65,6 +65,12 @@ _"Un desarrollador, guiado por la Fuerza."_
 - **GitHub:** [@Juandamm01](https://github.com/Juandamm01)
 
 ---
-<div align="center">
-  <p><strong>Que la Fuerza te acompañe. ✨</strong></p>
+<div align="center" style="background: linear-gradient(135deg, #111, #222); padding: 25px; border-radius: 15px; box-shadow: 0 0 25px rgba(255,255,255,0.2);">
+  <p style="color: #fff; font-size: 22px; font-weight: bold; letter-spacing: 1.5px; text-shadow: 0 0 10px rgba(255,255,255,0.6);">
+    Si quieres hacer el mundo un lugar mejor. <br/>
+    Mírate a ti mismo y haz el cambio. ♾️
+  </p>
 </div>
+
+
+
