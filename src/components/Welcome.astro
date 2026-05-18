@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import portfolioImg from "../assets/photos/JuanDa.jpg";
 import Navbar from "./Navbar.astro";
+import StarBorder from "../logic/animations/StarBorder.jsx";
 ---
 
 <div class="portfolio-container" id="home">
@@ -19,7 +20,7 @@ import Navbar from "./Navbar.astro";
         <!-- Left Side: Content -->
         <div class="hero-content">
             <div class="badge entrance-anim" data-i18n="badge">
-                Un desarrollador, guiado por la Fuerza.
+                "Antes de la creación, viene la destrucción." — Bills
             </div>
 
             <h1 class="glitch-text entrance-anim" data-i18n="title">
@@ -28,7 +29,8 @@ import Navbar from "./Navbar.astro";
 
             <h2 class="entrance-anim">
                 <span id="typed-text"></span><span class="blinking-cursor"
-                    >|</span>
+                    >|</span
+                >
             </h2>
 
             <p class="description entrance-anim" data-i18n="description">
@@ -104,32 +106,33 @@ import Navbar from "./Navbar.astro";
         <!-- Right Side: Developer ID Badge -->
         <div class="hero-visuals">
             <div class="id-card-wrapper entrance-anim">
-                <div class="lanyard-string"></div>
                 <!-- Interactive 3D Card -->
-                <div class="id-card" id="developer-card">
-                    <div class="card-header">
-                        <span class="logo-icon small">JD</span>
-                        <span class="header-title" data-i18n="id_header"
-                            >DESARROLLO DE SOFTWARE</span
-                        >
-                    </div>
-                    <div class="card-body">
-                        <!-- Eliminado el texto vertical JUAN. El wrapper ahora ocupa todo el tamaño -->
-                        <div class="photo-wrapper">
-                            <Image
-                                src={portfolioImg}
-                                alt="Juan David Profile"
-                                class="profile-photo"
-                            />
+                <StarBorder client:load id="developer-card" color="cyan" speed="6s" borderRadius="12px" className="id-card-star">
+                    <div class="id-card">
+                        <div class="card-header">
+                            <span class="logo-icon small">JD</span>
+                            <span class="header-title" data-i18n="id_header"
+                                >DESARROLLO DE SOFTWARE</span
+                            >
+                        </div>
+                        <div class="card-body">
+                            <!-- Eliminado el texto vertical JUAN. El wrapper ahora ocupa todo el tamaño -->
+                            <div class="photo-wrapper">
+                                <Image
+                                    src={portfolioImg}
+                                    alt="Juan David Profile"
+                                    class="profile-photo"
+                                />
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="footer-name">JUAN DAVID M.</div>
+                            <div class="footer-role" data-i18n="id_role">
+                                DESARROLLADOR FRONT END
+                            </div>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <div class="footer-name">JUAN DAVID M.</div>
-                        <div class="footer-role" data-i18n="id_role">
-                            DESARROLLADOR FRONT END
-                        </div>
-                    </div>
-                </div>
+                </StarBorder>
             </div>
         </div>
     </main>

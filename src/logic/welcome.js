@@ -11,7 +11,7 @@ export function initWelcomeInteractive() {
             nav_experience: "Experiencia",
             nav_cert: "Diplomas",
             nav_contact: "Contacto",
-            badge: "Un desarrollador, guiado por la Fuerza.",
+            badge: '"Antes de la creación, viene la destrucción." — Bills',
             title: 'BIENVENIDO A MI <br/> <span class="text-cyan">PORTAFOLIO</span>',
             typed: "Desarrollador de Software",
             description: "Soy un estudiante de <strong>6º semestre</strong> de Desarrollo de Software con experiencia en proyectos Fullstack usando <strong><span class=\"text-cyan\">Next.js</span></strong>, <strong><span class=\"text-cyan\">React.js</span></strong>, <strong><span class=\"text-cyan\">JavaScript</span></strong> y <strong><span class=\"text-cyan\">TypeScript</span></strong>. Me apasiona construir aplicaciones web y móviles funcionales con excelente experiencia de usuario. Enfocado en optimizar interfaces y aportar soluciones técnicas escalables como desarrollador Front-End, destacándome por mi <strong>buena comunicación</strong> y <strong>trabajo en equipo</strong>, además de mi aprendizaje continuo en <strong>AWS</strong> y <strong>Docker</strong> (nivel principiante).",
@@ -26,7 +26,7 @@ export function initWelcomeInteractive() {
             project1_title: "Dra. Camila Henao Odontología",
             project1_desc: 'Desarrollo moderno y dinámico para clínica dental. Frontend construido en Next.js con animaciones fluidas a medida usando Framer Motion y GSAP para una experiencia interactiva inmersiva. <span class="text-cyan">(En Desarrollo)</span>',
             project2_title: "Bioconstructores Asociados SAS",
-            project2_desc: "Panel de administración y landing corporativa Fullstack. Desarrollada con Next.js, React.js, Prisma, Neon y animaciones avanzadas con Framer Motion y GSAP. Incorpora infraestructura de backend robusta y almacenamiento escalable.",
+            project2_desc: "<strong>Desarrollador Web Fullstack</strong><br/>📍 Bioconstructores Asociados SAS<br/>Desarrollo integral de plataforma web moderna y escalable:<ul class='project-bullets' style='margin-top: 0.4rem; padding-left: 1.1rem; font-size: 0.82rem; line-height: 1.4; color: rgba(255,255,255,0.75); list-style-type: disc;'><li style='margin-bottom: 0.2rem;'>Arquitectura moderna con <strong>Next.js</strong>, base de datos <strong>Neon</strong> y ORM <strong>Prisma</strong>, integrando un panel de administración y dashboard completamente editable.</li><li style='margin-bottom: 0.2rem;'>Interfaz premium animada con <strong>Framer Motion</strong>, <strong>GSAP</strong> y componentes dinámicos de <strong>React Bits</strong> y <strong>Aceternity UI</strong>.</li><li>Backend estructurado en <strong>TypeScript</strong> y almacenamiento en la nube con <strong>AWS S3</strong>.</li></ul>",
             // Tech Stack
             stack_badge: "Tecnologías",
             stack_title: 'Mi <br/><span class="text-cyan">Stack</span>',
@@ -53,8 +53,10 @@ export function initWelcomeInteractive() {
             exp1_b3: "Fortalecimiento de liderazgo académico y comunicación.",
             exp2_role: "Desarrollador Web Fullstack",
             exp2_b1: "Desarrollé sitio web con <strong>Next.js</strong>, <strong>React.js</strong>, <strong>Prisma</strong> y <strong>Neon</strong>.",
-            exp2_b2: "Animaciones con <strong>Framer Motion</strong> y <strong>GSAP</strong>.",
-            exp2_b3: "Coordinación de proyectos y adaptación tecnológica.",
+            exp2_b2: "<strong>Neon</strong> como base de datos PostgreSQL en la nube y <strong>Prisma</strong> como ORM para el modelado y gestión del esquema de datos.",
+            exp2_b3: "Animaciones con <strong>Framer Motion</strong> y <strong>GSAP</strong>, reutilizando componentes de <strong>React Bits</strong> y <strong>Aceternity UI</strong>.",
+            exp2_b4: "Implementación de almacenamiento en la nube utilizando <strong>AWS S3</strong> para la gestión de imágenes.",
+            exp2_b5: "Coordinación de proyectos, adaptación tecnológica e implementación de <strong>TypeScript</strong> en el backend.",
             edu_badge: "Formación",
             edu_title: "Educación",
             edu1_degree: "Tecnología en Desarrollo de Software",
@@ -85,6 +87,10 @@ export function initWelcomeInteractive() {
             footer_quote: "Construyendo el futuro de la web y el desarrollo móvil, una línea de código a la vez.",
             footer_contact_title: "Contacto",
             footer_navigation_title: "Navegación",
+            footer_social_title: "Redes",
+            footer_profile_title: "Perfil",
+            footer_profile_role: "Desarrollador Full Stack",
+            footer_profile_work: "Híbrido / Remoto",
             footer_rights: "Todos los derechos reservados.",
             footer_tagline: "Que la Fuerza te acompañe.",
             nav_tech: "Tecnologías",
@@ -100,7 +106,7 @@ export function initWelcomeInteractive() {
             nav_experience: "Experience",
             nav_cert: "Badges",
             nav_contact: "Contact",
-            badge: "A developer, guided by the Force.",
+            badge: '"Before creation, comes destruction." — Bills',
             title: 'WELCOME TO MY <br/> <span class="text-cyan">PORTFOLIO</span>',
             typed: "Software Developer",
             description: "I am a <strong>6th-semester</strong> Software Development student with experience in Fullstack projects using <strong><span class=\"text-cyan\">Next.js</span></strong>, <strong><span class=\"text-cyan\">React.js</span></strong>, <strong><span class=\"text-cyan\">JavaScript</span></strong>, and <strong><span class=\"text-cyan\">TypeScript</span></strong>. I am passionate about building functional web and mobile applications with excellent user experience. Focused on optimizing interfaces and providing scalable technical solutions as a Front-End developer, excelling in <strong>teamwork</strong> and <strong>good communication</strong>, while actively learning <strong>AWS</strong> and <strong>Docker</strong> (beginner level).",
@@ -115,7 +121,7 @@ export function initWelcomeInteractive() {
             project1_title: "Dr. Camila Henao Clinic",
             project1_desc: 'Modern and dynamic development for a dental clinic. Frontend built in Next.js with custom fluid animations using Framer Motion and GSAP for an immersive interactive experience. <span class="text-cyan">(In Development)</span>',
             project2_title: "Bioconstructores Asociados SAS",
-            project2_desc: "Fullstack corporate landing and admin dashboard. Developed with Next.js, React.js, Prisma, Neon, and advanced animations with Framer Motion and GSAP. Features robust backend infrastructure and scalable storage.",
+            project2_desc: "<strong>Fullstack Web Developer</strong><br/>📍 Bioconstructores Asociados SAS<br/>End-to-end development of a modern, scalable web platform:<ul class='project-bullets' style='margin-top: 0.4rem; padding-left: 1.1rem; font-size: 0.82rem; line-height: 1.4; color: rgba(255,255,255,0.75); list-style-type: disc;'><li style='margin-bottom: 0.2rem;'>Modern architecture using <strong>Next.js</strong>, <strong>Neon</strong> database, and <strong>Prisma</strong> ORM, integrating a fully dynamic and editable admin panel and dashboard.</li><li style='margin-bottom: 0.2rem;'>Premium animated interface with <strong>Framer Motion</strong>, <strong>GSAP</strong>, <strong>React Bits</strong>, and <strong>Aceternity UI</strong>.</li><li>Backend structured in <strong>TypeScript</strong> and cloud media management via <strong>AWS S3</strong>.</li></ul>",
             // Tech Stack
             stack_badge: "Technologies",
             stack_title: 'My <br/><span class="text-cyan">Stack</span>',
@@ -142,8 +148,10 @@ export function initWelcomeInteractive() {
             exp1_b3: "Strengthening academic leadership and communication.",
             exp2_role: "Fullstack Web Developer",
             exp2_b1: "Developed website with <strong>Next.js</strong>, <strong>React.js</strong>, <strong>Prisma</strong>, and <strong>Neon</strong>.",
-            exp2_b2: "Animations with <strong>Framer Motion</strong> and <strong>GSAP</strong>.",
-            exp2_b3: "Project coordination and technological adaptation.",
+            exp2_b2: "<strong>Neon</strong> as cloud PostgreSQL database and <strong>Prisma</strong> as ORM for data schema modeling and management.",
+            exp2_b3: "Animations with <strong>Framer Motion</strong> and <strong>GSAP</strong>, reusing components from <strong>React Bits</strong> and <strong>Aceternity UI</strong>.",
+            exp2_b4: "Cloud storage implementation using <strong>AWS S3</strong> for image management.",
+            exp2_b5: "Project coordination, technological adaptation, and <strong>TypeScript</strong> implementation for the backend.",
             edu_badge: "Formation",
             edu_title: "Education",
             edu1_degree: "Software Development Technology",
@@ -174,6 +182,10 @@ export function initWelcomeInteractive() {
             footer_quote: "Building the future of web and mobile development, one line of code at a time.",
             footer_contact_title: "Contact",
             footer_navigation_title: "Navigation",
+            footer_social_title: "Socials",
+            footer_profile_title: "Profile",
+            footer_profile_role: "Full Stack Developer",
+            footer_profile_work: "Hybrid / Remote",
             footer_rights: "All rights reserved.",
             footer_tagline: "May the Force be with you.",
             nav_tech: "Technologies",
@@ -241,100 +253,91 @@ export function initWelcomeInteractive() {
         // First pass: set all to invisible
         heroElements.forEach(el => {
             el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
         });
 
-        // Badge pops in from above with spring
+        // Badge pops in
         const badge = document.querySelector('.badge.entrance-anim');
         if (badge) {
             window.anime({
                 targets: badge,
-                translateY: [-35, 0],
                 opacity: [0, 1],
-                scale: [0.75, 1],
-                easing: 'cubicBezier(0.34, 1.76, 0.64, 1)',
-                duration: 1400,
-                delay: 350
+                translateY: [25, 0],
+                scale: [0.92, 1],
+                easing: 'cubicBezier(0.34, 1.56, 0.64, 1)',
+                duration: 1800,
+                delay: 400
             });
         }
 
-        // Heading sweeps up
+        // Heading fades and slides in
         const heading = document.querySelector('.glitch-text.entrance-anim');
         if (heading) {
             window.anime({
                 targets: heading,
-                translateY: [80, 0],
                 opacity: [0, 1],
-                easing: 'cubicBezier(0.16, 1, 0.3, 1)',
-                duration: 1800,
-                delay: 500
-            });
-        }
-
-        // Subheading
-        const subheading = document.querySelector('h2.entrance-anim');
-        if (subheading) {
-            window.anime({
-                targets: subheading,
-                translateY: [50, 0],
-                opacity: [0, 1],
-                easing: 'cubicBezier(0.16, 1, 0.3, 1)',
-                duration: 1600,
-                delay: 750
-            });
-        }
-
-        // Description fades with slight Y shift
-        const desc = document.querySelector('.description.entrance-anim');
-        if (desc) {
-            window.anime({
-                targets: desc,
                 translateY: [40, 0],
-                opacity: [0, 1],
+                scale: [0.97, 1],
                 easing: 'cubicBezier(0.16, 1, 0.3, 1)',
-                duration: 1500,
-                delay: 950
-            });
-        }
-
-        // Social links appear one by one
-        const socialLinks = document.querySelectorAll('.social-links.entrance-anim, .cv-btn.entrance-anim');
-        window.anime({
-            targets: socialLinks,
-            translateY: [30, 0],
-            opacity: [0, 1],
-            scale: [0.85, 1],
-            delay: window.anime.stagger(120, { start: 1100 }),
-            easing: 'cubicBezier(0.34, 1.56, 0.64, 1)',
-            duration: 900
-        });
-
-        // ID Card wrapper sweeps in from the right
-        const cardWrapper = document.querySelector('.id-card-wrapper.entrance-anim');
-        if (cardWrapper) {
-            window.anime({
-                targets: cardWrapper,
-                translateX: [140, 0],
-                translateY: [30, 0],
-                opacity: [0, 1],
-                scale: [0.84, 1],
-                easing: 'cubicBezier(0.16, 1, 0.3, 1)',
-                duration: 2000,
+                duration: 2400,
                 delay: 600
             });
         }
 
-        // --- 4. ID Card floating animation ---
+        // Subheading (Typed text container)
+        const subheading = document.querySelector('h2.entrance-anim');
+        if (subheading) {
+            window.anime({
+                targets: subheading,
+                opacity: [0, 1],
+                translateY: [25, 0],
+                easing: 'cubicBezier(0.16, 1, 0.3, 1)',
+                duration: 2200,
+                delay: 850
+            });
+        }
+
+        // Description fades and slides in
+        const desc = document.querySelector('.description.entrance-anim');
+        if (desc) {
+            window.anime({
+                targets: desc,
+                opacity: [0, 1],
+                translateY: [35, 0],
+                easing: 'cubicBezier(0.16, 1, 0.3, 1)',
+                duration: 2200,
+                delay: 1100
+            });
+        }
+
+        // Social links appear staggeredly
+        const socialLinks = document.querySelectorAll('.social-links.entrance-anim, .cv-btn.entrance-anim');
         window.anime({
-            targets: '.id-card-wrapper',
-            translateY: ['-14px', '14px'],
-            rotateZ: ['-2.5deg', '2.5deg'],
-            duration: 7000,
-            direction: 'alternate',
-            loop: true,
-            easing: 'easeInOutSine',
-            transformOrigin: 'top center'
+            targets: socialLinks,
+            opacity: [0, 1],
+            translateY: [20, 0],
+            delay: window.anime.stagger(150, { start: 1300 }),
+            easing: 'cubicBezier(0.34, 1.56, 0.64, 1)',
+            duration: 1600
         });
+
+        // ID Card wrapper fades and slides up with 3D rotation
+        const cardWrapper = document.querySelector('.id-card-wrapper.entrance-anim');
+        if (cardWrapper) {
+            window.anime({
+                targets: cardWrapper,
+                opacity: [0, 1],
+                translateY: [60, 0],
+                rotateY: [15, 0],
+                scale: [0.94, 1],
+                easing: 'cubicBezier(0.16, 1, 0.3, 1)',
+                duration: 2800,
+                delay: 700
+            });
+        }
+
+        // --- 4. ID Card floating animation (keep minimal or remove) ---
+        // Removed to stop movement
+
     }
 
     // --- 5. Interactive hover 3D tilt effect ---
@@ -367,11 +370,9 @@ export function initWelcomeInteractive() {
         const lightning = document.querySelector('.lightning-svg');
 
         if (heroContent) {
-            heroContent.style.transform = `translateY(${scrollY * 0.2}px)`; // Slower
             heroContent.style.opacity = Math.max(0, 1 - (scrollY / 600)); // Lasts longer
         }
         if (idVisuals) {
-            idVisuals.style.transform = `translateY(${scrollY * -0.15}px) rotateZ(${scrollY * 0.05}deg)`; // Slower
             idVisuals.style.opacity = Math.max(0, 1 - (scrollY / 600));
         }
         if (lightning) {
