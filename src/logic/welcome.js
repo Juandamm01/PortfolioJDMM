@@ -39,6 +39,7 @@ export function initWelcomeInteractive() {
             cat_cloud: "Cloud",
             cat_design: "Diseño",
             docker_wip: "En proceso",
+            aws_level: "Principiante",
             // Experience
             exp_badge: "Trayectoria",
             exp_title: 'Experiencia & <span class="text-cyan">Estudios</span>',
@@ -70,7 +71,7 @@ export function initWelcomeInteractive() {
             cert2_date: "Julio 2025",
             cert3_title: "Programación Nivel Explorador",
             cert3_entity: "Ministerio TIC / CUN",
-            cert3_desc: "El curso Explorador de Talento Tech introduce los fundamentos del desarrollo web, incluyendo HTML, CSS, JavaScript y programación básica con Python utilizando el framework Flask, desarrollando lógica de programación y proyectos prácticos.",
+            cert3_desc: "El curso Explorador de Talento Tech introduce los fundamentos del desarrollo web, incluyendo HTML y CSS básico, el desarrollo de lógica de programación con <strong>JavaScript (Nivel Intermedio)</strong> y la creación de proyectos prácticos.",
             cert3_date: "Agosto 2025",
             // Badges
             badges_badge: "Reconocimientos Digitales",
@@ -127,6 +128,7 @@ export function initWelcomeInteractive() {
             cat_cloud: "Cloud",
             cat_design: "Design",
             docker_wip: "In progress",
+            aws_level: "Beginner",
             // Experience
             exp_badge: "Path",
             exp_title: 'Experience & <span class="text-cyan">Studios</span>',
@@ -158,7 +160,7 @@ export function initWelcomeInteractive() {
             cert2_date: "July 2025",
             cert3_title: "Explorer Level Programming",
             cert3_entity: "Ministerio TIC / CUN",
-            cert3_desc: "The Explorer Talento Tech course introduces students to the fundamentals of web development, including HTML, CSS, JavaScript, and basic programming with Python using the Flask framework, developing programming logic and practical projects.",
+            cert3_desc: "The Explorer Talento Tech course introduces the fundamentals of web development, including basic HTML and CSS, programming logic with <strong>JavaScript (Intermediate Level)</strong>, and the creation of practical projects.",
             cert3_date: "August 2025",
             // Badges
             badges_badge: "Digital Badges",
@@ -180,9 +182,9 @@ export function initWelcomeInteractive() {
     };
 
     let currentLang = 'es';
-    
+
     const langToggleBtn = document.getElementById('lang-toggle');
-    
+
     let textToType = translations[currentLang].typed;
     const typedTextSpan = document.getElementById("typed-text");
     let typeIntervalId = null;
@@ -220,19 +222,19 @@ export function initWelcomeInteractive() {
         if (typeIntervalId) clearInterval(typeIntervalId);
         if (typeTimeoutId) clearTimeout(typeTimeoutId);
         let i = 0;
-        
+
         function typeWriter() {
             if (i < textToType.length) {
                 typedTextSpan.innerHTML += textToType.charAt(i);
                 i++;
-                typeTimeoutId = setTimeout(typeWriter, Math.random() * 50 + 50); 
+                typeTimeoutId = setTimeout(typeWriter, Math.random() * 50 + 50);
             }
         }
         typeTimeoutId = setTimeout(typeWriter, 1200);
     }
     startTypeWriter();
 
-    if(window.anime) {
+    if (window.anime) {
         // --- 2. Anime.js Lightning Animation Effect ---
         const pathElements = document.querySelectorAll('.lightning-path, .lightning-core');
         if (pathElements.length > 0) {
@@ -240,7 +242,7 @@ export function initWelcomeInteractive() {
             pathElements.forEach(path => {
                 window.anime.setDashoffset(path);
             });
-            
+
             // Animate paths together for a single strike effect
             window.anime({
                 targets: '.lightning-path, .lightning-core',
@@ -290,16 +292,16 @@ export function initWelcomeInteractive() {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-            
+
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-            
-            const rotateX = ((y - centerY) / centerY) * -12; 
+
+            const rotateX = ((y - centerY) / centerY) * -12;
             const rotateY = ((x - centerX) / centerX) * 12;
-            
+
             card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
         });
-        
+
         card.addEventListener('mouseleave', () => {
             card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
         });
@@ -309,9 +311,9 @@ export function initWelcomeInteractive() {
     window.addEventListener('scroll', () => {
         const scrollY = window.scrollY;
         const heroContent = document.querySelector('.hero-content');
-        const idVisuals = document.querySelector('.hero-visuals'); 
+        const idVisuals = document.querySelector('.hero-visuals');
         const lightning = document.querySelector('.lightning-svg');
-        
+
         if (heroContent) {
             heroContent.style.transform = `translateY(${scrollY * 0.2}px)`; // Slower
             heroContent.style.opacity = Math.max(0, 1 - (scrollY / 600)); // Lasts longer

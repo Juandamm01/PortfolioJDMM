@@ -97,6 +97,20 @@
     line-height: 1.2;
 }
 
+.stack-beginner-badge {
+    font-size: 0.62rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.2rem 0.45rem;
+    margin-left: 0.15rem;
+    border-radius: 4px;
+    color: #ffb703;
+    background: rgba(255, 183, 3, 0.12);
+    border: 1px solid rgba(255, 183, 3, 0.35);
+    line-height: 1.2;
+}
+
 @media (max-width: 768px) {
     .stack-section {
         padding-top: 6rem;
