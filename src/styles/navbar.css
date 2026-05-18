@@ -50,7 +50,8 @@
     justify-content: center;
     width: 44px;
     height: 55px;
-    border-radius: 8px; /* Changed to rounded square to avoid hair clipping */
+    border-radius: 8px;
+    /* Changed to rounded square to avoid hair clipping */
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
@@ -109,6 +110,8 @@
     background: transparent;
     border: none;
     box-shadow: none;
+    position: relative;
+    z-index: 3;
 }
 
 .nav-links li a {
@@ -117,17 +120,27 @@
     font-size: 0.92rem;
     font-weight: 500;
     letter-spacing: 0.02em;
-    transition: color 0.25s ease, text-shadow 0.25s ease;
+    padding: 0.5rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .nav-links li a:hover {
     color: var(--cyan);
-    text-shadow: 0 0 14px var(--cyan-glow);
+    background: rgba(0, 243, 255, 0.06);
+    border-color: rgba(0, 243, 255, 0.15);
+    text-shadow: 0 0 10px var(--cyan-glow);
 }
 
 .nav-links li.active a {
     color: var(--cyan);
     font-weight: 700;
+    background: rgba(0, 243, 255, 0.12);
+    border-color: rgba(0, 243, 255, 0.35);
+    box-shadow:
+        0 0 15px rgba(0, 243, 255, 0.1),
+        inset 0 0 10px rgba(0, 243, 255, 0.15);
     text-shadow: 0 0 16px var(--cyan-glow);
 }
 
@@ -198,17 +211,20 @@
 
     .nav-links li a {
         font-size: 0.55rem;
-        padding: 0.3rem 0.1rem;
+        padding: 0.35rem 0.65rem;
         text-transform: uppercase;
         letter-spacing: 0.01em;
         color: rgba(255, 255, 255, 0.72);
-        border-top: none !important;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        transition: all 0.25s ease;
     }
 
     .nav-links li.active a {
         color: var(--cyan);
-        transform: none;
-        border-bottom: 2px solid var(--cyan);
+        background: rgba(0, 243, 255, 0.12);
+        border: 1px solid rgba(0, 243, 255, 0.3);
+        box-shadow: inset 0 0 6px rgba(0, 243, 255, 0.25);
     }
 
     .lang-btn {
@@ -250,3 +266,136 @@
         height: 18px;
     }
 }
+
+/* ── Vanilla Gooey Navigation Styles ── */
+.nav-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.nav-effect.filter {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    z-index: 1;
+    border-radius: 999px;
+    filter: blur(7px) contrast(40) blur(0);
+    mix-blend-mode: lighten;
+    transition: all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-effect.filter::before {
+    content: '';
+    position: absolute;
+    inset: -75px;
+    z-index: -2;
+    background: black;
+    border-radius: 999px;
+}
+
+.nav-effect.filter::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--cyan);
+    box-shadow: 0 0 25px rgba(0, 243, 255, 0.8);
+    z-index: -1;
+    border-radius: 999px;
+}
+
+/* Perfect contrast text colors for desktop */
+@media (min-width: 901px) {
+    .nav-links li.active a {
+        color: #050914 !important;
+        font-weight: 700;
+        text-shadow: none !important;
+        background: transparent !important;
+        border-color: transparent !important;
+        box-shadow: none !important;
+    }
+}
+
+.particle,
+.point {
+    display: block;
+    opacity: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
+    transform-origin: center;
+}
+
+.particle {
+    --time: 5s;
+    position: absolute;
+    top: calc(50% - 12px);
+    left: calc(50% - 12px);
+    animation: navParticle calc(var(--time)) ease 1 -350ms;
+}
+
+.point {
+    background: var(--color);
+    box-shadow: 0 0 12px var(--color);
+    opacity: 1;
+    animation: navPoint calc(var(--time)) ease 1 -350ms;
+}
+
+@keyframes navParticle {
+    0% {
+        transform: rotate(0deg) translate(calc(var(--start-x)), calc(var(--start-y)));
+        opacity: 1;
+        animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+    }
+
+    70% {
+        transform: rotate(calc(var(--rotate) * 0.5)) translate(calc(var(--end-x) * 1.2), calc(var(--end-y) * 1.2));
+        opacity: 1;
+        animation-timing-function: ease;
+    }
+
+    85% {
+        transform: rotate(calc(var(--rotate) * 0.66)) translate(calc(var(--end-x)), calc(var(--end-y)));
+        opacity: 1;
+    }
+
+    100% {
+        transform: rotate(calc(var(--rotate) * 1.2)) translate(calc(var(--end-x) * 0.5), calc(var(--end-y) * 0.5));
+        opacity: 1;
+    }
+}
+
+@keyframes navPoint {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+        animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+    }
+
+    25% {
+        transform: scale(calc(var(--scale) * 0.25));
+    }
+
+    38% {
+        opacity: 1;
+    }
+
+    65% {
+        transform: scale(var(--scale));
+        opacity: 1;
+        animation-timing-function: ease;
+    }
+
+    85% {
+        transform: scale(var(--scale));
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}

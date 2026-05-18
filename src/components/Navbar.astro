@@ -1,33 +1,62 @@
 ---
-import { Image } from 'astro:assets';
-import navbarImg from '../assets/photos/portfolio.jpg';
+import { Image } from "astro:assets";
+import navbarImg from "../assets/photos/portfolio.jpg";
 ---
 
 <nav class="navbar" id="main-nav">
     <a href="#home" class="logo" aria-label="Inicio — Juan David Martínez">
         <span class="logo-thumb nav-anim" aria-hidden="true">
-            <Image src={navbarImg} alt="" class="logo-mark" width={88} height={110} loading="eager" />
+            <Image
+                src={navbarImg}
+                alt=""
+                class="logo-mark"
+                width={88}
+                height={110}
+                loading="eager"
+            />
         </span>
         <span class="logo-text-wrap nav-anim">
-            <span class="logo-text-strong" data-i18n="nav_logo_strong">JUAN DAVID</span>
-            <span class="logo-text-muted" data-i18n="nav_logo_muted">MARTÍNEZ</span>
+            <span class="logo-text-strong" data-i18n="nav_logo_strong"
+                >JUAN DAVID</span
+            >
+            <span class="logo-text-muted" data-i18n="nav_logo_muted"
+                >MARTÍNEZ</span
+            >
         </span>
     </a>
-    <ul class="nav-links">
-        <li class="active nav-anim"><a href="#home" data-i18n="nav_home">Inicio</a></li>
-        <li class="nav-anim"><a href="#project" data-i18n="nav_project">Proyectos</a></li>
-        <li class="nav-anim"><a href="#tech" data-i18n="nav_stack">Stack</a></li>
-        <li class="nav-anim"><a href="#experience" data-i18n="nav_experience">Experiencia</a></li>
-        <li class="nav-anim"><a href="#certifications" data-i18n="nav_cert">Diplomas</a></li>
-        <li class="nav-anim"><a href="#contact" data-i18n="nav_contact">Contacto</a></li>
-    </ul>
-    <button id="lang-toggle" class="lang-btn nav-anim" aria-label="Toggle Language">EN</button>
+    <div class="nav-container" id="nav-container">
+        <ul class="nav-links">
+            <li class="active nav-anim">
+                <a href="#home" data-i18n="nav_home">Inicio</a>
+            </li>
+            <li class="nav-anim">
+                <a href="#project" data-i18n="nav_project">Proyectos</a>
+            </li>
+            <li class="nav-anim">
+                <a href="#tech" data-i18n="nav_stack">Stack</a>
+            </li>
+            <li class="nav-anim">
+                <a href="#experience" data-i18n="nav_experience">Experiencia</a>
+            </li>
+            <li class="nav-anim">
+                <a href="#certifications" data-i18n="nav_cert">Diplomas</a>
+            </li>
+            <li class="nav-anim">
+                <a href="#contact" data-i18n="nav_contact">Contacto</a>
+            </li>
+        </ul>
+        <span class="nav-effect filter" id="nav-filter"></span>
+    </div>
+    <button
+        id="lang-toggle"
+        class="lang-btn nav-anim"
+        aria-label="Toggle Language">EN</button
+    >
 </nav>
 
-
 <script>
-    import { initNavbarInteractive } from '../logic/navbar.js';
-    
+    import { initNavbarInteractive } from "../logic/navbar.js";
+
     document.addEventListener("DOMContentLoaded", () => {
         initNavbarInteractive();
     });
