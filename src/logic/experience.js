@@ -6,65 +6,101 @@ export function initExperienceInteractive() {
 
     const mainHeader = section.querySelector('.exp-main-anim');
     const cards = section.querySelectorAll('.exp-card-anim');
+    const dots = section.querySelectorAll('.exp-dot');
+    const bullets = section.querySelectorAll('.exp-bullets li');
+    const techPills = section.querySelectorAll('.exp-tech .tech-pill');
+    const timeline = section.querySelector('.exp-timeline');
 
-    const ease = 'cubicBezier(0.22, 1, 0.36, 1)';
+    const ease = 'cubicBezier(0.16, 1, 0.3, 1)'; // Expo ease out
 
     function resetExperience() {
         if (mainHeader) {
             mainHeader.style.opacity = '0';
-            mainHeader.style.transform = 'translateY(20px)';
+            mainHeader.style.transform = 'translateY(40px)';
         }
         cards.forEach(el => {
             el.style.opacity = '0';
-            el.style.transform = 'translateY(28px) scale(0.98)';
+            el.style.transform = 'translateY(50px) scale(0.96)';
         });
-        section.querySelectorAll('.exp-dot').forEach(el => {
+        dots.forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'scale(0)';
         });
-        section.querySelectorAll('.exp-bullets li').forEach(el => {
+        bullets.forEach(el => {
             el.style.opacity = '0';
-            el.style.transform = 'translateX(-10px)';
+            el.style.transform = 'translateX(-16px)';
         });
+        techPills.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'scale(0.7) translateY(8px)';
+        });
+        if (timeline) {
+            timeline.style.opacity = '0';
+        }
     }
 
     function animateExperience() {
-        if (mainHeader) {
+        // Timeline line draws in
+        if (timeline) {
             window.anime({
-                targets: mainHeader,
-                translateY: [20, 0],
+                targets: timeline,
                 opacity: [0, 1],
                 easing: ease,
-                duration: 620
+                duration: 500
             });
         }
 
+        // Header slides up with blur clear
+        if (mainHeader) {
+            window.anime({
+                targets: mainHeader,
+                translateY: [40, 0],
+                opacity: [0, 1],
+                easing: ease,
+                duration: 900
+            });
+        }
+
+        // Cards come in with stagger, and scale
         window.anime({
             targets: cards,
-            translateY: [28, 0],
+            translateY: [50, 0],
             opacity: [0, 1],
-            scale: [0.98, 1],
-            delay: window.anime.stagger(110, { start: 120 }),
+            scale: [0.96, 1],
+            delay: window.anime.stagger(160, { start: 180 }),
             easing: ease,
-            duration: 680
+            duration: 900
         });
 
+        // Dots pop in
         window.anime({
-            targets: section.querySelectorAll('.exp-dot'),
-            scale: [0, 1],
+            targets: dots,
+            scale: [0, 1.2, 1],
             opacity: [0, 1],
-            delay: window.anime.stagger(120, { start: 360 }),
-            easing: ease,
-            duration: 480
+            delay: window.anime.stagger(160, { start: 400 }),
+            easing: 'cubicBezier(0.34, 1.56, 0.64, 1)', // Spring overshoot
+            duration: 600
         });
 
+        // Bullets cascade in
         window.anime({
-            targets: section.querySelectorAll('.exp-bullets li'),
-            translateX: [-10, 0],
+            targets: bullets,
+            translateX: [-16, 0],
             opacity: [0, 1],
-            delay: window.anime.stagger(35, { start: 520 }),
+            delay: window.anime.stagger(40, { start: 600 }),
             easing: ease,
-            duration: 380
+            duration: 500
+        });
+
+        // Tech pills bounce in
+        window.anime({
+            targets: techPills,
+            scale: [0.7, 1.05, 1],
+            translateY: [8, 0],
+            opacity: [0, 1],
+            delay: window.anime.stagger(30, { start: 800 }),
+            easing: 'cubicBezier(0.34, 1.56, 0.64, 1)',
+            duration: 450
         });
     }
 
@@ -77,7 +113,7 @@ export function initExperienceInteractive() {
             played = true;
             animateExperience();
         });
-    }, { root: null, threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    }, { root: null, threshold: 0.08, rootMargin: '0px 0px -4% 0px' });
 
     observer.observe(section);
 }

@@ -9,6 +9,7 @@
   height: calc(100vh - 80px);
   min-height: 500px;
   gap: 1.5rem;
+  position: relative;
 }
 
 .hero-content {

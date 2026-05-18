@@ -2,6 +2,7 @@
     padding: 4.5rem 2rem 2rem;
     background: #03060d;
     position: relative;
+    z-index: 10;
     overflow: hidden;
     color: var(--white);
     scroll-margin-top: 80px;
@@ -153,6 +154,27 @@
     font-size: 0.8rem;
     padding-top: 1.5rem;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Star Wars: "Que la Fuerza te acompañe" styled tagline */
+.footer-bottom [data-i18n="footer_tagline"] {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(0, 243, 255, 0.35);
+    transition: color 0.4s ease, text-shadow 0.4s ease;
+}
+
+.footer-bottom [data-i18n="footer_tagline"]:hover {
+    color: rgba(0, 243, 255, 0.7);
+    text-shadow: 0 0 12px rgba(0, 243, 255, 0.3);
+}
+
+/* Star Wars: decorative line before tagline — like a lightsaber slash */
+.footer-bottom p:last-child::before {
+    content: '⋯ ';
+    color: rgba(0, 243, 255, 0.2);
+    letter-spacing: 0.1em;
 }
 
 .footer-glow {

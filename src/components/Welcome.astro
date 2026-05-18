@@ -11,19 +11,6 @@ import Navbar from './Navbar.astro';
     <!-- Anime.js Scripts (Loaded early for the background) -->
     <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
 
-    <!-- Background Lightning & Lottie Container -->
-    <div class="lightning-container" id="lightning-container">
-        <!-- SVG Lightning Path animado con AnimeJS -->
-        <svg viewBox="0 0 200 1000" preserveAspectRatio="none" id="lightning" class="lightning-svg">
-            <path d="M 100 0 L 80 150 L 130 220 L 70 380 L 150 500 L 40 680 L 110 820 L 80 1000" stroke="#00f3ff" stroke-width="4" fill="none" class="lightning-path" style="filter: drop-shadow(0 0 20px #00f3ff) drop-shadow(0 0 10px #00f3ff);"/>
-            <path d="M 100 0 L 80 150 L 130 220 L 70 380 L 150 500 L 40 680 L 110 820 L 80 1000" stroke="#ffffff" stroke-width="2" fill="none" class="lightning-core" style="filter: drop-shadow(0 0 8px #fff);"/>
-            <!-- Branches for a more realistic lightning effect -->
-            <path d="M 80 150 L 40 220 L 30 300" stroke="#00f3ff" stroke-width="2" fill="none" class="lightning-path" style="filter: drop-shadow(0 0 12px #00f3ff);"/>
-            <path d="M 130 220 L 170 300 L 190 350" stroke="#00f3ff" stroke-width="2" fill="none" class="lightning-path" style="filter: drop-shadow(0 0 12px #00f3ff);"/>
-            <path d="M 150 500 L 180 580" stroke="#00f3ff" stroke-width="2" fill="none" class="lightning-path" style="filter: drop-shadow(0 0 12px #00f3ff);"/>
-            <path d="M 40 680 L 10 750" stroke="#00f3ff" stroke-width="2" fill="none" class="lightning-path" style="filter: drop-shadow(0 0 12px #00f3ff);"/>
-        </svg>
-    </div>
 
     <!-- Main Hero Section -->
     <main class="hero-section">

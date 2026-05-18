@@ -235,49 +235,101 @@ export function initWelcomeInteractive() {
     startTypeWriter();
 
     if (window.anime) {
-        // --- 2. Anime.js Lightning Animation Effect ---
-        const pathElements = document.querySelectorAll('.lightning-path, .lightning-core');
-        if (pathElements.length > 0) {
-            // Initialize all paths
-            pathElements.forEach(path => {
-                window.anime.setDashoffset(path);
-            });
+        // --- 3. Premium Hero Entrance Animations ---
+        const heroElements = document.querySelectorAll('.entrance-anim');
 
-            // Animate paths together for a single strike effect
+        // First pass: set all to invisible
+        heroElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+        });
+
+        // Badge pops in from above with spring
+        const badge = document.querySelector('.badge.entrance-anim');
+        if (badge) {
             window.anime({
-                targets: '.lightning-path, .lightning-core',
-                strokeDashoffset: [window.anime.setDashoffset, 0],
-                easing: 'easeOutElastic(1, .8)',
+                targets: badge,
+                translateY: [-20, 0],
+                opacity: [0, 1],
+                scale: [0.85, 1],
+                easing: 'cubicBezier(0.34, 1.56, 0.64, 1)',
                 duration: 800,
-                direction: 'alternate',
-                loop: true,
-                opacity: [
-                    { value: 0, duration: 100 },
-                    { value: 1, duration: 50 },
-                    { value: 0.3, duration: 50 },
-                    { value: 1, duration: 50 },
-                    { value: 0, duration: 300, delay: 200 }
-                ],
-                delay: 2000 // wait 2 seconds between strikes
+                delay: 300
             });
         }
 
-        // --- 3. Anime.js Entrance Animations ---
+        // Heading sweeps up
+        const heading = document.querySelector('.glitch-text.entrance-anim');
+        if (heading) {
+            window.anime({
+                targets: heading,
+                translateY: [50, 0],
+                opacity: [0, 1],
+                easing: 'cubicBezier(0.16, 1, 0.3, 1)',
+                duration: 1100,
+                delay: 480
+            });
+        }
+
+        // Subheading
+        const subheading = document.querySelector('h2.entrance-anim');
+        if (subheading) {
+            window.anime({
+                targets: subheading,
+                translateY: [30, 0],
+                opacity: [0, 1],
+                easing: 'cubicBezier(0.16, 1, 0.3, 1)',
+                duration: 900,
+                delay: 680
+            });
+        }
+
+        // Description fades with slight Y shift
+        const desc = document.querySelector('.description.entrance-anim');
+        if (desc) {
+            window.anime({
+                targets: desc,
+                translateY: [24, 0],
+                opacity: [0, 1],
+                easing: 'cubicBezier(0.16, 1, 0.3, 1)',
+                duration: 850,
+                delay: 820
+            });
+        }
+
+        // Social links appear one by one
+        const socialLinks = document.querySelectorAll('.social-links.entrance-anim, .cv-btn.entrance-anim');
         window.anime({
-            targets: '.entrance-anim',
-            translateY: [28, 0],
+            targets: socialLinks,
+            translateY: [20, 0],
             opacity: [0, 1],
-            delay: window.anime.stagger(100, { start: 480 }),
-            easing: 'cubicBezier(0.22, 1, 0.36, 1)',
-            duration: 780
+            scale: [0.9, 1],
+            delay: window.anime.stagger(80, { start: 1000 }),
+            easing: 'cubicBezier(0.34, 1.56, 0.64, 1)',
+            duration: 600
         });
 
-        // --- 4. ID Card Swinging Animation (más sutil) ---
+        // ID Card wrapper sweeps in from the right
+        const cardWrapper = document.querySelector('.id-card-wrapper.entrance-anim');
+        if (cardWrapper) {
+            window.anime({
+                targets: cardWrapper,
+                translateX: [80, 0],
+                translateY: [20, 0],
+                opacity: [0, 1],
+                scale: [0.92, 1],
+                easing: 'cubicBezier(0.16, 1, 0.3, 1)',
+                duration: 1200,
+                delay: 550
+            });
+        }
+
+        // --- 4. ID Card floating animation ---
         window.anime({
             targets: '.id-card-wrapper',
-            rotateZ: ['-3deg', '3deg'],
-            translateY: ['-5px', '5px'],
-            duration: 5200,
+            translateY: ['-8px', '8px'],
+            rotateZ: ['-1.5deg', '1.5deg'],
+            duration: 5000,
             direction: 'alternate',
             loop: true,
             easing: 'easeInOutSine',
