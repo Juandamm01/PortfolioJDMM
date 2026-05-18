@@ -1,0 +1,44 @@
+.star-border-container {
+  display: block;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.border-gradients-wrapper {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.border-gradient-rotate {
+  position: absolute;
+  width: 300%;
+  height: 300%;
+  top: -100%;
+  left: -100%;
+  animation: star-rotate linear infinite;
+  z-index: 0;
+}
+
+.inner-content {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+  background: #090d16; /* Solid backing color */
+  border-radius: inherit;
+}
+
+@keyframes star-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

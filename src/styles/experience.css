@@ -205,7 +205,6 @@
     display: flex;
     gap: 0.8rem;
     align-items: flex-start;
-    opacity: 0;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 

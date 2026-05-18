@@ -110,24 +110,8 @@ body {
 }
 
 /* ── Seamless Section Transitions ── */
-/* Each section has a bottom fade that blends into the next */
 #home, #project, #tech, #experience, #certifications {
   position: relative;
-}
-
-#home::after,
-#project::after,
-#tech::after,
-#experience::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 120px;
-  background: linear-gradient(to bottom, transparent, var(--bg-dark));
-  pointer-events: none;
-  z-index: 5;
 }
 
 @media (max-width: 768px) {

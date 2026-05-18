@@ -201,3 +201,228 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* 🌟 Custom brand hover outlines (Request 12) 🌟 */
+
+/* React - Keep color, rotate icon complete 360deg and settle */
+.stack-item--react:hover {
+    color: #61dafb !important;
+    background-color: rgba(97, 218, 251, 0.08) !important;
+    border-color: rgba(97, 218, 251, 0.35) !important;
+    box-shadow: 
+        0 8px 20px rgba(97, 218, 251, 0.12),
+        inset 0 0 8px rgba(97, 218, 251, 0.08) !important;
+}
+.stack-item--react:hover i {
+    transform: scale(1.25) rotate(360deg) !important;
+}
+
+/* Prisma - White Outline */
+.stack-item--prisma:hover {
+    color: #ffffff !important;
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+    box-shadow: 
+        0 8px 20px rgba(255, 255, 255, 0.12),
+        inset 0 0 8px rgba(255, 255, 255, 0.06) !important;
+}
+.stack-item--prisma:hover i {
+    transform: scale(1.25) translateY(-1px) !important;
+}
+
+/* Neon - Neon Green Outline */
+.stack-item--neon:hover {
+    color: #00e699 !important;
+    background-color: rgba(0, 230, 153, 0.08) !important;
+    border-color: rgba(0, 230, 153, 0.4) !important;
+    box-shadow: 
+        0 8px 20px rgba(0, 230, 153, 0.15),
+        inset 0 0 8px rgba(0, 230, 153, 0.08) !important;
+}
+.stack-item--neon:hover svg {
+    transform: scale(1.25) rotate(12deg) translateY(-1px) !important;
+}
+
+/* Vercel - White Outline */
+.stack-item--vercel:hover {
+    color: #ffffff !important;
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+    box-shadow: 
+        0 8px 20px rgba(255, 255, 255, 0.12),
+        inset 0 0 8px rgba(255, 255, 255, 0.06) !important;
+}
+.stack-item--vercel:hover i {
+    transform: scale(1.25) translateY(-1px) !important;
+}
+
+/* Railway - White Outline */
+.stack-item--railway:hover {
+    color: #ffffff !important;
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+    box-shadow: 
+        0 8px 20px rgba(255, 255, 255, 0.12),
+        inset 0 0 8px rgba(255, 255, 255, 0.06) !important;
+}
+.stack-item--railway:hover img {
+    transform: scale(1.25) translateY(-1px) !important;
+}
+
+/* Dribbble - Pink Outline */
+.stack-item--dribbble:hover {
+    color: #ea4c89 !important;
+    background-color: rgba(234, 76, 137, 0.08) !important;
+    border-color: rgba(234, 76, 137, 0.35) !important;
+    box-shadow: 
+        0 8px 20px rgba(234, 76, 137, 0.14),
+        inset 0 0 8px rgba(234, 76, 137, 0.08) !important;
+}
+.stack-item--dribbble:hover img {
+    transform: scale(1.25) rotate(8deg) translateY(-1px) !important;
+}
+
+/* Google Stitch - Pink Outline */
+.stack-item--stitch:hover {
+    color: #ea4c89 !important;
+    background-color: rgba(234, 76, 137, 0.08) !important;
+    border-color: rgba(234, 76, 137, 0.35) !important;
+    box-shadow: 
+        0 8px 20px rgba(234, 76, 137, 0.14),
+        inset 0 0 8px rgba(234, 76, 137, 0.08) !important;
+}
+.stack-item--stitch:hover img {
+    transform: scale(1.25) rotate(-8deg) translateY(-1px) !important;
+}
+
+/* 🌟 Brand specific outline and hover colors (Request 13) 🌟 */
+
+/* Next.js - White Contour */
+.stack-item--nextjs:hover {
+    color: #ffffff !important;
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+    box-shadow: 
+        0 8px 20px rgba(255, 255, 255, 0.12),
+        inset 0 0 8px rgba(255, 255, 255, 0.06) !important;
+}
+.stack-item--nextjs:hover i {
+    transform: scale(1.25) translateY(-1px) !important;
+}
+
+/* NestJS - Raspberry Red Contour */
+.stack-item--nestjs:hover {
+    color: #e0234e !important;
+    background-color: rgba(224, 35, 78, 0.08) !important;
+    border-color: rgba(224, 35, 78, 0.4) !important;
+    box-shadow: 
+        0 8px 20px rgba(224, 35, 78, 0.16),
+        inset 0 0 8px rgba(224, 35, 78, 0.08) !important;
+}
+.stack-item--nestjs:hover i {
+    transform: scale(1.25) rotate(8deg) translateY(-1px) !important;
+}
+
+/* Astro - Astro Orange Contour */
+.stack-item--astro:hover {
+    color: #ff5c00 !important;
+    background-color: rgba(255, 92, 0, 0.08) !important;
+    border-color: rgba(255, 92, 0, 0.4) !important;
+    box-shadow: 
+        0 8px 20px rgba(255, 92, 0, 0.15),
+        inset 0 0 8px rgba(255, 92, 0, 0.08) !important;
+}
+.stack-item--astro:hover img {
+    transform: scale(1.25) rotate(-6deg) translateY(-1px) !important;
+}
+
+/* Postman - Postman Orange Contour */
+.stack-item--postman:hover {
+    color: #ff6c37 !important;
+    background-color: rgba(255, 108, 55, 0.08) !important;
+    border-color: rgba(255, 108, 55, 0.4) !important;
+    box-shadow: 
+        0 8px 20px rgba(255, 108, 55, 0.15),
+        inset 0 0 8px rgba(255, 108, 55, 0.08) !important;
+}
+.stack-item--postman:hover i {
+    transform: scale(1.25) translateY(-1px) !important;
+}
+
+/* Git - Git Orange Contour */
+.stack-item--git:hover {
+    color: #f05032 !important;
+    background-color: rgba(240, 80, 50, 0.08) !important;
+    border-color: rgba(240, 80, 50, 0.4) !important;
+    box-shadow: 
+        0 8px 20px rgba(240, 80, 50, 0.15),
+        inset 0 0 8px rgba(240, 80, 50, 0.08) !important;
+}
+.stack-item--git:hover i {
+    transform: scale(1.25) rotate(-10deg) translateY(-1px) !important;
+}
+
+/* MongoDB - MongoDB Green Contour */
+.stack-item--mongodb:hover {
+    color: #47a248 !important;
+    background-color: rgba(71, 162, 72, 0.08) !important;
+    border-color: rgba(71, 162, 72, 0.4) !important;
+    box-shadow: 
+        0 8px 20px rgba(71, 162, 72, 0.15),
+        inset 0 0 8px rgba(71, 162, 72, 0.08) !important;
+}
+.stack-item--mongodb:hover i {
+    transform: scale(1.25) rotate(10deg) translateY(-1px) !important;
+}
+
+/* PostgreSQL - PostgreSQL Blue Contour */
+.stack-item--postgresql:hover {
+    color: #336791 !important;
+    background-color: rgba(51, 103, 145, 0.08) !important;
+    border-color: rgba(51, 103, 145, 0.4) !important;
+    box-shadow: 
+        0 8px 20px rgba(51, 103, 145, 0.15),
+        inset 0 0 8px rgba(51, 103, 145, 0.08) !important;
+}
+.stack-item--postgresql:hover i {
+    transform: scale(1.25) translateY(-1px) !important;
+}
+
+/* HTML - HTML5 Orange Contour */
+.stack-item--html:hover {
+    color: #e34f26 !important;
+    background-color: rgba(227, 79, 38, 0.08) !important;
+    border-color: rgba(227, 79, 38, 0.4) !important;
+    box-shadow: 
+        0 8px 20px rgba(227, 79, 38, 0.15),
+        inset 0 0 8px rgba(227, 79, 38, 0.08) !important;
+}
+.stack-item--html:hover i {
+    transform: scale(1.25) translateY(-1px) !important;
+}
+
+/* Node.js - Node Green Contour */
+.stack-item--node:hover {
+    color: #339933 !important;
+    background-color: rgba(51, 153, 51, 0.08) !important;
+    border-color: rgba(51, 153, 51, 0.4) !important;
+    box-shadow: 
+        0 8px 20px rgba(51, 153, 51, 0.15),
+        inset 0 0 8px rgba(51, 153, 51, 0.08) !important;
+}
+.stack-item--node:hover i {
+    transform: scale(1.25) translateY(-1px) !important;
+}
+
+/* Express.js - White Contour */
+.stack-item--express:hover {
+    color: #ffffff !important;
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+    box-shadow: 
+        0 8px 20px rgba(255, 255, 255, 0.12),
+        inset 0 0 8px rgba(255, 255, 255, 0.06) !important;
+}
+.stack-item--express:hover i {
+    transform: scale(1.25) translateY(-1px) !important;
+}

@@ -1,5 +1,6 @@
 ---
 // Experience & Education component
+import StarBorder from '../logic/animations/StarBorder.jsx';
 ---
 
 <section id="experience" class="exp-section">
@@ -23,8 +24,9 @@
                 <!-- Job 1 -->
                 <article class="exp-card exp-card-anim">
                     <div class="exp-dot"></div>
-                    <div class="exp-card-inner">
-                        <div class="exp-meta">
+                    <StarBorder as="div" color="cyan" speed="6s" borderRadius="8px" className="w-full">
+                        <div class="exp-card-inner" style="position: relative; z-index: 1; height: 100%; width: 100%;">
+                            <div class="exp-meta">
                             <span class="exp-period">Sep 2025 – Nov 2025</span>
                             <span class="exp-tag" data-i18n="exp_tag_onsite"
                                 >Presencial</span
@@ -56,12 +58,14 @@
                             <span class="tech-pill">C++</span>
                         </div>
                     </div>
-                </article>
+                </StarBorder>
+            </article>
 
-                <!-- Job 2 -->
-                <article class="exp-card exp-card-anim">
-                    <div class="exp-dot active"></div>
-                    <div class="exp-card-inner">
+            <!-- Job 2 -->
+            <article class="exp-card exp-card-anim">
+                <div class="exp-dot active"></div>
+                <StarBorder as="div" color="cyan" speed="6s" borderRadius="8px" className="w-full">
+                    <div class="exp-card-inner" style="position: relative; z-index: 1; height: 100%; width: 100%;">
                         <div class="exp-meta">
                             <span class="exp-period">Feb 2026 – Mayo 2026</span>
                             <span
@@ -78,22 +82,19 @@
                         </p>
                         <ul class="exp-bullets">
                             <li data-i18n="exp2_b1">
-                                Desarrollé sitio web con <strong>Next.js</strong
-                                >, <strong>React.js</strong>, <strong
-                                    >Prisma</strong
-                                > y <strong>Neon</strong>.
+                                Desarrollé sitio web con <strong>Next.js</strong>, <strong>React.js</strong>, <strong>Prisma</strong> y <strong>Neon</strong>.
                             </li>
                             <li data-i18n="exp2_b2">
-                                Animaciones con <strong>Framer Motion</strong> y <strong
-                                    >GSAP</strong
-                                >.
+                                <strong>Neon</strong> como base de datos PostgreSQL en la nube y <strong>Prisma</strong> como ORM para el modelado y gestión del esquema de datos.
                             </li>
                             <li data-i18n="exp2_b3">
-                                Implementación de almacenamiento en la nube utilizando <strong>AWS S3</strong> para la gestión de imágenes.
+                                Animaciones con <strong>Framer Motion</strong> y <strong>GSAP</strong>, reutilizando componentes de <strong>React Bits</strong> y <strong>Aceternity UI</strong>.
                             </li>
                             <li data-i18n="exp2_b4">
-                                Coordinación de proyectos y adaptación
-                                tecnológica.
+                                Implementación de almacenamiento en la nube utilizando <strong>AWS S3</strong> para la gestión de imágenes.
+                            </li>
+                            <li data-i18n="exp2_b5">
+                                Coordinación de proyectos, adaptación tecnológica e implementación de <strong>TypeScript</strong> en el backend.
                             </li>
                         </ul>
                         <div class="exp-tech">
@@ -105,10 +106,13 @@
                             <span class="tech-pill">AWS</span>
                             <span class="tech-pill">GSAP</span>
                             <span class="tech-pill">Framer Motion</span>
+                            <span class="tech-pill">React Bits</span>
+                            <span class="tech-pill">Aceternity UI</span>
                         </div>
                     </div>
-                </article>
-            </div>
+                </StarBorder>
+            </article>
+        </div>
         </div>
 
         <!-- EDUCATION column -->
@@ -117,19 +121,21 @@
                 🎓 Educación
             </h3>
 
-            <article class="edu-card exp-card-anim">
-                <div class="edu-icon">🎓</div>
-                <div>
-                    <h3 data-i18n="edu1_degree">
-                        Tecnología en Desarrollo de Software
-                    </h3>
-                    <p class="exp-company">
-                        Corporación Universitaria Minuto de Dios
-                    </p>
-                    <p class="exp-company">Villavicencio, Meta</p>
-                    <span class="exp-period">Feb 2024 – Actualidad</span>
-                </div>
-            </article>
+            <StarBorder as="div" className="exp-card-anim w-full" color="cyan" speed="6s" borderRadius="10px">
+                <article class="edu-card" style="position: relative; z-index: 1; width: 100%; height: 100%; margin: 0;">
+                    <div class="edu-icon">🎓</div>
+                    <div>
+                        <h3 data-i18n="edu1_degree">
+                            Tecnología en Desarrollo de Software
+                        </h3>
+                        <p class="exp-company">
+                            Corporación Universitaria Minuto de Dios
+                        </p>
+                        <p class="exp-company">Villavicencio, Meta</p>
+                        <span class="exp-period">Feb 2024 – Actualidad</span>
+                    </div>
+                </article>
+            </StarBorder>
         </div>
     </div>
 </section>

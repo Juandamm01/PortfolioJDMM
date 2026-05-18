@@ -21,10 +21,10 @@ import SpotlightCard from '../logic/animations/SpotlightCard.jsx';
         <SpotlightCard client:visible className="stack-card project-anim" style={{ animationDelay: '100ms' }} spotlightColor="rgba(0, 229, 255, 0.2)">
             <h3 class="stack-category" data-i18n="cat_front">Frontend</h3>
             <div class="stack-items">
-                <span class="stack-item"
+                <span class="stack-item stack-item--react"
                     ><i class="devicon-react-original colored"></i> React</span
                 >
-                <span class="stack-item"
+                <span class="stack-item stack-item--html"
                     ><i class="devicon-html5-plain colored"></i> HTML</span
                 >
                 <span class="stack-item"
@@ -37,10 +37,10 @@ import SpotlightCard from '../logic/animations/SpotlightCard.jsx';
         <SpotlightCard client:visible className="stack-card project-anim" style={{ animationDelay: '200ms' }} spotlightColor="rgba(0, 229, 255, 0.2)">
             <h3 class="stack-category" data-i18n="cat_back">Backend</h3>
             <div class="stack-items">
-                <span class="stack-item"
+                <span class="stack-item stack-item--node"
                     ><i class="devicon-nodejs-plain colored"></i> Node.js</span
                 >
-                <span class="stack-item"
+                <span class="stack-item stack-item--express"
                     ><i class="devicon-express-original" style="color: white;"
                     ></i> Express.js</span
                 >
@@ -67,19 +67,19 @@ import SpotlightCard from '../logic/animations/SpotlightCard.jsx';
         <SpotlightCard client:visible className="stack-card project-anim" style={{ animationDelay: '400ms' }} spotlightColor="rgba(0, 229, 255, 0.2)">
             <h3 class="stack-category" data-i18n="cat_frame">Frameworks</h3>
             <div class="stack-items">
-                <span class="stack-item"
+                <span class="stack-item stack-item--nextjs"
                     ><i class="devicon-nextjs-plain" style="color: white;"></i> Next.js</span
                 >
-                <span class="stack-item"
+                <span class="stack-item stack-item--astro"
                     ><img src={astroImg.src} alt="Astro" class="sicon" /> Astro</span
                 >
-                <span class="stack-item"
+                <span class="stack-item stack-item--nestjs"
                     ><i class="devicon-nestjs-plain colored"></i> NestJS</span
                 >
                 <span class="stack-item"
                     ><i class="devicon-flutter-plain colored"></i> Flutter</span
                 >
-                <span class="stack-item"
+                <span class="stack-item stack-item--react"
                     ><i class="devicon-react-original colored"></i> React Native</span
                 >
             </div>
@@ -89,10 +89,10 @@ import SpotlightCard from '../logic/animations/SpotlightCard.jsx';
         <SpotlightCard client:visible className="stack-card project-anim" style={{ animationDelay: '500ms' }} spotlightColor="rgba(0, 229, 255, 0.2)">
             <h3 class="stack-category" data-i18n="cat_db">Bases de Datos</h3>
             <div class="stack-items">
-                <span class="stack-item"
+                <span class="stack-item stack-item--postgresql"
                     ><i class="devicon-postgresql-plain colored"></i> PostgreSQL</span
                 >
-                <span class="stack-item"
+                <span class="stack-item stack-item--mongodb"
                     ><i class="devicon-mongodb-plain colored"></i> MongoDB</span
                 >
             </div>
@@ -102,21 +102,21 @@ import SpotlightCard from '../logic/animations/SpotlightCard.jsx';
         <SpotlightCard client:visible className="stack-card project-anim" style={{ animationDelay: '600ms' }} spotlightColor="rgba(0, 229, 255, 0.2)">
             <h3 class="stack-category" data-i18n="cat_tools">Herramientas</h3>
             <div class="stack-items">
-                <span class="stack-item"
+                <span class="stack-item stack-item--git"
                     ><i class="devicon-git-plain colored"></i> Git</span
                 >
                 <span class="stack-item"
                     ><i class="devicon-github-original" style="color: white;"
                     ></i> GitHub</span
                 >
-                <span class="stack-item"
+                <span class="stack-item stack-item--postman"
                     ><i class="devicon-postman-plain colored"></i> Postman</span
                 >
-                <span class="stack-item"
+                <span class="stack-item stack-item--prisma"
                     ><i class="devicon-prisma-original" style="color: white;"
                     ></i> Prisma</span
                 >
-                <span class="stack-item">
+                <span class="stack-item stack-item--neon">
                     <svg
                         class="sicon"
                         viewBox="0 0 24 24"
@@ -141,11 +141,11 @@ import SpotlightCard from '../logic/animations/SpotlightCard.jsx';
                 <span class="stack-item"
                     ><img src={awsImg.src} alt="AWS" class="sicon" /> AWS <span class="stack-beginner-badge" data-i18n="aws_level">Principiante</span></span
                 >
-                <span class="stack-item"
+                <span class="stack-item stack-item--vercel"
                     ><i class="devicon-vercel-plain" style="color: #ffffff;"
                     ></i> Vercel</span
                 >
-                <span class="stack-item">
+                <span class="stack-item stack-item--railway">
                     <img
                         src="https://cdn.simpleicons.org/railway/ffffff"
                         alt=""
@@ -170,10 +170,10 @@ import SpotlightCard from '../logic/animations/SpotlightCard.jsx';
         <SpotlightCard client:visible className="stack-card project-anim" style={{ animationDelay: '800ms' }} spotlightColor="rgba(0, 229, 255, 0.2)">
             <h3 class="stack-category" data-i18n="cat_design">Diseño</h3>
             <div class="stack-items">
-                <span class="stack-item"
+                <span class="stack-item stack-item--dribbble"
                     ><img src={dribbleImg.src} alt="Dribbble" class="sicon" /> Dribbble</span
                 >
-                <span class="stack-item">
+                <span class="stack-item stack-item--stitch">
                     <img
                         src={stitchImg.src}
                         alt="Google Stitch"

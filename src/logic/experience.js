@@ -16,23 +16,18 @@ export function initExperienceInteractive() {
     function resetExperience() {
         if (mainHeader) {
             mainHeader.style.opacity = '0';
-            mainHeader.style.transform = 'translateY(40px)';
         }
         cards.forEach(el => {
             el.style.opacity = '0';
-            el.style.transform = 'translateY(50px) scale(0.96)';
         });
         dots.forEach(el => {
             el.style.opacity = '0';
-            el.style.transform = 'scale(0)';
         });
         bullets.forEach(el => {
             el.style.opacity = '0';
-            el.style.transform = 'translateX(-16px)';
         });
         techPills.forEach(el => {
             el.style.opacity = '0';
-            el.style.transform = 'scale(0.7) translateY(8px)';
         });
         if (timeline) {
             timeline.style.opacity = '0';
@@ -54,7 +49,6 @@ export function initExperienceInteractive() {
         if (mainHeader) {
             window.anime({
                 targets: mainHeader,
-                translateY: [40, 0],
                 opacity: [0, 1],
                 easing: ease,
                 duration: 900
@@ -64,9 +58,7 @@ export function initExperienceInteractive() {
         // Cards come in with stagger, and scale
         window.anime({
             targets: cards,
-            translateY: [50, 0],
             opacity: [0, 1],
-            scale: [0.96, 1],
             delay: window.anime.stagger(160, { start: 180 }),
             easing: ease,
             duration: 900
@@ -75,7 +67,6 @@ export function initExperienceInteractive() {
         // Dots pop in
         window.anime({
             targets: dots,
-            scale: [0, 1.2, 1],
             opacity: [0, 1],
             delay: window.anime.stagger(160, { start: 400 }),
             easing: 'cubicBezier(0.34, 1.56, 0.64, 1)', // Spring overshoot
@@ -85,7 +76,6 @@ export function initExperienceInteractive() {
         // Bullets cascade in
         window.anime({
             targets: bullets,
-            translateX: [-16, 0],
             opacity: [0, 1],
             delay: window.anime.stagger(40, { start: 600 }),
             easing: ease,
@@ -95,8 +85,6 @@ export function initExperienceInteractive() {
         // Tech pills bounce in
         window.anime({
             targets: techPills,
-            scale: [0.7, 1.05, 1],
-            translateY: [8, 0],
             opacity: [0, 1],
             delay: window.anime.stagger(30, { start: 800 }),
             easing: 'cubicBezier(0.34, 1.56, 0.64, 1)',

@@ -15,9 +15,7 @@ export function initProjectsInteractive() {
         if (badge) {
             window.anime({
                 targets: badge,
-                translateY: [-30, 0],
                 opacity: [0, 1],
-                scale: [0.8, 1],
                 easing: spring,
                 duration: 750,
                 delay: 0
@@ -28,7 +26,6 @@ export function initProjectsInteractive() {
         if (heading) {
             window.anime({
                 targets: heading,
-                translateY: [50, 0],
                 opacity: [0, 1],
                 easing: ease,
                 duration: 900,
@@ -39,10 +36,7 @@ export function initProjectsInteractive() {
         // Cards rise in with perspective tilt
         window.anime({
             targets: cards,
-            translateY: [60, 0],
-            rotateX: ['8deg', '0deg'],
             opacity: [0, 1],
-            scale: [0.94, 1],
             delay: window.anime.stagger(150, { start: 250 }),
             easing: ease,
             duration: 950
@@ -51,7 +45,7 @@ export function initProjectsInteractive() {
         // Images scale into view
         window.anime({
             targets: images,
-            scale: [1.1, 1],
+            opacity: [0, 1],
             delay: window.anime.stagger(120, { start: 450 }),
             easing: ease,
             duration: 900
@@ -60,7 +54,6 @@ export function initProjectsInteractive() {
         // Pills cascade at the end
         window.anime({
             targets: pills,
-            scale: [0.6, 1.05, 1],
             opacity: [0, 1],
             delay: window.anime.stagger(20, { start: 700 }),
             easing: spring,
@@ -78,9 +71,7 @@ export function initProjectsInteractive() {
         if (badge) {
             window.anime({
                 targets: badge,
-                translateY: [-30, 0],
                 opacity: [0, 1],
-                scale: [0.8, 1],
                 easing: spring,
                 duration: 700
             });
@@ -89,7 +80,6 @@ export function initProjectsInteractive() {
         if (heading) {
             window.anime({
                 targets: heading,
-                translateY: [40, 0],
                 opacity: [0, 1],
                 filter: ['blur(5px)', 'blur(0px)'],
                 easing: ease,
@@ -101,10 +91,7 @@ export function initProjectsInteractive() {
         // Cards fly in from slight downward with stagger
         window.anime({
             targets: cards,
-            translateY: [45, 0],
             opacity: [0, 1],
-            scale: [0.92, 1],
-            rotateX: ['6deg', '0deg'],
             filter: ['blur(5px)', 'blur(0px)'],
             delay: window.anime.stagger(70, { start: 200 }),
             easing: ease,
@@ -114,7 +101,6 @@ export function initProjectsInteractive() {
         // Category labels reveal after cards
         window.anime({
             targets: categories,
-            translateX: [-12, 0],
             opacity: [0, 1],
             delay: window.anime.stagger(70, { start: 350 }),
             easing: ease,
@@ -124,7 +110,6 @@ export function initProjectsInteractive() {
         // Icons bounce in with spring
         window.anime({
             targets: icons,
-            scale: [0.5, 1.1, 1],
             opacity: [0, 1],
             delay: window.anime.stagger(18, { start: 550 }),
             easing: spring,
