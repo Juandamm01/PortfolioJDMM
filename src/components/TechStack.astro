@@ -5,6 +5,7 @@ import astroImg from "../assets/Astro.png";
 import antiImg from "../assets/Antigravity.png";
 import dribbleImg from "../assets/Dribble.png";
 import stitchImg from "../assets/stitch.png";
+import SpotlightCard from '../logic/animations/SpotlightCard.jsx';
 ---
 
 <section id="tech" class="stack-section">
@@ -17,10 +18,7 @@ import stitchImg from "../assets/stitch.png";
 
     <div class="stack-grid">
         <!-- Frontend -->
-        <article
-            class="stack-card project-anim"
-            style="animation-delay: 100ms;"
-        >
+        <SpotlightCard client:visible className="stack-card project-anim" style={{ animationDelay: '100ms' }} spotlightColor="rgba(0, 229, 255, 0.2)">
             <h3 class="stack-category" data-i18n="cat_front">Frontend</h3>
             <div class="stack-items">
                 <span class="stack-item"
@@ -33,13 +31,10 @@ import stitchImg from "../assets/stitch.png";
                     ><i class="devicon-css3-plain colored"></i> CSS</span
                 >
             </div>
-        </article>
+        </SpotlightCard>
 
         <!-- Backend -->
-        <article
-            class="stack-card project-anim"
-            style="animation-delay: 200ms;"
-        >
+        <SpotlightCard client:visible className="stack-card project-anim" style={{ animationDelay: '200ms' }} spotlightColor="rgba(0, 229, 255, 0.2)">
             <h3 class="stack-category" data-i18n="cat_back">Backend</h3>
             <div class="stack-items">
                 <span class="stack-item"
@@ -50,13 +45,10 @@ import stitchImg from "../assets/stitch.png";
                     ></i> Express.js</span
                 >
             </div>
-        </article>
+        </SpotlightCard>
 
         <!-- Languages -->
-        <article
-            class="stack-card project-anim"
-            style="animation-delay: 300ms;"
-        >
+        <SpotlightCard client:visible className="stack-card project-anim" style={{ animationDelay: '300ms' }} spotlightColor="rgba(0, 229, 255, 0.2)">
             <h3 class="stack-category" data-i18n="cat_dev">Lenguajes</h3>
             <div class="stack-items">
                 <span class="stack-item"
@@ -69,13 +61,10 @@ import stitchImg from "../assets/stitch.png";
                     ><i class="devicon-cplusplus-plain colored"></i> C++</span
                 >
             </div>
-        </article>
+        </SpotlightCard>
 
         <!-- Frameworks -->
-        <article
-            class="stack-card project-anim"
-            style="animation-delay: 400ms;"
-        >
+        <SpotlightCard client:visible className="stack-card project-anim" style={{ animationDelay: '400ms' }} spotlightColor="rgba(0, 229, 255, 0.2)">
             <h3 class="stack-category" data-i18n="cat_frame">Frameworks</h3>
             <div class="stack-items">
                 <span class="stack-item"
@@ -94,13 +83,10 @@ import stitchImg from "../assets/stitch.png";
                     ><i class="devicon-react-original colored"></i> React Native</span
                 >
             </div>
-        </article>
+        </SpotlightCard>
 
         <!-- Databases -->
-        <article
-            class="stack-card project-anim"
-            style="animation-delay: 500ms;"
-        >
+        <SpotlightCard client:visible className="stack-card project-anim" style={{ animationDelay: '500ms' }} spotlightColor="rgba(0, 229, 255, 0.2)">
             <h3 class="stack-category" data-i18n="cat_db">Bases de Datos</h3>
             <div class="stack-items">
                 <span class="stack-item"
@@ -110,13 +96,10 @@ import stitchImg from "../assets/stitch.png";
                     ><i class="devicon-mongodb-plain colored"></i> MongoDB</span
                 >
             </div>
-        </article>
+        </SpotlightCard>
 
         <!-- Tools -->
-        <article
-            class="stack-card project-anim"
-            style="animation-delay: 600ms;"
-        >
+        <SpotlightCard client:visible className="stack-card project-anim" style={{ animationDelay: '600ms' }} spotlightColor="rgba(0, 229, 255, 0.2)">
             <h3 class="stack-category" data-i18n="cat_tools">Herramientas</h3>
             <div class="stack-items">
                 <span class="stack-item"
@@ -149,13 +132,10 @@ import stitchImg from "../assets/stitch.png";
                     ><img src={antiImg.src} alt="Antigravity" class="sicon" /> Antigravity</span
                 >
             </div>
-        </article>
+        </SpotlightCard>
 
         <!-- Cloud -->
-        <article
-            class="stack-card project-anim"
-            style="animation-delay: 700ms;"
-        >
+        <SpotlightCard client:visible className="stack-card project-anim" style={{ animationDelay: '700ms' }} spotlightColor="rgba(0, 229, 255, 0.2)">
             <h3 class="stack-category" data-i18n="cat_cloud">Cloud</h3>
             <div class="stack-items">
                 <span class="stack-item"
@@ -184,13 +164,10 @@ import stitchImg from "../assets/stitch.png";
                     >
                 </span>
             </div>
-        </article>
+        </SpotlightCard>
 
         <!-- Design -->
-        <article
-            class="stack-card project-anim"
-            style="animation-delay: 800ms;"
-        >
+        <SpotlightCard client:visible className="stack-card project-anim" style={{ animationDelay: '800ms' }} spotlightColor="rgba(0, 229, 255, 0.2)">
             <h3 class="stack-category" data-i18n="cat_design">Diseño</h3>
             <div class="stack-items">
                 <span class="stack-item"
@@ -204,7 +181,7 @@ import stitchImg from "../assets/stitch.png";
                     /> Google Stitch
                 </span>
             </div>
-        </article>
+        </SpotlightCard>
     </div>
 </section>
 
