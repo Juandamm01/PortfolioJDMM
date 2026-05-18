@@ -1,4 +1,5 @@
 const SECTION_IDS = ['home', 'project', 'tech', 'experience', 'certifications', 'contact'];
+let lastBurstTime = 0;
 
 function updateFilterPosition(navbar, activeLi) {
     const filterEl = document.getElementById('nav-filter');
@@ -74,20 +75,14 @@ function makeParticles(filterEl) {
 
 function setActiveNavItem(navbar, sectionId) {
     if (!SECTION_IDS.includes(sectionId)) sectionId = 'home';
-    const filterEl = document.getElementById('nav-filter');
 
     navbar.querySelectorAll('.nav-links li').forEach((li) => {
         const a = li.querySelector('a[href^="#"]');
         if (!a) return;
         const href = a.getAttribute('href');
         if (href === `#${sectionId}`) {
-            const wasActive = li.classList.contains('active');
             li.classList.add('active');
             updateFilterPosition(navbar, li);
-            
-            if (!wasActive && filterEl) {
-                makeParticles(filterEl);
-            }
         } else {
             li.classList.remove('active');
         }
@@ -132,12 +127,10 @@ export function initNavbarInteractive() {
     if (!navbar) return;
 
     let ticking = false;
-    const SCROLL_GLASS_AT = 32;
-
-    /** Tras clic en ancla, el scroll suave dispara muchos "scroll" y el spy devolvía la sección anterior hasta el final del movimiento. */
+    let clickLockId = null;
     let pendingClickNav = false;
-    let clickLockId = 'home';
     let navLockTimer = null;
+    const SCROLL_GLASS_AT = 20;
 
     function clearNavLockTimer() {
         if (navLockTimer) {
@@ -203,6 +196,17 @@ export function initNavbarInteractive() {
     function onHashNav(href) {
         const id = href.startsWith('#') ? href.slice(1) : href;
         if (!SECTION_IDS.includes(id)) return;
+
+        // Trigger particle burst EXACTLY once per click/hash change with debouncing
+        const now = Date.now();
+        if (now - lastBurstTime > 900) {
+            lastBurstTime = now;
+            const filterEl = document.getElementById('nav-filter');
+            if (filterEl) {
+                makeParticles(filterEl);
+            }
+        }
+
         armNavClickLock(id);
     }
 
@@ -223,7 +227,7 @@ export function initNavbarInteractive() {
     window.addEventListener('hashchange', () => {
         const id = (window.location.hash || '#home').replace(/^#/, '');
         if (SECTION_IDS.includes(id)) {
-            armNavClickLock(id);
+            onHashNav(id);
         }
     });
 
