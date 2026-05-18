@@ -1,6 +1,7 @@
 ---
  import '../styles/global.css';
 import dartVaderIcon from '../assets/DartVader.png';
+import PixelSnow from '../logic/animations/PixelSnow.jsx';
 ---
 <!doctype html>
 <html lang="en">
@@ -14,6 +15,19 @@ import dartVaderIcon from '../assets/DartVader.png';
 		<title>Portfolio Juan David Martinez</title>
 	</head>
 	<body>
+		<div class="pixel-snow-global-wrapper">
+			<PixelSnow 
+				client:load
+				color="#87b5ff"
+				flakeSize={0.01}
+				minFlakeSize={1.25}
+				pixelResolution={200}
+				speed={1.25}
+				density={0.3}
+				direction={125}
+				brightness={1}
+			/>
+		</div>
 		<slot />
 
 		<!-- Lenis Smooth Scroll -->
