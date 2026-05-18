@@ -283,28 +283,11 @@
     pointer-events: none;
     z-index: 1;
     border-radius: 999px;
-    filter: blur(7px) contrast(40) blur(0);
-    mix-blend-mode: lighten;
-    transition: all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.nav-effect.filter::before {
-    content: '';
-    position: absolute;
-    inset: -75px;
-    z-index: -2;
-    background: black;
-    border-radius: 999px;
-}
-
-.nav-effect.filter::after {
-    content: '';
-    position: absolute;
-    inset: 0;
     background: var(--cyan);
-    box-shadow: 0 0 25px rgba(0, 243, 255, 0.8);
-    z-index: -1;
-    border-radius: 999px;
+    box-shadow: 
+        0 0 15px rgba(0, 243, 255, 0.5),
+        0 0 30px rgba(0, 243, 255, 0.25);
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 /* Perfect contrast text colors for desktop */

@@ -234,6 +234,13 @@ export function initNavbarInteractive() {
         }
     });
 
+    window.addEventListener('load', () => {
+        const activeLi = navbar.querySelector('.nav-links li.active');
+        if (activeLi) {
+            updateFilterPosition(navbar, activeLi);
+        }
+    });
+
     const initial = (window.location.hash || '#home').replace(/^#/, '');
     setActiveNavItem(navbar, SECTION_IDS.includes(initial) ? initial : 'home');
     requestAnimationFrame(applyScrollState);
