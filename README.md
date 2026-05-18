@@ -14,7 +14,7 @@
 
 Soy un Desarrollador de Software apasionado por construir aplicaciones web y móviles funcionales con una experiencia de usuario (UX) inmejorable. Aunque disfruto mucho creando interfaces fluidas como Front-End, también me apasiona el desarrollo Back-End para crear soluciones técnicas robustas y escalables de principio a fin.
 
-_"Un desarrollador, guiado por la Fuerza."_
+_"Antes de la creación, viene la destrucción." — Bills_
 
 ## 🚀 Mi Stack
 
@@ -22,6 +22,7 @@ _"Un desarrollador, guiado por la Fuerza."_
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![Next.js](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
 ![Astro](https://img.shields.io/badge/astro-%232C2052.svg?style=for-the-badge&logo=astro&logoColor=white)
+![NestJS](https://img.shields.io/badge/nestjs-%23E0234E.svg?style=for-the-badge&logo=nestjs&logoColor=white)
 ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
 ![React Native](https://img.shields.io/badge/react_native-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
@@ -71,6 +72,3 @@ _"Un desarrollador, guiado por la Fuerza."_
     Mírate a ti mismo y haz el cambio. ♾️
   </p>
 </div>
-
-
-
