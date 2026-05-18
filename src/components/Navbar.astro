@@ -1,6 +1,8 @@
 ---
 import { Image } from "astro:assets";
-import navbarImg from "../assets/photos/JuanDa.jpg";
+import navbarImg from "../assets/photos/portfolio.jpg";
+import GooeyNav from "../logic/animations/GooeyNav.jsx";
+import NavbarPhone from "../logic/animations/phone/NavbarPhone.jsx";
 ---
 
 <nav class="navbar" id="main-nav">
@@ -24,40 +26,30 @@ import navbarImg from "../assets/photos/JuanDa.jpg";
             >
         </span>
     </a>
-    <div class="nav-container" id="nav-container">
-        <ul class="nav-links">
-            <li class="active nav-anim">
-                <a href="#home" data-i18n="nav_home">Inicio</a>
-            </li>
-            <li class="nav-anim">
-                <a href="#project" data-i18n="nav_project">Proyectos</a>
-            </li>
-            <li class="nav-anim">
-                <a href="#tech" data-i18n="nav_stack">Stack</a>
-            </li>
-            <li class="nav-anim">
-                <a href="#experience" data-i18n="nav_experience">Experiencia</a>
-            </li>
-            <li class="nav-anim">
-                <a href="#certifications" data-i18n="nav_cert">Diplomas</a>
-            </li>
-            <li class="nav-anim">
-                <a href="#contact" data-i18n="nav_contact">Contacto</a>
-            </li>
-        </ul>
-        <span class="nav-effect filter" id="nav-filter"></span>
+    
+    <!-- Desktop Navigation -->
+    <div class="desktop-only">
+        <GooeyNav client:load />
     </div>
+
+    <!-- Mobile Burger Menu -->
+    <div class="mobile-only">
+        <NavbarPhone client:load />
+    </div>
+
+    <!-- Desktop Language Toggle Button -->
     <button
         id="lang-toggle"
-        class="lang-btn nav-anim"
+        class="lang-btn nav-anim desktop-only"
         aria-label="Toggle Language">EN</button
     >
 </nav>
 
 <script>
-    import { initNavbarInteractive } from "../logic/animations/navbar.js";
+    import { initNavbarInteractive } from "../logic/navbar.js";
 
     document.addEventListener("DOMContentLoaded", () => {
         initNavbarInteractive();
     });
 </script>
+

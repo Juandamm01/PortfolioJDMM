@@ -1,0 +1,195 @@
+/* GooeyNav Premium CSS Styles */
+.gooey-nav-container {
+    --color-1: #00f3ff;
+    --color-2: #7df9ff;
+    --color-3: #3178c6;
+    --color-4: #f7df1e;
+    
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.gooey-nav-container nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 3;
+}
+
+.gooey-nav-container nav ul li a {
+    color: rgba(255, 255, 255, 0.82);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    padding: 0.5rem 1.1rem;
+    border-radius: 999px;
+    transition: color 0.35s ease;
+    display: block;
+    position: relative;
+}
+
+.gooey-nav-container nav ul li a:hover {
+    color: var(--cyan);
+}
+
+/* Fallback styles on mobile screens */
+@media (max-width: 900px) {
+    .gooey-nav-container nav ul {
+        gap: 0.8rem;
+    }
+    .gooey-nav-container nav ul li a {
+        font-size: 0.55rem;
+        padding: 0.35rem 0.65rem;
+    }
+    .gooey-nav-container nav ul li.active a {
+        color: var(--cyan) !important;
+        background: rgba(0, 243, 255, 0.12);
+        border: 1px solid rgba(0, 243, 255, 0.3);
+        box-shadow: inset 0 0 6px rgba(0, 243, 255, 0.25);
+    }
+    .gooey-nav-container .effect {
+        display: none !important;
+    }
+}
+
+/* Premium active pill indicator on desktop */
+@media (min-width: 901px) {
+    .gooey-nav-container nav ul li.active a {
+        opacity: 0; /* Fully hidden to let the high-contrast overlay text display */
+        pointer-events: none;
+    }
+
+    .effect {
+        display: block;
+        position: absolute;
+        pointer-events: none;
+        border-radius: 999px;
+        transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    /* Cyan glowing capsule indicator */
+    .effect.filter {
+        z-index: 1;
+        background: var(--cyan);
+        box-shadow: 
+            0 0 15px rgba(0, 243, 255, 0.5),
+            0 0 30px rgba(0, 243, 255, 0.25);
+    }
+
+    /* Active overlay text (bold black text matching the item dimensions) */
+    .effect.text {
+        z-index: 4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #050914;
+        font-weight: 700;
+        font-size: 0.92rem;
+        text-shadow: none !important;
+        pointer-events: none;
+        text-transform: none;
+        transform-origin: center;
+    }
+
+    .effect.text.active {
+        animation: activePulse 0.35s ease-out 1;
+    }
+}
+
+@keyframes activePulse {
+    0% {
+        transform: scale(0.92);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Dynamic Particle Bubbles */
+.particle,
+.point {
+    display: block;
+    opacity: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
+    transform-origin: center;
+}
+
+.particle {
+    --time: 5s;
+    position: absolute;
+    top: calc(50% - 12px);
+    left: calc(50% - 12px);
+    animation: gooeyParticle calc(var(--time)) ease 1 -350ms;
+}
+
+.point {
+    background: var(--color);
+    box-shadow: 0 0 12px var(--color);
+    opacity: 1;
+    animation: gooeyPoint calc(var(--time)) ease 1 -350ms;
+}
+
+@keyframes gooeyParticle {
+    0% {
+        transform: rotate(0deg) translate(calc(var(--start-x)), calc(var(--start-y)));
+        opacity: 1;
+        animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+    }
+
+    70% {
+        transform: rotate(calc(var(--rotate) * 0.5)) translate(calc(var(--end-x) * 1.2), calc(var(--end-y) * 1.2));
+        opacity: 1;
+        animation-timing-function: ease;
+    }
+
+    85% {
+        transform: rotate(calc(var(--rotate) * 0.66)) translate(calc(var(--end-x)), calc(var(--end-y)));
+        opacity: 1;
+    }
+
+    100% {
+        transform: rotate(calc(var(--rotate) * 1.2)) translate(calc(var(--end-x) * 0.5), calc(var(--end-y) * 0.5));
+        opacity: 1;
+    }
+}
+
+@keyframes gooeyPoint {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+        animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+    }
+
+    25% {
+        transform: scale(calc(var(--scale) * 0.25));
+    }
+
+    38% {
+        opacity: 1;
+    }
+
+    65% {
+        transform: scale(var(--scale));
+        opacity: 1;
+        animation-timing-function: ease;
+    }
+
+    85% {
+        transform: scale(var(--scale));
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}

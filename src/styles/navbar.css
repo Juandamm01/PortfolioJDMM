@@ -110,8 +110,6 @@
     background: transparent;
     border: none;
     box-shadow: none;
-    position: relative;
-    z-index: 3;
 }
 
 .nav-links li a {
@@ -171,7 +169,7 @@
 
 @media (max-width: 900px) {
     .navbar {
-        padding: 0.4rem 2%;
+        padding: 0.5rem 1.25rem;
         background: rgba(5, 9, 20, 0.75);
         backdrop-filter: blur(16px) saturate(1.2);
         -webkit-backdrop-filter: blur(16px) saturate(1.2);
@@ -181,7 +179,7 @@
     }
 
     .navbar.scrolled {
-        padding: 0.3rem 2%;
+        padding: 0.4rem 1.25rem;
     }
 
     .logo-text-wrap {
@@ -189,8 +187,8 @@
     }
 
     .logo-thumb {
-        width: 36px;
-        height: 36px;
+        width: 32px;
+        height: 32px;
     }
 
     .nav-links {
@@ -226,15 +224,6 @@
         border: 1px solid rgba(0, 243, 255, 0.3);
         box-shadow: inset 0 0 6px rgba(0, 243, 255, 0.25);
     }
-
-    .lang-btn {
-        padding: 0.25rem 0.5rem;
-        font-size: 0.6rem;
-        display: block !important;
-        position: relative;
-        z-index: 2100;
-        margin-left: 0.2rem;
-    }
 }
 
 /* ── Star Wars: Rebel Alliance subtle icon ── */
@@ -267,118 +256,22 @@
     }
 }
 
-/* ── Vanilla Gooey Navigation Styles ── */
-.nav-container {
-    position: relative;
-    display: flex;
+/* Responsive display helper classes */
+.desktop-only {
+    display: flex !important;
     align-items: center;
 }
 
-.nav-effect.filter {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 0;
-    height: 0;
-    pointer-events: none;
-    z-index: 1;
-    border-radius: 999px;
-    background: var(--cyan);
-    box-shadow: 
-        0 0 15px rgba(0, 243, 255, 0.5),
-        0 0 30px rgba(0, 243, 255, 0.25);
-    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+.mobile-only {
+    display: none !important;
 }
 
-/* Perfect contrast text colors for desktop */
-@media (min-width: 901px) {
-    .nav-links li.active a {
-        color: #050914 !important;
-        font-weight: 700;
-        text-shadow: none !important;
-        background: transparent !important;
-        border-color: transparent !important;
-        box-shadow: none !important;
+@media (max-width: 900px) {
+    .desktop-only {
+        display: none !important;
+    }
+    
+    .mobile-only {
+        display: block !important;
     }
 }
-
-.particle,
-.point {
-    display: block;
-    opacity: 0;
-    width: 24px;
-    height: 24px;
-    border-radius: 100%;
-    transform-origin: center;
-}
-
-.particle {
-    --time: 5s;
-    position: absolute;
-    top: calc(50% - 12px);
-    left: calc(50% - 12px);
-    animation: navParticle calc(var(--time)) ease 1 -350ms;
-}
-
-.point {
-    background: var(--color);
-    box-shadow: 0 0 12px var(--color);
-    opacity: 1;
-    animation: navPoint calc(var(--time)) ease 1 -350ms;
-}
-
-@keyframes navParticle {
-    0% {
-        transform: rotate(0deg) translate(calc(var(--start-x)), calc(var(--start-y)));
-        opacity: 1;
-        animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
-    }
-
-    70% {
-        transform: rotate(calc(var(--rotate) * 0.5)) translate(calc(var(--end-x) * 1.2), calc(var(--end-y) * 1.2));
-        opacity: 1;
-        animation-timing-function: ease;
-    }
-
-    85% {
-        transform: rotate(calc(var(--rotate) * 0.66)) translate(calc(var(--end-x)), calc(var(--end-y)));
-        opacity: 1;
-    }
-
-    100% {
-        transform: rotate(calc(var(--rotate) * 1.2)) translate(calc(var(--end-x) * 0.5), calc(var(--end-y) * 0.5));
-        opacity: 1;
-    }
-}
-
-@keyframes navPoint {
-    0% {
-        transform: scale(0);
-        opacity: 0;
-        animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
-    }
-
-    25% {
-        transform: scale(calc(var(--scale) * 0.25));
-    }
-
-    38% {
-        opacity: 1;
-    }
-
-    65% {
-        transform: scale(var(--scale));
-        opacity: 1;
-        animation-timing-function: ease;
-    }
-
-    85% {
-        transform: scale(var(--scale));
-        opacity: 1;
-    }
-
-    100% {
-        transform: scale(0);
-        opacity: 0;
-    }
-}
