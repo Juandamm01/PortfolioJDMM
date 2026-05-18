@@ -14,7 +14,7 @@ export function initWelcomeInteractive() {
             badge: "Un desarrollador, guiado por la Fuerza.",
             title: 'BIENVENIDO A MI <br/> <span class="text-cyan">PORTAFOLIO</span>',
             typed: "Desarrollador de Software",
-            description: "Soy un estudiante de 5º semestre de Desarrollo de Software con experiencia en proyectos Fullstack usando Next.js, React.js, Javascript y Flutter. Me apasiona construir aplicaciones web y móviles funcionales con buena experiencia de usuario. Enfocado en optimizar interfaces y aportar soluciones técnicas escalables como desarrollador Front-End en proyectos profesionales.",
+            description: "Soy un estudiante de <strong>6º semestre</strong> de Desarrollo de Software con experiencia en proyectos Fullstack usando <strong><span class=\"text-cyan\">Next.js</span></strong>, <strong><span class=\"text-cyan\">React.js</span></strong>, <strong><span class=\"text-cyan\">JavaScript</span></strong> y <strong><span class=\"text-cyan\">TypeScript</span></strong>. Me apasiona construir aplicaciones web y móviles funcionales con excelente experiencia de usuario. Enfocado en optimizar interfaces y aportar soluciones técnicas escalables como desarrollador Front-End, destacándome por mi <strong>buena comunicación</strong> y <strong>trabajo en equipo</strong>, además de mi aprendizaje continuo en <strong>AWS</strong> y <strong>Docker</strong> (nivel principiante).",
             id_header: "DESARROLLO DE SOFTWARE",
             id_role: "DESARROLLADOR FRONT END",
             scroll_down: "Desliza abajo",
@@ -103,7 +103,7 @@ export function initWelcomeInteractive() {
             badge: "A developer, guided by the Force.",
             title: 'WELCOME TO MY <br/> <span class="text-cyan">PORTFOLIO</span>',
             typed: "Software Developer",
-            description: "I am a 5th-semester Software Development student with experience in Fullstack projects using Next.js, React.js, Javascript, and Flutter. I am passionate about building functional web and mobile applications with good user experience. Focused on optimizing interfaces and providing scalable technical solutions as a Front-End developer in professional projects.",
+            description: "I am a <strong>6th-semester</strong> Software Development student with experience in Fullstack projects using <strong><span class=\"text-cyan\">Next.js</span></strong>, <strong><span class=\"text-cyan\">React.js</span></strong>, <strong><span class=\"text-cyan\">JavaScript</span></strong>, and <strong><span class=\"text-cyan\">TypeScript</span></strong>. I am passionate about building functional web and mobile applications with excellent user experience. Focused on optimizing interfaces and providing scalable technical solutions as a Front-End developer, excelling in <strong>teamwork</strong> and <strong>good communication</strong>, while actively learning <strong>AWS</strong> and <strong>Docker</strong> (beginner level).",
             id_header: "SOFTWARE DEV",
             id_role: "FRONT END DEVELOPER",
             scroll_down: "Scroll down",
@@ -232,7 +232,7 @@ export function initWelcomeInteractive() {
         }
         typeTimeoutId = setTimeout(typeWriter, 1200);
     }
-    startTypeWriter();
+    renderTranslations();
 
     if (window.anime) {
         // --- 3. Premium Hero Entrance Animations ---
@@ -249,12 +249,12 @@ export function initWelcomeInteractive() {
         if (badge) {
             window.anime({
                 targets: badge,
-                translateY: [-20, 0],
+                translateY: [-35, 0],
                 opacity: [0, 1],
-                scale: [0.85, 1],
-                easing: 'cubicBezier(0.34, 1.56, 0.64, 1)',
-                duration: 800,
-                delay: 300
+                scale: [0.75, 1],
+                easing: 'cubicBezier(0.34, 1.76, 0.64, 1)',
+                duration: 1400,
+                delay: 350
             });
         }
 
@@ -263,11 +263,11 @@ export function initWelcomeInteractive() {
         if (heading) {
             window.anime({
                 targets: heading,
-                translateY: [50, 0],
+                translateY: [80, 0],
                 opacity: [0, 1],
                 easing: 'cubicBezier(0.16, 1, 0.3, 1)',
-                duration: 1100,
-                delay: 480
+                duration: 1800,
+                delay: 500
             });
         }
 
@@ -276,11 +276,11 @@ export function initWelcomeInteractive() {
         if (subheading) {
             window.anime({
                 targets: subheading,
-                translateY: [30, 0],
+                translateY: [50, 0],
                 opacity: [0, 1],
                 easing: 'cubicBezier(0.16, 1, 0.3, 1)',
-                duration: 900,
-                delay: 680
+                duration: 1600,
+                delay: 750
             });
         }
 
@@ -289,11 +289,11 @@ export function initWelcomeInteractive() {
         if (desc) {
             window.anime({
                 targets: desc,
-                translateY: [24, 0],
+                translateY: [40, 0],
                 opacity: [0, 1],
                 easing: 'cubicBezier(0.16, 1, 0.3, 1)',
-                duration: 850,
-                delay: 820
+                duration: 1500,
+                delay: 950
             });
         }
 
@@ -301,12 +301,12 @@ export function initWelcomeInteractive() {
         const socialLinks = document.querySelectorAll('.social-links.entrance-anim, .cv-btn.entrance-anim');
         window.anime({
             targets: socialLinks,
-            translateY: [20, 0],
+            translateY: [30, 0],
             opacity: [0, 1],
-            scale: [0.9, 1],
-            delay: window.anime.stagger(80, { start: 1000 }),
+            scale: [0.85, 1],
+            delay: window.anime.stagger(120, { start: 1100 }),
             easing: 'cubicBezier(0.34, 1.56, 0.64, 1)',
-            duration: 600
+            duration: 900
         });
 
         // ID Card wrapper sweeps in from the right
@@ -314,22 +314,22 @@ export function initWelcomeInteractive() {
         if (cardWrapper) {
             window.anime({
                 targets: cardWrapper,
-                translateX: [80, 0],
-                translateY: [20, 0],
+                translateX: [140, 0],
+                translateY: [30, 0],
                 opacity: [0, 1],
-                scale: [0.92, 1],
+                scale: [0.84, 1],
                 easing: 'cubicBezier(0.16, 1, 0.3, 1)',
-                duration: 1200,
-                delay: 550
+                duration: 2000,
+                delay: 600
             });
         }
 
         // --- 4. ID Card floating animation ---
         window.anime({
             targets: '.id-card-wrapper',
-            translateY: ['-8px', '8px'],
-            rotateZ: ['-1.5deg', '1.5deg'],
-            duration: 5000,
+            translateY: ['-14px', '14px'],
+            rotateZ: ['-2.5deg', '2.5deg'],
+            duration: 7000,
             direction: 'alternate',
             loop: true,
             easing: 'easeInOutSine',
