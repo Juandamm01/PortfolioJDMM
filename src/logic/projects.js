@@ -17,7 +17,7 @@ export function initProjectsInteractive() {
                 targets: badge,
                 opacity: [0, 1],
                 easing: spring,
-                duration: 750,
+                duration: 400,
                 delay: 0
             });
         }
@@ -28,8 +28,8 @@ export function initProjectsInteractive() {
                 targets: heading,
                 opacity: [0, 1],
                 easing: ease,
-                duration: 900,
-                delay: 120
+                duration: 400,
+                delay: 50
             });
         }
 
@@ -37,27 +37,27 @@ export function initProjectsInteractive() {
         window.anime({
             targets: cards,
             opacity: [0, 1],
-            delay: window.anime.stagger(150, { start: 250 }),
+            delay: window.anime.stagger(60, { start: 100 }),
             easing: ease,
-            duration: 950
+            duration: 400
         });
 
         // Images scale into view
         window.anime({
             targets: images,
             opacity: [0, 1],
-            delay: window.anime.stagger(120, { start: 450 }),
+            delay: window.anime.stagger(50, { start: 200 }),
             easing: ease,
-            duration: 900
+            duration: 400
         });
 
         // Pills cascade at the end
         window.anime({
             targets: pills,
             opacity: [0, 1],
-            delay: window.anime.stagger(20, { start: 700 }),
+            delay: window.anime.stagger(10, { start: 300 }),
             easing: spring,
-            duration: 400
+            duration: 300
         });
     }
 
@@ -65,15 +65,14 @@ export function initProjectsInteractive() {
         const badge = section.querySelector('.projects-header .badge');
         const heading = section.querySelector('.projects-header h2');
         const cards = section.querySelectorAll('.stack-card');
-        const icons = section.querySelectorAll('.stack-item');
-        const categories = section.querySelectorAll('.stack-category');
 
         if (badge) {
             window.anime({
                 targets: badge,
                 opacity: [0, 1],
-                easing: spring,
-                duration: 700
+                translateY: [-10, 0],
+                easing: 'easeOutQuad',
+                duration: 250
             });
         }
 
@@ -81,39 +80,21 @@ export function initProjectsInteractive() {
             window.anime({
                 targets: heading,
                 opacity: [0, 1],
-                filter: ['blur(5px)', 'blur(0px)'],
-                easing: ease,
-                duration: 850,
-                delay: 100
+                translateY: [10, 0],
+                easing: 'easeOutQuad',
+                duration: 300,
+                delay: 50
             });
         }
 
-        // Cards fly in from slight downward with stagger
+        // Animar únicamente las tarjetas completas para máxima fluidez y cero lag
         window.anime({
             targets: cards,
             opacity: [0, 1],
-            filter: ['blur(5px)', 'blur(0px)'],
-            delay: window.anime.stagger(70, { start: 200 }),
-            easing: ease,
-            duration: 800
-        });
-
-        // Category labels reveal after cards
-        window.anime({
-            targets: categories,
-            opacity: [0, 1],
-            delay: window.anime.stagger(70, { start: 350 }),
-            easing: ease,
-            duration: 500
-        });
-
-        // Icons bounce in with spring
-        window.anime({
-            targets: icons,
-            opacity: [0, 1],
-            delay: window.anime.stagger(18, { start: 550 }),
-            easing: spring,
-            duration: 480
+            translateY: [20, 0],
+            delay: window.anime.stagger(40, { start: 100 }),
+            easing: 'easeOutSine',
+            duration: 300
         });
     }
 
@@ -140,9 +121,7 @@ export function initProjectsInteractive() {
         setInitial(stackSection, [
             '.projects-header .badge',
             '.projects-header h2',
-            '.stack-card',
-            '.stack-item',
-            '.stack-category',
+            '.stack-card'
         ]);
     }
 

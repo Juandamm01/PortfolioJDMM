@@ -31,18 +31,23 @@ export function initNavbarInteractive() {
     // Navbar Entrance Animation
     if (window.anime) {
         const navElements = document.querySelectorAll('.nav-anim');
+        const isHome = window.location.pathname === '/' || window.location.pathname.endsWith('index.html');
         
-        // Initial state
-        navElements.forEach(el => {
-            el.style.opacity = '0';
-        });
-
-        window.anime({
-            targets: navElements,
-            opacity: [0, 1],
-            delay: window.anime.stagger(50, { start: 100 }), // Slightly faster stagger for navbar
-            easing: 'linear',
-            duration: 800
-        });
+        if (isHome) {
+            window.anime({
+                targets: navElements,
+                opacity: [0, 1],
+                translateY: [-20, 0],
+                delay: window.anime.stagger(40, { start: 200 }),
+                easing: 'easeOutCubic',
+                duration: 700
+            });
+        } else {
+            // Instant show on secondary pages (no entrance drop animation)
+            navElements.forEach(el => {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            });
+        }
     }
 }

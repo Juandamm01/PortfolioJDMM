@@ -9,7 +9,7 @@ export function initWelcomeInteractive() {
             nav_project: "Proyectos",
             nav_stack: "Stack",
             nav_experience: "Experiencia",
-            nav_cert: "Diplomas",
+            nav_cert: "Certificaciones",
             nav_contact: "Contacto",
             badge: '"Antes de la creación, viene la destrucción." — Bills',
             title: 'BIENVENIDO A MI <br/> <span class="text-cyan">PORTAFOLIO</span>',
@@ -217,7 +217,7 @@ export function initWelcomeInteractive() {
 
         const cvBtn = document.getElementById('download-cv-btn');
         if (cvBtn) {
-            cvBtn.href = currentLang === 'es' ? '/pdf/JUAN_DAVID_MARTINEZ_CV_ES.pdf' : '/pdf/JUAN_DAVID_MARTINEZ_CV_EN.pdf';
+            cvBtn.href = currentLang === 'es' ? '/pdf/Juan_David_Martinez_CV_ES.pdf' : '/pdf/Juan_David_Martinez_CV_EN.pdf';
         }
     }
 
@@ -248,12 +248,7 @@ export function initWelcomeInteractive() {
 
     if (window.anime) {
         // --- 3. Premium Hero Entrance Animations ---
-        const heroElements = document.querySelectorAll('.entrance-anim');
-
-        // First pass: set all to invisible
-        heroElements.forEach(el => {
-            el.style.opacity = '0';
-        });
+        // Initial opacity is handled via CSS (.entrance-anim { opacity: 0 }) to prevent flashing
 
         // Badge pops in
         const badge = document.querySelector('.badge.entrance-anim');
