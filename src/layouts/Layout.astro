@@ -1,7 +1,8 @@
 ---
- import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+import '../styles/global.css';
 import dartVaderIcon from '../assets/DartVader.png';
-import PixelSnow from '../logic/animations/PixelSnow.jsx';
+import PixelSnow from '../animations/PixelSnow.jsx';
 ---
 <!doctype html>
 <html lang="en">
@@ -13,6 +14,7 @@ import PixelSnow from '../logic/animations/PixelSnow.jsx';
 		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Portfolio Juan David Martinez</title>
+		<ClientRouter />
 	</head>
 	<body>
 		<div class="pixel-snow-global-wrapper">
@@ -33,7 +35,18 @@ import PixelSnow from '../logic/animations/PixelSnow.jsx';
 		<!-- Lenis Smooth Scroll -->
 		<script is:inline src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 		<script is:inline>
-			document.addEventListener("DOMContentLoaded", () => {
+			// Evitar flash del home al navegar a hashes con View Transitions
+			document.addEventListener('astro:after-swap', () => {
+				const hash = window.location.hash;
+				if (hash) {
+					const target = document.querySelector(hash);
+					if (target) {
+						window.scrollTo({ top: target.offsetTop - 80, behavior: 'instant' });
+					}
+				}
+			});
+
+			document.addEventListener("astro:page-load", () => {
 				if (typeof Lenis !== 'undefined') {
 					const lenis = new Lenis({
 						duration: 1.4,
@@ -48,15 +61,18 @@ import PixelSnow from '../logic/animations/PixelSnow.jsx';
 					}
 					requestAnimationFrame(raf);
 
-					document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+					document.querySelectorAll('a[href^="#"], a[href^="/#"]').forEach(anchor => {
 						anchor.addEventListener('click', function (e) {
-							e.preventDefault();
-							const targetId = this.getAttribute('href');
-							if (targetId === '#') return;
-							const targetElement = document.querySelector(targetId);
+							const href = this.getAttribute('href');
+							if (href === '#') return;
+							
+							const hash = href.includes('#') ? '#' + href.split('#')[1] : href;
+							const targetElement = document.querySelector(hash);
+							
 							if (targetElement) {
+								e.preventDefault();
 								lenis.scrollTo(targetElement, {
-									duration: 1.5,
+									duration: 0.8,
 									easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
 									offset: -80
 								});

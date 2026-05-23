@@ -1,6 +1,6 @@
 ---
 // Experience & Education component
-import StarBorder from '../logic/animations/StarBorder.jsx';
+import StarBorder from '../animations/StarBorder.jsx';
 ---
 
 <section id="experience" class="exp-section">
@@ -142,7 +142,7 @@ import StarBorder from '../logic/animations/StarBorder.jsx';
 
 <script>
     import { initExperienceInteractive } from "../logic/experience.js";
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("astro:page-load", () => {
         initExperienceInteractive();
     });
 </script>

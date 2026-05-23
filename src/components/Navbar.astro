@@ -1,8 +1,8 @@
 ---
 import { Image } from "astro:assets";
 import navbarImg from "../assets/photos/portfolio.jpg";
-import GooeyNav from "../logic/animations/GooeyNav.jsx";
-import NavbarPhone from "../logic/animations/phone/NavbarPhone.jsx";
+import GooeyNav from "../animations/GooeyNav.jsx";
+import NavbarPhone from "../animations/phone/NavbarPhone.jsx";
 ---
 
 <nav class="navbar" id="main-nav">
@@ -48,7 +48,7 @@ import NavbarPhone from "../logic/animations/phone/NavbarPhone.jsx";
 <script>
     import { initNavbarInteractive } from "../logic/navbar.js";
 
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("astro:page-load", () => {
         initNavbarInteractive();
     });
 </script>

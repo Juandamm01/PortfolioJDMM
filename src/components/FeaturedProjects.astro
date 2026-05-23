@@ -1,8 +1,8 @@
 ---
 import { Image } from 'astro:assets';
 import CamiVideo from '../assets/Video/Cami.mp4';
-import constructionImg from '../assets/BCAS.png';
-import StarBorder from '../logic/animations/StarBorder.jsx';
+import BcasVideo from '../assets/Video/Bcas.mp4';
+import StarBorder from '../animations/StarBorder.jsx';
 ---
 
 <section id="project" class="projects-section">
@@ -42,9 +42,12 @@ import StarBorder from '../logic/animations/StarBorder.jsx';
             <article class="project-card project-anim" style="animation-delay: 200ms;">
                 <div style="display: flex; flex-direction: column; width: 100%; height: 100%; background: rgba(13, 19, 35, 0.4); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; overflow: hidden;">
                     <div class="project-image-wrapper">
-                        <Image src={constructionImg} alt="Bioconstructores Asociados Web" class="project-image" />
+                        <video src={BcasVideo} autoplay loop muted playsinline class="project-image"></video>
                         <div class="project-overlay">
-                            <!-- El video y link de este proyecto se añadirán próximamente -->
+                            <a href="https://bcas-iqax.vercel.app/" target="_blank" class="project-link" aria-label="Website">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                <span data-i18n="btn_website">Ver Sitio</span>
+                            </a>
                         </div>
                     </div>
                     <div class="project-content">
@@ -73,7 +76,7 @@ import StarBorder from '../logic/animations/StarBorder.jsx';
 <script>
     import { initProjectsInteractive } from '../logic/projects.js';
     
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("astro:page-load", () => {
         initProjectsInteractive();
     });
 </script>

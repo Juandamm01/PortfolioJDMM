@@ -1,8 +1,10 @@
 ---
 import { Image } from "astro:assets";
 import portfolioImg from "../assets/photos/JuanDa.jpg";
+import DesarrolladorImg from "../assets/photos/Desarrollador.jpg";
 import Navbar from "./Navbar.astro";
-import StarBorder from "../logic/animations/StarBorder.jsx";
+import StarBorder from "../animations/StarBorder.jsx";
+import ImageDisplacement from "../animations/ImageDisplacement.jsx";
 ---
 
 <div class="portfolio-container" id="home">
@@ -117,19 +119,21 @@ import StarBorder from "../logic/animations/StarBorder.jsx";
                         </div>
                         <div class="card-body">
                             <!-- Eliminado el texto vertical JUAN. El wrapper ahora ocupa todo el tamaño -->
-                            <div class="photo-wrapper">
+                            <div class="photo-wrapper" style="position: relative;">
                                 <Image
                                     src={portfolioImg}
                                     alt="Juan David Profile"
                                     class="profile-photo"
                                 />
+                                <ImageDisplacement 
+                                    client:only="react"
+                                    imageSrc={portfolioImg.src} 
+                                    hoverImageSrc={DesarrolladorImg.src} 
+                                />
                             </div>
                         </div>
                         <div class="card-footer">
-                            <div class="footer-name">JUAN DAVID M.</div>
-                            <div class="footer-role" data-i18n="id_role">
-                                DESARROLLADOR FRONT END
-                            </div>
+                            <div class="footer-name">JUAN DAVID MARTINEZ MEDINA</div>
                         </div>
                     </div>
                 </StarBorder>
@@ -140,8 +144,7 @@ import StarBorder from "../logic/animations/StarBorder.jsx";
 
 <script>
     import { initWelcomeInteractive } from "../logic/welcome.js";
-
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("astro:page-load", () => {
         initWelcomeInteractive();
     });
 </script>

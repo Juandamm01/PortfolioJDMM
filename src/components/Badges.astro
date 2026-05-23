@@ -53,7 +53,7 @@ import gitGithubBadge from '../assets/badges/GitGitHubBadge.png';
 
 <script>
     import { initBadgesInteractive } from '../logic/badges.js';
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('astro:page-load', () => {
         initBadgesInteractive();
     });
 </script>
