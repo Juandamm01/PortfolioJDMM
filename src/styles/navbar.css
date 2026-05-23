@@ -266,6 +266,10 @@
     display: none !important;
 }
 
+.nav-anim {
+    opacity: 0;
+}
+
 @media (max-width: 900px) {
     .desktop-only {
         display: none !important;

@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import '../../../styles/phone/NavbarPhone.css';
+import '../../styles/phone/NavbarPhone.css';
 
 export default function NavbarPhone() {
   const [isOpen, setIsOpen] = useState(false);
   const [langLabel, setLangLabel] = useState('EN');
 
   const menuItems = [
-    { label: 'Inicio', href: '#home', i18n: 'nav_home' },
-    { label: 'Proyectos', href: '#project', i18n: 'nav_project' },
-    { label: 'Stack', href: '#tech', i18n: 'nav_stack' },
-    { label: 'Experiencia', href: '#experience', i18n: 'nav_experience' },
-    { label: 'Diplomas', href: '#certifications', i18n: 'nav_cert' },
-    { label: 'Contacto', href: '#contact', i18n: 'nav_contact' },
+    { label: 'Inicio', href: '/#home', i18n: 'nav_home' },
+    { label: 'Proyectos', href: '/#project', i18n: 'nav_project' },
+    { label: 'Stack', href: '/#tech', i18n: 'nav_stack' },
+    { label: 'Experiencia', href: '/#experience', i18n: 'nav_experience' },
+    { label: 'Contacto', href: '/#contact', i18n: 'nav_contact' },
   ];
 
   const toggleMenu = () => {
@@ -40,6 +39,7 @@ export default function NavbarPhone() {
         setLangLabel(desktopToggle.textContent || 'EN');
       });
       observer.observe(desktopToggle, { characterData: true, childList: true });
+
       return () => observer.disconnect();
     }
   }, []);

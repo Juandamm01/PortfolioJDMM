@@ -11,7 +11,7 @@ import {
   WebGLRenderer
 } from 'three';
 
-import '../../styles/PixelSnow.css';
+import '../styles/PixelSnow.css';
 
 const vertexShader = `
 void main() {

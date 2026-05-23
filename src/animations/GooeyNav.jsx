@@ -1,14 +1,13 @@
 import { useRef, useEffect, useState } from 'react';
-import '../../styles/GooeyNav.css';
+import '../styles/GooeyNav.css';
 
 const GooeyNav = ({
   items = [
-    { label: "Inicio", href: "#home", i18n: "nav_home" },
-    { label: "Proyectos", href: "#project", i18n: "nav_project" },
-    { label: "Stack", href: "#tech", i18n: "nav_stack" },
-    { label: "Experiencia", href: "#experience", i18n: "nav_experience" },
-    { label: "Diplomas", href: "#certifications", i18n: "nav_cert" },
-    { label: "Contacto", href: "#contact", i18n: "nav_contact" }
+    { label: "Inicio", href: "/#home", i18n: "nav_home" },
+    { label: "Proyectos", href: "/#project", i18n: "nav_project" },
+    { label: "Stack", href: "/#tech", i18n: "nav_stack" },
+    { label: "Experiencia", href: "/#experience", i18n: "nav_experience" },
+    { label: "Contacto", href: "/#contact", i18n: "nav_contact" }
   ],
   animationTime = 600,
   particleCount = 15,
@@ -23,6 +22,16 @@ const GooeyNav = ({
   const filterRef = useRef(null);
   const textRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
+
+  useEffect(() => {
+    const isHome = window.location.pathname === '/' || window.location.pathname.endsWith('index.html');
+    if (!isHome) {
+      setActiveIndex(-1);
+    }
+  }, []);
+  const isHomePage = () =>
+    window.location.pathname === '/' || window.location.pathname.endsWith('index.html');
+
   const clickLockRef = useRef(false);
   const clickLockTimeoutRef = useRef(null);
   const lastBurstTimeRef = useRef(0);
@@ -121,23 +130,29 @@ const GooeyNav = ({
   };
 
   const handleClick = (e, index) => {
+    if (!isHomePage()) {
+      // En certificaciones: dejar que el navegador siga el href normalmente (/#home, /#project, etc.)
+      // Sin animaciones, sin bloqueos — navegación directa
+      return;
+    }
+
     const liEl = e.currentTarget.parentElement || e.currentTarget;
     if (activeIndex === index) return;
 
     setActiveIndex(index);
     updateEffectPosition(liEl);
 
-    clickLockRef.current = true;
-    if (clickLockTimeoutRef.current) clearTimeout(clickLockTimeoutRef.current);
-    clickLockTimeoutRef.current = setTimeout(() => {
-      clickLockRef.current = false;
-    }, 1000);
-
     if (textRef.current) {
       textRef.current.classList.remove('active');
       void textRef.current.offsetWidth;
       textRef.current.classList.add('active');
     }
+
+    clickLockRef.current = true;
+    if (clickLockTimeoutRef.current) clearTimeout(clickLockTimeoutRef.current);
+    clickLockTimeoutRef.current = setTimeout(() => {
+      clickLockRef.current = false;
+    }, 1000);
 
     triggerBurst(index);
   };
@@ -152,83 +167,94 @@ const GooeyNav = ({
     }
   };
 
+  // ── Effect 1: Runs ONCE on mount. Sets up all global listeners. ──
   useEffect(() => {
-    const SECTION_IDS = ['home', 'project', 'tech', 'experience', 'certifications', 'contact'];
+    const SECTION_IDS = ['home', 'project', 'tech', 'experience', 'contact'];
 
     const getActiveSectionId = () => {
       const doc = document.documentElement;
       const scrollBottom = window.scrollY + window.innerHeight;
-      if (scrollBottom >= doc.scrollHeight - 48) {
-        return 'contact';
-      }
-
+      if (scrollBottom >= doc.scrollHeight - 48) return 'contact';
       const navH = 80;
       const marker = window.scrollY + navH + 12;
       let current = 'home';
-
       for (const id of SECTION_IDS) {
         const el = document.getElementById(id);
         if (!el) continue;
         const top = el.getBoundingClientRect().top + window.scrollY;
-        if (top <= marker) {
-          current = id;
-        }
+        if (top <= marker) current = id;
       }
       return current;
     };
 
-    const handleScroll = () => {
-      if (clickLockRef.current) return;
-
-      const activeId = getActiveSectionId();
-      const newIndex = items.findIndex(item => item.href === `#${activeId}`);
-      if (newIndex !== -1) {
-        if (newIndex !== activeIndex) {
-          setActiveIndex(newIndex);
-          triggerBurst(newIndex);
-        } else {
-          const currentActiveLi = navRef.current?.querySelectorAll('li')[newIndex];
-          if (currentActiveLi) {
-            updateEffectPosition(currentActiveLi);
-          }
+    // Called on page-load / hashchange / astro transition to set the
+    // correct active item. NEVER called during a user click.
+    const activateFromPageChange = () => {
+      if (!isHomePage()) {
+        setActiveIndex(-1);
+        return;
+      }
+      const hash = window.location.hash.replace(/^#/, '');
+      if (hash) {
+        const idx = items.findIndex(item => item.href.endsWith(`#${hash}`));
+        if (idx !== -1) {
+          setActiveIndex(idx);
+          return;
         }
       }
+      const activeId = getActiveSectionId();
+      const newIdx = items.findIndex(item => item.href.endsWith(`#${activeId}`));
+      if (newIdx !== -1) setActiveIndex(newIdx);
     };
 
+    const handleScroll = () => {
+      if (clickLockRef.current) return;
+      if (!isHomePage()) return; // don't reset on scroll — click already handles it
+
+      const activeId = getActiveSectionId();
+      const newIndex = items.findIndex(item => item.href.endsWith(`#${activeId}`));
+      if (newIndex !== -1) {
+        setActiveIndex(prev => {
+          if (prev !== newIndex) {
+            triggerBurst(newIndex);
+            return newIndex;
+          }
+          // Same index: just reposition the pill
+          const li = navRef.current?.querySelectorAll('li')[newIndex];
+          if (li) updateEffectPosition(li);
+          return prev;
+        });
+      }
+    };
+
+    // Initial activation on mount
+    activateFromPageChange();
+
+    // Re-activate after every View Transition
+    document.addEventListener('astro:page-load', activateFromPageChange);
     window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    setTimeout(() => {
-      handleScroll();
-    }, 100);
-
-    window.addEventListener('hashchange', () => {
-      const id = (window.location.hash || '#home').replace(/^#/, '');
-      const newIndex = items.findIndex(item => item.href === `#${id}`);
-      if (newIndex !== -1 && newIndex !== activeIndex) {
-        setActiveIndex(newIndex);
-        triggerBurst(newIndex);
-      }
-    });
-
-    window.addEventListener('load', () => {
-      const currentActiveLi = navRef.current?.querySelectorAll('li')[activeIndex];
-      if (currentActiveLi) {
-        updateEffectPosition(currentActiveLi);
-      }
-    });
+    window.addEventListener('hashchange', activateFromPageChange);
 
     return () => {
+      document.removeEventListener('astro:page-load', activateFromPageChange);
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('hashchange', activateFromPageChange);
       if (clickLockTimeoutRef.current) clearTimeout(clickLockTimeoutRef.current);
     };
-  }, [activeIndex, items]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // ← empty deps: runs once, never re-registers listeners on activeIndex change
 
   useEffect(() => {
     if (!navRef.current || !containerRef.current) return;
     const activeLi = navRef.current.querySelectorAll('li')[activeIndex];
     if (activeLi) {
+      if (filterRef.current) filterRef.current.style.opacity = '1';
+      if (textRef.current) textRef.current.style.opacity = '1';
       updateEffectPosition(activeLi);
       textRef.current?.classList.add('active');
+    } else {
+      if (filterRef.current) filterRef.current.style.opacity = '0';
+      if (textRef.current) textRef.current.style.opacity = '0';
     }
 
     // Recalculate once web fonts are fully loaded to avoid incorrect widths
@@ -253,13 +279,13 @@ const GooeyNav = ({
   }, [activeIndex]);
 
   return (
-    <div className="gooey-nav-container" ref={containerRef}>
+    <div className="gooey-nav-container nav-anim" ref={containerRef}>
       <nav>
         <ul ref={navRef}>
           {items.map((item, index) => (
             <li 
               key={index} 
-              className={`nav-anim ${activeIndex === index ? 'active' : ''}`}
+              className={activeIndex === index ? 'active' : ''}
             >
               <a href={item.href} data-i18n={item.i18n} onClick={e => handleClick(e, index)} onKeyDown={e => handleKeyDown(e, index)}>
                 {item.label}

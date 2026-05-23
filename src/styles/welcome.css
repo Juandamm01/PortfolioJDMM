@@ -1,13 +1,16 @@
 /* Hero / Welcome Styles */
+.entrance-anim {
+    opacity: 0;
+}
+
 .hero-section {
   display: flex;
   align-items: center;
   justify-content: space-between;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 8rem 2rem 0 2rem;
-  height: calc(100vh - 80px);
-  min-height: 500px;
+  padding: 8rem 2rem 2rem 2rem;
+  min-height: calc(100vh - 80px);
   gap: 1.5rem;
   position: relative;
 }
@@ -208,6 +211,9 @@
   width: 150px;
   height: 210px;
   perspective: 1000px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .profile-photo {
@@ -217,7 +223,6 @@
   object-position: top;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .card-footer {
@@ -228,148 +233,108 @@
 
 .footer-name {
   font-size: 1.4rem;
-  font-weight: 800;
-  margin-bottom: 0.2rem;
-}
-
-.footer-role {
-  font-size: 0.8rem;
-  color: var(--cyan);
+  font-weight: 900;
+  color: var(--white);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  line-height: 1.2;
 }
 
 /* Responsive */
 @media (max-width: 968px) {
   .hero-section {
-    flex-direction: column;
-    text-align: center;
-    margin-top: 64px;
-    padding: 0.25rem 1rem;
-    height: calc(100vh - 64px);
-    min-height: auto;
-    gap: 0.2rem;
-    justify-content: center;
+    flex-direction: row;
+    text-align: left;
+    margin-top: 60px;
+    padding: 1rem;
+    height: auto;
+    min-height: calc(100vh - 64px);
+    gap: 1rem;
+    justify-content: space-between;
     overflow: hidden;
   }
 
   .hero-content {
-    max-width: 100%;
+    flex: 1;
+    max-width: 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .badge {
-    font-size: 0.62rem;
-    padding: 0.2rem 0.5rem;
-    margin-top: 0.2rem;
-    margin-bottom: 0.25rem;
+    font-size: 0.55rem;
+    padding: 0.2rem 0.4rem;
+    margin-bottom: 0.3rem;
+    display: inline-block;
+    align-self: flex-start;
   }
 
   .glitch-text {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     line-height: 1.1;
-    margin-bottom: 0.15rem;
+    margin-bottom: 0.2rem;
   }
 
   .hero-content h2 {
-    font-size: 0.95rem;
+    font-size: 0.8rem;
     min-height: auto;
     margin-bottom: 0.2rem;
   }
 
   .description {
-    font-size: 0.74rem;
-    line-height: 1.3;
-    margin-bottom: 0.4rem;
+    font-size: 0.68rem;
+    line-height: 1.35;
+    margin-bottom: 0.6rem;
     max-width: 100%;
   }
 
   .social-links {
-    justify-content: center;
+    justify-content: flex-start;
     gap: 0.5rem;
-    margin-top: 0.1rem;
+    margin-top: 0.2rem;
+    flex-wrap: wrap;
   }
 
   .social-icon {
-    width: 32px;
-    height: 32px;
+    width: 35px;
+    height: 35px;
   }
 
   .social-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .cv-btn {
+    height: 35px;
+    padding: 0 1rem;
+    font-size: 0.8rem;
+    border-radius: 20px;
+  }
+
+  .cv-btn svg {
     width: 14px;
     height: 14px;
   }
 
-  .cv-btn {
-    height: 32px;
-    padding: 0 0.8rem;
-    font-size: 0.74rem;
-    border-radius: 16px;
-  }
-
-  .cv-btn svg {
-    width: 12px;
-    height: 12px;
+  .hero-visuals {
+    flex: 1;
+    max-width: 45%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
   }
 
   .id-card-wrapper {
-    transform: scale(0.7) !important;
-    transform-origin: top center;
-    margin: 0.5rem auto -2.5rem auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 190px;
+    transform: scale(0.65) !important;
+    transform-origin: center right;
+    margin: 0;
+    width: 280px; /* Original width to maintain aspect ratio, scaling handles fitting */
+    animation: mobileFloat 6s ease-in-out infinite;
   }
 
   .lanyard-string {
     display: none;
-  }
-
-  .id-card {
-    width: 190px;
-  }
-
-  .card-header {
-    padding: 0.5rem;
-    gap: 0.4rem;
-  }
-
-  .logo-icon.small {
-    width: 18px;
-    height: 18px;
-    font-size: 0.55rem;
-  }
-
-  .header-title {
-    font-size: 0.55rem;
-    letter-spacing: 1px;
-  }
-
-  .card-body {
-    padding: 0.6rem;
-    gap: 0.5rem;
-  }
-
-  .photo-wrapper {
-    width: 82px;
-    height: 115px;
-  }
-
-  .card-footer {
-    padding: 0.6rem;
-  }
-
-  .footer-name {
-    font-size: 0.9rem;
-  }
-
-  .footer-role {
-    font-size: 0.55rem;
-  }
-
-  .profile-photo {
-    border-radius: 6px;
   }
 
   .lightning-svg {
@@ -378,4 +343,10 @@
     transform: none;
     opacity: 0.1;
   }
+}
+
+@keyframes mobileFloat {
+  0% { transform: scale(0.65) translateY(0); }
+  50% { transform: scale(0.65) translateY(-20px); }
+  100% { transform: scale(0.65) translateY(0); }
 }

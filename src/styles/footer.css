@@ -1,45 +1,64 @@
+/* ── Footer: Premium Full-Viewport Final Section ── */
 .footer {
-    padding: 4.5rem 2rem 2rem;
+    height: 100vh;
+    width: 100%;
     background: #03060d;
     position: relative;
     z-index: 10;
     overflow: hidden;
     color: var(--white);
-    scroll-margin-top: 80px;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+}
+
+/* Animated top border */
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.5), transparent);
 }
 
 .footer-container {
-    max-width: var(--max-width);
+    width: 100%;
+    max-width: 100%;
+    padding: 5vh 6% 4vh 6%;
+    padding-top: calc(5vh + 80px); /* 80px = navbar height */
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    justify-content: space-between;
     position: relative;
     z-index: 2;
 }
 
+/* ── Hero Brand Row ── */
 .footer-top {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
     flex-wrap: wrap;
-    gap: 1.5rem;
-    border-bottom: 1px solid rgba(0, 243, 255, 0.1);
-    padding-bottom: 2rem;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(0, 243, 255, 0.08);
+    padding-bottom: 2vh;
 }
 
 .footer-brand {
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 1rem;
 }
 
 .footer-logo {
-    font-size: 2.2rem;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
     font-weight: 900;
     color: var(--white);
-    letter-spacing: -1px;
-    line-height: 1.1;
+    letter-spacing: -2px;
+    line-height: 1;
 }
 
 .footer-location-item {
@@ -48,7 +67,7 @@
     gap: 0.6rem;
     color: var(--gray);
     font-size: 1rem;
-    margin: 0.2rem 0 0 0;
+    margin: 0;
 }
 
 .footer-location-item svg {
@@ -59,32 +78,34 @@
     flex-shrink: 0;
 }
 
+/* ── Info Grid ── */
 .footer-info-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
+    gap: 3rem;
     width: 100%;
 }
 
 .footer-group {
     display: flex;
     flex-direction: column;
+    gap: 0;
 }
 
 .footer-group h4 {
     color: var(--cyan);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 700;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
 }
 
 .footer-contact-list {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 1rem;
     margin: 0;
     padding: 0;
 }
@@ -92,17 +113,17 @@
 .footer-contact-item {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.7rem;
     color: var(--gray);
     text-decoration: none;
     transition: all 0.3s ease;
     font-size: 1rem;
-    line-height: 1.3;
+    line-height: 1.4;
 }
 
 .footer-contact-item:hover {
     color: var(--white);
-    transform: translateX(5px);
+    transform: translateX(6px);
 }
 
 .footer-contact-item svg {
@@ -113,31 +134,32 @@
     flex-shrink: 0;
 }
 
+/* ── Social Icons ── */
 .footer-social-flex {
     display: flex;
-    gap: 1.2rem;
+    gap: 1rem;
 }
 
 .footer-social-link {
-    width: 42px;
-    height: 42px;
-    background: rgba(13, 19, 35, 0.5);
-    border: 1px solid rgba(0, 243, 255, 0.1);
+    width: 46px;
+    height: 46px;
+    background: rgba(0, 243, 255, 0.05);
+    border: 1px solid rgba(0, 243, 255, 0.12);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     color: var(--gray);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(8px);
 }
 
 .footer-social-link:hover {
     background: var(--cyan);
     border-color: var(--cyan);
     color: var(--bg-dark);
-    transform: translateY(-5px) rotate(10deg);
-    box-shadow: 0 0 20px var(--cyan-glow);
+    transform: translateY(-6px) rotate(8deg);
+    box-shadow: 0 12px 30px rgba(0, 243, 255, 0.35);
 }
 
 .footer-social-link svg {
@@ -146,94 +168,88 @@
     fill: currentColor;
 }
 
+/* ── Bottom Bar ── */
 .footer-bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: rgba(161, 161, 170, 0.5);
-    font-size: 0.8rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: rgba(161, 161, 170, 0.4);
+    font-size: 0.82rem;
+    padding-top: 2vh;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
-/* Star Wars: "Que la Fuerza te acompañe" styled tagline */
 .footer-bottom [data-i18n="footer_tagline"] {
     font-size: 0.72rem;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: rgba(0, 243, 255, 0.35);
+    color: rgba(0, 243, 255, 0.3);
     transition: color 0.4s ease, text-shadow 0.4s ease;
 }
 
 .footer-bottom [data-i18n="footer_tagline"]:hover {
-    color: rgba(0, 243, 255, 0.7);
-    text-shadow: 0 0 12px rgba(0, 243, 255, 0.3);
+    color: rgba(0, 243, 255, 0.65);
+    text-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
 }
 
-/* Star Wars: decorative line before tagline — like a lightsaber slash */
 .footer-bottom p:last-child::before {
     content: '⋯ ';
     color: rgba(0, 243, 255, 0.2);
     letter-spacing: 0.1em;
 }
 
+/* ── Glow Orb ── */
 .footer-glow {
     position: absolute;
-    bottom: -150px;
-    right: -100px;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(0, 243, 255, 0.1) 0%, transparent 70%);
-    filter: blur(80px);
+    bottom: -200px;
+    right: -150px;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(0, 243, 255, 0.07) 0%, transparent 65%);
+    filter: blur(100px);
     pointer-events: none;
     z-index: 1;
 }
 
+/* ── Responsive ── */
 @media (max-width: 768px) {
     .footer {
-        padding: 3rem 1.5rem 1.5rem;
+        height: auto;
+        min-height: 100vh;
     }
-    
+
     .footer-container {
-        gap: 1.5rem;
+        padding: 80px 6% 3rem 6%; /* 80px top = navbar + breathing room */
+        gap: 2.5rem;
+        justify-content: flex-start;
     }
 
     .footer-top {
-        padding-bottom: 1.5rem;
-        gap: 1rem;
+        padding-bottom: 2rem;
+        gap: 1.5rem;
     }
 
     .footer-logo {
-        font-size: 1.8rem;
+        font-size: 2.2rem;
     }
 
     .footer-info-grid {
-        grid-template-columns: 1fr;
-        gap: 1.2rem;
-    }
-
-    .footer-group h4 {
-        margin-bottom: 0.8rem;
-    }
-
-    .footer-contact-item,
-    .footer-location-item {
-        font-size: 0.95rem;
-    }
-
-    .footer-social-flex {
-        gap: 1rem;
-    }
-
-    .footer-social-link {
-        width: 40px;
-        height: 40px;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
     }
 
     .footer-bottom {
-        padding-top: 1.2rem;
         flex-direction: column;
         align-items: flex-start;
         gap: 0.5rem;
+        padding-top: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-info-grid {
+        grid-template-columns: 1fr;
     }
 }

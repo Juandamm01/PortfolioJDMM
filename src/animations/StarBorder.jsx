@@ -1,4 +1,4 @@
-import '../../styles/StarBorder.css';
+import '../styles/StarBorder.css';
 
 const StarBorder = ({
   as: Component = 'div',
