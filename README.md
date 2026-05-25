@@ -54,7 +54,6 @@ _"Antes de la creación, viene la destrucción." — Bills_
 ### **Diseño & Otros**
 ![Dribbble](https://img.shields.io/badge/Dribbble-EA4C89?style=for-the-badge&logo=dribbble&logoColor=white)
 ![Google Stitch](https://img.shields.io/badge/Google_Stitch-4285F4?style=for-the-badge&logo=google&logoColor=white)
-![Antigravity](https://img.shields.io/badge/Antigravity-00f3ff?style=for-the-badge&logoColor=white)
 
 ## 📫 Contacto
 
