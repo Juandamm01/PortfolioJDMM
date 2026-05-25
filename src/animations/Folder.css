@@ -1,0 +1,240 @@
+:root {
+  --folder-color: #70a1ff;
+  --folder-back-color: #4785ff;
+  --paper-1: #e6e6e6;
+  --paper-2: #f2f2f2;
+  --paper-3: #ffffff;
+  --folder-ease: cubic-bezier(0.33, 1, 0.68, 1);
+  --folder-ease-spring: cubic-bezier(0.34, 1.25, 0.64, 1);
+}
+
+.folder-scale {
+  perspective: 900px;
+}
+
+.folder {
+  transition: transform 0.48s var(--folder-ease-spring);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transform-style: preserve-3d;
+}
+
+.folder:not(.open):not(.folder-click-peek):not(.folder-scroll-peek):active {
+  transform: scale(0.97) translateY(-2px);
+  transition-duration: 0.12s;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .folder:not(.open):not(.folder-click-peek):not(.folder-scroll-peek):hover {
+    transform: translateY(-6px);
+  }
+
+  .folder:not(.open):not(.folder-click-peek):not(.folder-scroll-peek):hover .paper {
+    transform: translate(-50%, 2%);
+  }
+
+  .folder:not(.open):not(.folder-click-peek):not(.folder-scroll-peek):hover .folder__front {
+    transform: skew(10deg) scaleY(0.72);
+  }
+
+  .folder:not(.open):not(.folder-click-peek):not(.folder-scroll-peek):hover .folder__front.right {
+    transform: skew(-10deg) scaleY(0.72);
+  }
+}
+
+/* Apertura al clic (solo modo toggle, no portafolio) */
+.folder.open {
+  transform: translateY(-10px);
+}
+
+.folder.open .paper {
+  transition:
+    transform 0.55s var(--folder-ease-spring),
+    height 0.5s var(--folder-ease),
+    box-shadow 0.4s ease;
+}
+
+.folder.open .paper:nth-child(1) {
+  transition-delay: 0.06s;
+  transform: translate(calc(-118% + var(--magnet-x, 0px)), calc(-68% + var(--magnet-y, 0px)))
+    rotateZ(-14deg);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+.folder.open .paper:nth-child(2) {
+  transition-delay: 0.12s;
+  transform: translate(calc(8% + var(--magnet-x, 0px)), calc(-66% + var(--magnet-y, 0px))) rotateZ(12deg);
+  height: 82%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14);
+}
+
+.folder.open .paper:nth-child(3) {
+  transition-delay: 0.18s;
+  transform: translate(calc(-50% + var(--magnet-x, 0px)), calc(-96% + var(--magnet-y, 0px)))
+    rotateZ(4deg);
+  height: 82%;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+}
+
+.folder.open .paper:nth-child(1):hover,
+.folder.open .paper:nth-child(2):hover,
+.folder.open .paper:nth-child(3):hover {
+  filter: brightness(1.03);
+}
+
+.folder.open .folder__front {
+  transition:
+    transform 0.5s var(--folder-ease-spring),
+    box-shadow 0.35s ease;
+  transition-delay: 0.04s;
+  transform: skew(12deg) scaleY(0.58);
+  box-shadow: inset 0 -2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.folder.open .folder__front.right {
+  transition-delay: 0.1s;
+  transform: skew(-12deg) scaleY(0.58);
+}
+
+/* Apertura breve al entrar en viewport (scroll) */
+.folder.folder-scroll-peek {
+  transform: translateY(-8px);
+}
+
+.folder.folder-scroll-peek .paper {
+  transition-duration: 0.38s;
+}
+
+.folder.folder-scroll-peek .paper:nth-child(1) {
+  transform: translate(-92%, -52%) rotateZ(-10deg);
+}
+
+.folder.folder-scroll-peek .paper:nth-child(2) {
+  transform: translate(4%, -52%) rotateZ(8deg);
+  height: 78%;
+}
+
+.folder.folder-scroll-peek .paper:nth-child(3) {
+  transform: translate(-50%, -68%) rotateZ(3deg);
+  height: 76%;
+}
+
+.folder.folder-scroll-peek .folder__front {
+  transform: skew(10deg) scaleY(0.65);
+}
+
+.folder.folder-scroll-peek .folder__front.right {
+  transform: skew(-10deg) scaleY(0.65);
+}
+
+.folder__back {
+  position: relative;
+  width: 100px;
+  height: 80px;
+  background: var(--folder-back-color);
+  border-radius: 0 10px 10px 10px;
+  transform-style: preserve-3d;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+  transition: box-shadow 0.45s var(--folder-ease);
+}
+
+.folder.open .folder__back {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.28);
+}
+
+/* Peek breve al hacer clic → abre modal (carpeta vuelve a cerrarse) */
+.folder.folder-click-peek {
+  transform: translateY(-8px);
+}
+
+.folder.folder-click-peek .paper:nth-child(1) {
+  transform: translate(-92%, -52%) rotateZ(-10deg);
+}
+
+.folder.folder-click-peek .paper:nth-child(2) {
+  transform: translate(4%, -52%) rotateZ(8deg);
+  height: 78%;
+}
+
+.folder.folder-click-peek .paper:nth-child(3) {
+  transform: translate(-50%, -68%) rotateZ(3deg);
+  height: 76%;
+}
+
+.folder.folder-click-peek .folder__front {
+  transform: skew(10deg) scaleY(0.65);
+}
+
+.folder.folder-click-peek .folder__front.right {
+  transform: skew(-10deg) scaleY(0.65);
+}
+
+.folder__back::after {
+  position: absolute;
+  z-index: 0;
+  bottom: 98%;
+  left: 0;
+  content: '';
+  width: 30px;
+  height: 10px;
+  background: var(--folder-back-color);
+  border-radius: 5px 5px 0 0;
+  transition: background 0.3s ease;
+}
+
+.paper {
+  position: absolute;
+  z-index: 2;
+  bottom: 10%;
+  left: 50%;
+  transform: translate(-50%, 12%);
+  width: 70%;
+  height: 80%;
+  background: var(--paper-1);
+  border-radius: 10px;
+  transition:
+    transform 0.42s var(--folder-ease-spring),
+    height 0.42s var(--folder-ease),
+    box-shadow 0.35s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.paper:nth-child(2) {
+  background: var(--paper-2);
+  width: 80%;
+  height: 70%;
+}
+
+.paper:nth-child(3) {
+  background: var(--paper-3);
+  width: 90%;
+  height: 60%;
+}
+
+.folder__front {
+  position: absolute;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  background: var(--folder-color);
+  border-radius: 5px 10px 10px 10px;
+  transform-origin: bottom center;
+  transition: transform 0.42s var(--folder-ease-spring);
+  backface-visibility: hidden;
+}
+
+.folder__front.right {
+  z-index: 4;
+  border-radius: 5px 10px 10px 10px;
+  transform-origin: bottom center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .folder,
+  .paper,
+  .folder__front,
+  .folder__back {
+    transition-duration: 0.01ms !important;
+  }
+}
