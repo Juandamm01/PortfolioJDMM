@@ -1,8 +1,5 @@
 ---
-import { Image } from 'astro:assets';
-import CamiVideo from '../assets/Video/Cami.mp4';
-import BcasVideo from '../assets/Video/Bcas.mp4';
-import StarBorder from '../animations/StarBorder.jsx';
+import ProjectsSection from '../animations/ProjectsSection.jsx';
 ---
 
 <section id="project" class="projects-section">
@@ -12,71 +9,14 @@ import StarBorder from '../animations/StarBorder.jsx';
             <h2 class="glitch-text" data-i18n="projects_title">Proyectos <br/> <span class="text-cyan">Destacados</span></h2>
         </div>
 
-
-        <div class="projects-grid">
-            <!-- Project 1 -->
-            <article class="project-card project-anim">
-                <div style="display: flex; flex-direction: column; width: 100%; height: 100%; background: rgba(13, 19, 35, 0.4); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; overflow: hidden;">
-                    <div class="project-image-wrapper">
-                        <video src={CamiVideo} autoplay loop muted playsinline class="project-image"></video>
-                        <div class="project-overlay">
-                            <a href="https://dra-camila-henao-web.vercel.app/" target="_blank" class="project-link" aria-label="Website">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                                <span data-i18n="btn_website">Ver Sitio</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 data-i18n="project1_title">Dra. Camila Henao Odontología</h3>
-                        <p class="description" data-i18n="project1_desc">Página web de odontología moderna. <span class="text-cyan">(En Desarrollo)</span></p>
-                        <div class="tech-stack small-stack">
-                            <span class="tech-pill">Next.js</span>
-                            <span class="tech-pill">Framer Motion</span>
-                            <span class="tech-pill">GSAP</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Project 2 -->
-            <article class="project-card project-anim" style="animation-delay: 200ms;">
-                <div style="display: flex; flex-direction: column; width: 100%; height: 100%; background: rgba(13, 19, 35, 0.4); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; overflow: hidden;">
-                    <div class="project-image-wrapper">
-                        <video src={BcasVideo} autoplay loop muted playsinline class="project-image"></video>
-                        <div class="project-overlay">
-                            <a href="https://bcas-iqax.vercel.app/" target="_blank" class="project-link" aria-label="Website">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                                <span data-i18n="btn_website">Ver Sitio</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 data-i18n="project2_title">Bioconstructores Asociados SAS</h3>
-                        <p class="description" data-i18n="project2_desc">Panel de administración y landing corporativa Fullstack bajo arquitectura moderna.</p>
-                        <div class="tech-stack small-stack">
-                            <span class="tech-pill">Next.js</span>
-                            <span class="tech-pill">React</span>
-                            <span class="tech-pill">TypeScript</span>
-                            <span class="tech-pill">Prisma</span>
-                            <span class="tech-pill">Neon</span>
-                            <span class="tech-pill">AWS S3</span>
-                            <span class="tech-pill">GSAP</span>
-                            <span class="tech-pill">Framer Motion</span>
-                            <span class="tech-pill">React Bits</span>
-                            <span class="tech-pill">Aceternity UI</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </div>
+        <ProjectsSection client:visible />
     </div>
 </section>
 
-
 <script>
     import { initProjectsInteractive } from '../logic/projects.js';
-    
-    document.addEventListener("astro:page-load", () => {
+
+    document.addEventListener('astro:page-load', () => {
         initProjectsInteractive();
     });
 </script>
