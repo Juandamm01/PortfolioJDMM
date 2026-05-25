@@ -55,6 +55,8 @@ import PixelSnow from '../animations/PixelSnow.jsx';
 						smoothTouch: false,
 					});
 
+					window.__portfolioLenis = lenis;
+
 					function raf(time) {
 						lenis.raf(time);
 						requestAnimationFrame(raf);

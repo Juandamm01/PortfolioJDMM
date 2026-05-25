@@ -190,6 +190,7 @@ const GooeyNav = ({
     // Called on page-load / hashchange / astro transition to set the
     // correct active item. NEVER called during a user click.
     const activateFromPageChange = () => {
+      if (document.body.dataset.projectModal === 'open') return;
       if (!isHomePage()) {
         setActiveIndex(-1);
         return;
@@ -209,6 +210,7 @@ const GooeyNav = ({
 
     const handleScroll = () => {
       if (clickLockRef.current) return;
+      if (document.body.dataset.projectModal === 'open') return;
       if (!isHomePage()) return; // don't reset on scroll — click already handles it
 
       const activeId = getActiveSectionId();
@@ -231,14 +233,22 @@ const GooeyNav = ({
     activateFromPageChange();
 
     // Re-activate after every View Transition
+    const handleModalClosed = (e) => {
+      const sectionId = e.detail?.sectionId || 'project';
+      const idx = items.findIndex((item) => item.href.endsWith(`#${sectionId}`));
+      if (idx !== -1) setActiveIndex(idx);
+    };
+
     document.addEventListener('astro:page-load', activateFromPageChange);
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('hashchange', activateFromPageChange);
+    window.addEventListener('portfolio:modal-closed', handleModalClosed);
 
     return () => {
       document.removeEventListener('astro:page-load', activateFromPageChange);
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('hashchange', activateFromPageChange);
+      window.removeEventListener('portfolio:modal-closed', handleModalClosed);
       if (clickLockTimeoutRef.current) clearTimeout(clickLockTimeoutRef.current);
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
