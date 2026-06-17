@@ -239,7 +239,7 @@
   line-height: 1.2;
 }
 
-/* Responsive */
+/* Responsive — Tablet (max 968px): side-by-side compacto */
 @media (max-width: 968px) {
   .hero-section {
     flex-direction: row;
@@ -329,7 +329,7 @@
     transform: scale(0.65) !important;
     transform-origin: center right;
     margin: 0;
-    width: 280px; /* Original width to maintain aspect ratio, scaling handles fitting */
+    width: 280px;
     animation: mobileFloat 6s ease-in-out infinite;
   }
 
@@ -345,8 +345,110 @@
   }
 }
 
+/* Responsive — Móvil (max 600px): columna, tarjeta debajo del contenido */
+@media (max-width: 600px) {
+  .hero-section {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 70px;
+    padding: 1rem 1.25rem 2rem 1.25rem;
+    min-height: unset;
+    height: auto;
+    gap: 1.5rem;
+    overflow: visible;
+  }
+
+  .hero-content {
+    flex: unset;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .badge {
+    font-size: 0.65rem;
+    padding: 0.3rem 0.7rem;
+    margin-bottom: 0.5rem;
+    align-self: center;
+    text-align: center;
+  }
+
+  .glitch-text {
+    font-size: clamp(1.4rem, 7vw, 1.9rem);
+    line-height: 1.15;
+    margin-bottom: 0.3rem;
+    text-align: center;
+  }
+
+  .hero-content h2 {
+    font-size: 0.9rem;
+    min-height: auto;
+    margin-bottom: 0.4rem;
+    text-align: center;
+  }
+
+  .description {
+    font-size: 0.8rem;
+    line-height: 1.55;
+    margin-bottom: 1rem;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .social-links {
+    justify-content: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-top: 0;
+  }
+
+  .social-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .social-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .cv-btn {
+    height: 40px;
+    padding: 0 1.2rem;
+    font-size: 0.85rem;
+  }
+
+  .hero-visuals {
+    flex: unset;
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .id-card-wrapper {
+    transform: scale(0.85) !important;
+    transform-origin: center center;
+    width: 280px;
+    animation: mobileFloatPhone 6s ease-in-out infinite;
+  }
+
+  .lanyard-string {
+    display: none;
+  }
+}
+
 @keyframes mobileFloat {
   0% { transform: scale(0.65) translateY(0); }
   50% { transform: scale(0.65) translateY(-20px); }
   100% { transform: scale(0.65) translateY(0); }
 }
+
+@keyframes mobileFloatPhone {
+  0% { transform: scale(0.85) translateY(0); }
+  50% { transform: scale(0.85) translateY(-10px); }
+  100% { transform: scale(0.85) translateY(0); }
+}
