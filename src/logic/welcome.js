@@ -316,7 +316,7 @@ export function initWelcomeInteractive() {
         });
 
         // ID Card wrapper fades and slides up with 3D rotation
-        const cardWrapper = document.querySelector('.id-card-wrapper.entrance-anim');
+        const cardWrapper = document.querySelector('.hero-visuals.entrance-anim');
         if (cardWrapper) {
             window.anime({
                 targets: cardWrapper,
