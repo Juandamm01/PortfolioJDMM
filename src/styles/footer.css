@@ -218,17 +218,35 @@
     .footer {
         height: auto;
         min-height: 100vh;
+        text-align: center;
     }
 
     .footer-container {
         padding: 80px 6% 3rem 6%; /* 80px top = navbar + breathing room */
         gap: 2.5rem;
         justify-content: flex-start;
+        align-items: center;
     }
 
     .footer-top {
         padding-bottom: 2rem;
         gap: 1.5rem;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .footer-brand {
+        align-items: center;
+    }
+
+    .footer-location-item {
+        justify-content: center;
+    }
+
+    .footer-social-flex {
+        justify-content: center;
+        width: 100%;
     }
 
     .footer-logo {
@@ -238,13 +256,29 @@
     .footer-info-grid {
         grid-template-columns: 1fr 1fr;
         gap: 2rem;
+        justify-items: center;
+        text-align: center;
+    }
+
+    .footer-group {
+        align-items: center;
+    }
+
+    .footer-contact-list {
+        align-items: center;
+    }
+
+    .footer-contact-item {
+        justify-content: center;
     }
 
     .footer-bottom {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        text-align: center;
         gap: 0.5rem;
         padding-top: 2rem;
+        width: 100%;
     }
 }
 

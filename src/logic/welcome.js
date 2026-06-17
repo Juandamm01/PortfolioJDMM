@@ -363,15 +363,16 @@ export function initWelcomeInteractive() {
         const heroContent = document.querySelector('.hero-content');
         const idVisuals = document.querySelector('.hero-visuals');
         const lightning = document.querySelector('.lightning-svg');
+        const isMobile = window.innerWidth <= 600;
 
         if (heroContent) {
-            heroContent.style.opacity = Math.max(0, 1 - (scrollY / 600)); // Lasts longer
+            heroContent.style.opacity = isMobile ? 1 : Math.max(0, 1 - (scrollY / 600));
         }
         if (idVisuals) {
-            idVisuals.style.opacity = Math.max(0, 1 - (scrollY / 600));
+            idVisuals.style.opacity = isMobile ? 1 : Math.max(0, 1 - (scrollY / 600));
         }
         if (lightning) {
-            lightning.style.opacity = Math.max(0, 0.8 - (scrollY / 600));
+            lightning.style.opacity = isMobile ? 0.1 : Math.max(0, 0.8 - (scrollY / 600));
         }
     }, { passive: true });
 }
