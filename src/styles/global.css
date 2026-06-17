@@ -96,6 +96,7 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
+  height: 100dvh; /* dynamic viewport height for mobile browsers with address bars */
   z-index: -10;
   pointer-events: none;
 }
