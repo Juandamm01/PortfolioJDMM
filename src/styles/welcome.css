@@ -345,99 +345,194 @@
   }
 }
 
-/* Responsive — Móvil (max 600px): columna, tarjeta debajo del contenido */
+/* Responsive — Teléfonos (max 600px): side-by-side ultra compacto */
 @media (max-width: 600px) {
   .hero-section {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin-top: 70px;
-    padding: 1rem 1.25rem 2rem 1.25rem;
-    min-height: unset;
+    flex-direction: row;
+    text-align: left;
+    margin-top: 50px;
+    padding: 0.6rem 0.8rem;
+    min-height: calc(100vh - 50px);
+    min-height: calc(100dvh - 50px);
     height: auto;
-    gap: 1.5rem;
-    overflow: visible;
+    gap: 0.5rem;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
   }
 
   .hero-content {
-    flex: unset;
-    width: 100%;
-    max-width: 100%;
+    flex: 1 1 0;
+    max-width: 55%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    min-width: 0;
   }
 
   .badge {
-    font-size: 0.65rem;
-    padding: 0.3rem 0.7rem;
-    margin-bottom: 0.5rem;
-    align-self: center;
-    text-align: center;
+    font-size: 0.6rem;
+    padding: 0.2rem 0.45rem;
+    margin-bottom: 0.3rem;
+    display: inline-block;
+    align-self: flex-start;
+    white-space: normal;
+    line-height: 1.3;
   }
 
   .glitch-text {
-    font-size: clamp(1.4rem, 7vw, 1.9rem);
+    font-size: clamp(1.15rem, 5.5vw, 1.4rem);
     line-height: 1.15;
-    margin-bottom: 0.3rem;
-    text-align: center;
+    margin-bottom: 0.2rem;
+    word-break: break-word;
   }
 
   .hero-content h2 {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     min-height: auto;
-    margin-bottom: 0.4rem;
-    text-align: center;
+    margin-bottom: 0.2rem;
   }
 
   .description {
-    font-size: 0.8rem;
-    line-height: 1.55;
-    margin-bottom: 1rem;
+    font-size: 0.68rem;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
     max-width: 100%;
-    text-align: center;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
   }
 
   .social-links {
-    justify-content: center;
-    gap: 0.6rem;
+    justify-content: flex-start;
+    gap: 0.4rem;
+    margin-top: 0.2rem;
     flex-wrap: wrap;
-    margin-top: 0;
   }
 
   .social-icon {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
   }
 
   .social-icon svg {
-    width: 18px;
-    height: 18px;
+    width: 15px;
+    height: 15px;
   }
 
   .cv-btn {
-    height: 40px;
-    padding: 0 1.2rem;
-    font-size: 0.85rem;
+    height: 32px;
+    padding: 0 0.8rem;
+    font-size: 0.7rem;
+    border-radius: 18px;
+    gap: 0.3rem;
+  }
+
+  .cv-btn svg {
+    width: 13px;
+    height: 13px;
   }
 
   .hero-visuals {
-    flex: unset;
-    width: 100%;
-    max-width: 100%;
+    flex: 0 0 auto;
+    width: 45%;
+    max-width: 45%;
+    display: flex;
     justify-content: center;
     align-items: center;
+    overflow: visible;
   }
 
   .id-card-wrapper {
-    transform: scale(0.85) !important;
+    transform: scale(0.6) !important;
     transform-origin: center center;
+    margin: 0;
     width: 280px;
     animation: mobileFloatPhone 6s ease-in-out infinite;
   }
 
+  .id-card {
+    width: 280px;
+  }
+
+  .card-header {
+    padding: 0.8rem;
+    gap: 0.5rem;
+  }
+
+  .header-title {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  .card-footer {
+    padding: 1rem;
+  }
+
+  .footer-name {
+    font-size: 1.1rem;
+  }
+
   .lanyard-string {
     display: none;
+  }
+}
+
+/* Responsive — Teléfonos muy pequeños (max 380px) */
+@media (max-width: 380px) {
+  .hero-section {
+    padding: 0.5rem 0.6rem;
+    gap: 0.3rem;
+  }
+
+  .hero-content {
+    max-width: 54%;
+  }
+
+  .badge {
+    font-size: 0.5rem;
+  }
+
+  .glitch-text {
+    font-size: clamp(1rem, 5vw, 1.2rem);
+  }
+
+  .hero-content h2 {
+    font-size: 0.7rem;
+  }
+
+  .description {
+    font-size: 0.6rem;
+    line-height: 1.35;
+  }
+
+  .social-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .social-icon svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .cv-btn {
+    height: 28px;
+    padding: 0 0.6rem;
+    font-size: 0.62rem;
+  }
+
+  .hero-visuals {
+    width: 46%;
+    max-width: 46%;
+  }
+
+  .id-card-wrapper {
+    transform: scale(0.52) !important;
   }
 }
 
@@ -448,7 +543,8 @@
 }
 
 @keyframes mobileFloatPhone {
-  0% { transform: scale(0.85) translateY(0); }
-  50% { transform: scale(0.85) translateY(-10px); }
-  100% { transform: scale(0.85) translateY(0); }
-}
+  0% { transform: scale(0.6) translateY(0); }
+  50% { transform: scale(0.6) translateY(-15px); }
+  100% { transform: scale(0.6) translateY(0); }
+}
+
