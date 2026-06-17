@@ -351,14 +351,14 @@
     flex-direction: row;
     text-align: left;
     margin-top: 50px;
-    padding: 0.6rem 0.8rem;
+    padding: 0.6rem 0.8rem 3rem 0.8rem;
     min-height: calc(100vh - 50px);
     min-height: calc(100dvh - 50px);
     height: auto;
     gap: 0.5rem;
     justify-content: space-between;
-    align-items: center;
-    overflow: hidden;
+    align-items: flex-start;
+    overflow: visible;
   }
 
   .hero-content {
