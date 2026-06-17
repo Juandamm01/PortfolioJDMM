@@ -346,105 +346,66 @@
 }
 
 /* Responsive — Teléfonos (max 600px): side-by-side ultra compacto */
+/* Responsive — Teléfonos (max 600px): Grid layout */
 @media (max-width: 600px) {
   .hero-section {
-    flex-direction: row;
-    text-align: left;
-    margin-top: 50px;
-    padding: 0.6rem 0.8rem 3rem 0.8rem;
-    min-height: calc(100vh - 50px);
-    min-height: calc(100dvh - 50px);
-    height: auto;
-    gap: 0.5rem;
-    justify-content: space-between;
-    align-items: flex-start;
-    overflow: visible;
-  }
-
-  .hero-content {
-    flex: 1 1 0;
-    max-width: 55%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-width: 0;
-  }
-
-  .badge {
-    font-size: 0.6rem;
-    padding: 0.2rem 0.45rem;
-    margin-bottom: 0.3rem;
-    display: inline-block;
-    align-self: flex-start;
-    white-space: normal;
-    line-height: 1.3;
-  }
-
-  .glitch-text {
-    font-size: clamp(1.15rem, 5.5vw, 1.4rem);
-    line-height: 1.15;
-    margin-bottom: 0.2rem;
-    word-break: break-word;
-  }
-
-  .hero-content h2 {
-    font-size: 0.8rem;
-    min-height: auto;
-    margin-bottom: 0.2rem;
-  }
-
-  .description {
-    font-size: 0.68rem;
-    line-height: 1.4;
-    margin-bottom: 0.5rem;
-    max-width: 100%;
-    overflow-wrap: break-word;
-    word-break: break-word;
-    hyphens: auto;
-  }
-
-  .social-links {
-    justify-content: flex-start;
-    gap: 0.4rem;
-    margin-top: 0.2rem;
-    flex-wrap: wrap;
-  }
-
-  .social-icon {
-    width: 32px;
-    height: 32px;
-  }
-
-  .social-icon svg {
-    width: 15px;
-    height: 15px;
-  }
-
-  .cv-btn {
-    height: 32px;
-    padding: 0 0.8rem;
-    font-size: 0.7rem;
-    border-radius: 18px;
-    gap: 0.3rem;
-  }
-
-  .cv-btn svg {
-    width: 13px;
-    height: 13px;
-  }
-
-  .hero-visuals {
-    flex: 0 0 auto;
-    width: 45%;
-    max-width: 45%;
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto auto auto auto;
+    grid-template-areas:
+      "badge card"
+      "title card"
+      "subtitle card"
+      "desc desc"
+      "links links";
+    gap: 0.5rem 1rem;
+    padding: 6rem 1.25rem 3rem 1.25rem;
+    margin-top: 0;
+    min-height: calc(100dvh - 60px);
     align-items: center;
     overflow: visible;
   }
 
+  .hero-content {
+    display: contents;
+  }
+
+  .badge {
+    grid-area: badge;
+    font-size: 0.65rem;
+    padding: 0.3rem 0.6rem;
+    margin-bottom: 0;
+    align-self: end;
+    justify-self: start;
+    white-space: normal;
+  }
+
+  .glitch-text {
+    grid-area: title;
+    font-size: clamp(1.4rem, 6vw, 1.8rem);
+    line-height: 1.15;
+    margin-bottom: 0;
+    word-break: break-word;
+  }
+
+  .hero-content h2 {
+    grid-area: subtitle;
+    font-size: 0.85rem;
+    margin-bottom: 0;
+    align-self: start;
+  }
+
+  .hero-visuals {
+    grid-area: card;
+    width: 155px;
+    height: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .id-card-wrapper {
-    transform: scale(0.6) !important;
+    transform: scale(0.55) !important;
     transform-origin: center center;
     margin: 0;
     width: 280px;
@@ -456,83 +417,98 @@
   }
 
   .card-header {
-    padding: 0.8rem;
-    gap: 0.5rem;
+    padding: 1.2rem;
+    gap: 0.8rem;
   }
 
   .header-title {
-    font-size: 0.75rem;
-    letter-spacing: 1px;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
   }
 
   .card-body {
-    padding: 1rem;
+    padding: 1.5rem;
   }
 
   .card-footer {
-    padding: 1rem;
+    padding: 1.5rem;
   }
 
   .footer-name {
-    font-size: 1.1rem;
+    font-size: 1.4rem;
   }
 
   .lanyard-string {
     display: none;
+  }
+
+  .description {
+    grid-area: desc;
+    font-size: 0.85rem;
+    line-height: 1.55;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    text-align: left;
+    max-width: 100%;
+  }
+
+  .social-links {
+    grid-area: links;
+    justify-content: flex-start;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+
+  .social-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .social-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .cv-btn {
+    height: 40px;
+    padding: 0 1.2rem;
+    font-size: 0.85rem;
+    border-radius: 20px;
   }
 }
 
 /* Responsive — Teléfonos muy pequeños (max 380px) */
 @media (max-width: 380px) {
   .hero-section {
-    padding: 0.5rem 0.6rem;
-    gap: 0.3rem;
-  }
-
-  .hero-content {
-    max-width: 54%;
-  }
-
-  .badge {
-    font-size: 0.5rem;
-  }
-
-  .glitch-text {
-    font-size: clamp(1rem, 5vw, 1.2rem);
-  }
-
-  .hero-content h2 {
-    font-size: 0.7rem;
-  }
-
-  .description {
-    font-size: 0.6rem;
-    line-height: 1.35;
-  }
-
-  .social-icon {
-    width: 28px;
-    height: 28px;
-  }
-
-  .social-icon svg {
-    width: 13px;
-    height: 13px;
-  }
-
-  .cv-btn {
-    height: 28px;
-    padding: 0 0.6rem;
-    font-size: 0.62rem;
+    padding: 5rem 1rem 3rem 1rem;
+    gap: 0.4rem 0.5rem;
   }
 
   .hero-visuals {
-    width: 46%;
-    max-width: 46%;
+    width: 130px;
+    height: 185px;
   }
 
   .id-card-wrapper {
-    transform: scale(0.52) !important;
+    transform: scale(0.46) !important;
+  }
+
+  .badge {
+    font-size: 0.55rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .glitch-text {
+    font-size: clamp(1.2rem, 5vw, 1.4rem);
+  }
+
+  .hero-content h2 {
+    font-size: 0.75rem;
+  }
+
+  .description {
+    font-size: 0.75rem;
   }
 }
 
@@ -543,8 +519,8 @@
 }
 
 @keyframes mobileFloatPhone {
-  0% { transform: scale(0.6) translateY(0); }
-  50% { transform: scale(0.6) translateY(-15px); }
-  100% { transform: scale(0.6) translateY(0); }
+  0% { transform: scale(0.55) translateY(0); }
+  50% { transform: scale(0.55) translateY(-15px); }
+  100% { transform: scale(0.55) translateY(0); }
 }
 
