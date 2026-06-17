@@ -217,7 +217,9 @@ export function initWelcomeInteractive() {
 
         const cvBtn = document.getElementById('download-cv-btn');
         if (cvBtn) {
-            cvBtn.href = currentLang === 'es' ? '/pdf/Juan_David_Martinez_CV_ES.pdf' : '/pdf/Juan_David_Martinez_CV_EN.pdf';
+            const filename = currentLang === 'es' ? 'Juan_David_Martinez_CV_ES.pdf' : 'Juan_David_Martinez_CV_EN.pdf';
+            cvBtn.href = `/pdf/${filename}`;
+            cvBtn.setAttribute('download', filename);
         }
     }
 
@@ -317,17 +319,24 @@ export function initWelcomeInteractive() {
 
         // ID Card wrapper fades and slides up with 3D rotation
         const cardWrapper = document.querySelector('.hero-visuals.entrance-anim');
+        const isMobile = window.innerWidth <= 600;
         if (cardWrapper) {
-            window.anime({
-                targets: cardWrapper,
-                opacity: [0, 1],
-                translateY: [60, 0],
-                rotateY: [15, 0],
-                scale: [0.94, 1],
-                easing: 'cubicBezier(0.16, 1, 0.3, 1)',
-                duration: 2800,
-                delay: 700
-            });
+            if (isMobile) {
+                cardWrapper.style.opacity = '0';
+                cardWrapper.style.transform = 'translateY(40px) scale(0.85)';
+                cardWrapper.style.pointerEvents = 'none';
+            } else {
+                window.anime({
+                    targets: cardWrapper,
+                    opacity: [0, 1],
+                    translateY: [60, 0],
+                    rotateY: [15, 0],
+                    scale: [0.94, 1],
+                    easing: 'cubicBezier(0.16, 1, 0.3, 1)',
+                    duration: 2800,
+                    delay: 700
+                });
+            }
         }
 
         // --- 4. ID Card floating animation (keep minimal or remove) ---
@@ -369,7 +378,18 @@ export function initWelcomeInteractive() {
             heroContent.style.opacity = isMobile ? 1 : Math.max(0, 1 - (scrollY / 600));
         }
         if (idVisuals) {
-            idVisuals.style.opacity = isMobile ? 1 : Math.max(0, 1 - (scrollY / 600));
+            if (isMobile) {
+                // On mobile, fade in as they scroll, reaching full opacity at scrollY = 200
+                const opacityVal = Math.min(1, scrollY / 200);
+                idVisuals.style.opacity = opacityVal;
+                idVisuals.style.pointerEvents = scrollY > 50 ? 'auto' : 'none';
+                
+                const translateVal = Math.max(0, 40 - (scrollY / 5));
+                const scaleVal = Math.min(0.85, 0.72 + (scrollY / 1500));
+                idVisuals.style.transform = `translateY(${translateVal}px) scale(${scaleVal})`;
+            } else {
+                idVisuals.style.opacity = Math.max(0, 1 - (scrollY / 600));
+            }
         }
         if (lightning) {
             lightning.style.opacity = isMobile ? 0.1 : Math.max(0, 0.8 - (scrollY / 600));
