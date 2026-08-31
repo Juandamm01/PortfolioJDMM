@@ -57,7 +57,7 @@ export const PROJECTS = [
     folderLabel: 'Papelería M&M',
     title: 'Papelería M&M',
     description:
-      'Landing page para Papelería M&M, un emprendimiento familiar de barrio, con navegación por scroll-snap, animaciones fluidas y un carrusel de servicios para mostrar los productos. Incluye un botón de contacto directo por WhatsApp para facilitar los pedidos.',
+      'Landing page para Papelería M&M, un emprendimiento familiar de barrio, creada para ayudar a mi mamá a darle visibilidad a su papelería. Cuenta con navegación por scroll-snap, animaciones fluidas y un carrusel de servicios para mostrar los productos a la comunidad.',
     stack: ['React', 'Vite', 'TypeScript'],
     isWebPage: true,
     inDevelopment: false,
