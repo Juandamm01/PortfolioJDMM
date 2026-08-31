@@ -161,6 +161,19 @@
         min-height: 100vh;
         padding: 5rem 1.2rem 3rem 1.2rem;
     }
+    .projects-header {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .projects-header .badge {
+        display: inline-block;
+        margin: 0 auto 0.5rem auto;
+    }
+    .projects-header .glitch-text {
+        text-align: center;
+    }
     .projects-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
@@ -180,12 +193,12 @@
 /* ── Projects folder row + modal ── */
 .projects-folders-row {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   justify-items: center;
   align-items: end;
   gap: 2rem 1.5rem;
   width: 100%;
-  max-width: 520px;
+  max-width: 720px;
   margin: 0 auto;
   padding: 1rem 0 0.5rem;
 }
@@ -249,6 +262,12 @@
     ) {
     animation-delay: 0.6s;
   }
+
+  .folder-project-item.is-revealed:nth-child(3) .folder:not(:hover):not(.open):not(.folder-click-peek):not(
+      .folder-scroll-peek
+    ) {
+    animation-delay: 1.2s;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -259,6 +278,7 @@
 
 @media (max-width: 768px) {
   .projects-folders-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     max-width: 100%;
     gap: 1.75rem 1rem;
     padding-inline: 0.25rem;
@@ -474,10 +494,7 @@
   color: rgba(255, 255, 255, 0.78);
   margin: 0;
   line-height: 1.5;
-  display: -webkit-box;
-  -webkit-line-clamp: 6;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .modal-stack {
@@ -543,7 +560,6 @@
 
   .modal-description {
     font-size: 0.74rem;
-    -webkit-line-clamp: 7;
   }
 
   .modal-stack-pill {

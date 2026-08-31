@@ -184,6 +184,13 @@
     .stack-section {
         padding-top: 6rem;
     }
+    .stack-header {
+        text-align: center;
+    }
+    .stack-header .badge {
+        display: inline-block;
+        margin: 0 auto 0.5rem auto;
+    }
     .stack-grid {
         grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     }
