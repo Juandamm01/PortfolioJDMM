@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { getCurrentLanguage, translations } from '../logic/translations.js';
 import { lockPageScroll, unlockAndRestoreScroll } from '../logic/scrollLock.js';
 import Folder from './Folder';
 import '../styles/projects.css';
@@ -9,10 +10,9 @@ const MODAL_CLOSE_MS = 340;
 export const PROJECTS = [
   {
     id: 'camila',
-    folderLabel: 'Dra. Camila Henao Odontología',
-    title: 'Dra. Camila Henao Odontología',
-    description:
-      'Página web profesional y panel administrativo para clínica odontológica. Aplicación full-stack en Next.js con TypeScript, animaciones con Framer Motion y GSAP. Lógica de agendamiento de citas médicas mediante API Routes de Next.js. Prisma como capa de datos para almacenar citas, pacientes y la gestión del panel de administración.',
+    folderLabelKey: 'project1_title',
+    titleKey: 'project1_title',
+    descriptionKey: 'project1_desc',
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'API Routes', 'Framer Motion', 'GSAP', 'Prisma', 'PostgreSQL', 'Docker'],
     isWebPage: true,
     inDevelopment: false,
@@ -21,10 +21,9 @@ export const PROJECTS = [
   },
   {
     id: 'bcas',
-    folderLabel: 'Bioconstructores Asociados SAS',
-    title: 'Bioconstructores Asociados SAS',
-    description:
-      'Panel de administración y landing corporativa fullstack bajo arquitectura moderna con Next.js, Prisma, Neon y almacenamiento en AWS S3. Interfaz animada con GSAP, Framer Motion, React Bits y Aceternity UI.',
+    folderLabelKey: 'project2_title',
+    titleKey: 'project2_title',
+    descriptionKey: 'project2_desc',
     stack: [
       'Next.js',
       'React',
@@ -43,10 +42,9 @@ export const PROJECTS = [
   },
   {
     id: 'driveden',
-    folderLabel: 'DriveDen',
-    title: 'DriveDen',
-    description:
-      'DriveDen es una aplicación móvil desarrollada en React Native con Expo para la gestión inteligente de vehículos: control de combustible, mantenimientos, recordatorios y estadísticas, con un sistema de registro por voz asistido por IA. Trabajé en el desarrollo completo del frontend, consumiendo la API del backend e integrando toda la lógica de negocio para lograr una experiencia fluida, moderna y coherente en toda la aplicación.',
+    folderLabelKey: 'project3_title',
+    titleKey: 'project3_title',
+    descriptionKey: 'project3_desc',
     stack: ['React Native', 'Expo', 'TypeScript', 'Expo Router', 'Zustand', 'AsyncStorage'],
     inDevelopment: false,
     siteUrl: 'https://driveden.online/',
@@ -54,10 +52,9 @@ export const PROJECTS = [
   },
   {
     id: 'papeleria-m-m',
-    folderLabel: 'Papelería M&M',
-    title: 'Papelería M&M',
-    description:
-      'Landing page para Papelería M&M, un emprendimiento familiar de barrio, creada para ayudar a mi mamá a darle visibilidad a su papelería. Cuenta con navegación por scroll-snap, animaciones fluidas y un carrusel de servicios para mostrar los productos a la comunidad.',
+    folderLabelKey: 'project4_title',
+    titleKey: 'project4_title',
+    descriptionKey: 'project4_desc',
     stack: ['React', 'Vite', 'TypeScript'],
     isWebPage: true,
     inDevelopment: false,
@@ -66,7 +63,18 @@ export const PROJECTS = [
   },
 ];
 
-function ProjectModal({ project, onClose, isClosing }) {
+const getLocalizedProjects = (lang = getCurrentLanguage()) => {
+  const active = translations[lang] || translations.es;
+
+  return PROJECTS.map((project) => ({
+    ...project,
+    folderLabel: active[project.folderLabelKey],
+    title: active[project.titleKey],
+    description: active[project.descriptionKey],
+  }));
+};
+
+function ProjectModal({ project, onClose, isClosing, lang }) {
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) onClose();
   };
@@ -74,6 +82,10 @@ function ProjectModal({ project, onClose, isClosing }) {
   const canOpenSite = Boolean(project.siteUrl);
   const overlayClass = isClosing ? 'modal-overlay--closing' : 'modal-overlay--open';
   const panelClass = isClosing ? 'modal-panel--closing' : 'modal-panel--open';
+  const translatedClose = lang === 'en' ? 'Close' : 'Cerrar';
+  const translatedView = lang === 'en' ? 'View project' : 'Ver proyecto';
+  const translatedWeb = lang === 'en' ? 'Website' : 'Página web';
+  const translatedDev = lang === 'en' ? 'In Development' : 'En Desarrollo';
 
   return (
     <div className={`modal-overlay ${overlayClass}`} onClick={handleOverlayClick} role="presentation">
@@ -100,7 +112,7 @@ function ProjectModal({ project, onClose, isClosing }) {
             e.stopPropagation();
             onClose();
           }}
-          aria-label="Cerrar"
+          aria-label={translatedClose}
         >
           ×
         </button>
@@ -110,8 +122,8 @@ function ProjectModal({ project, onClose, isClosing }) {
             <h3 id="modal-title" className="modal-title">
               {project.title}
             </h3>
-            {project.isWebPage && <span className="modal-type-badge">Página web</span>}
-            {project.inDevelopment && <span className="modal-dev-badge">En Desarrollo</span>}
+            {project.isWebPage && <span className="modal-type-badge">{translatedWeb}</span>}
+            {project.inDevelopment && <span className="modal-dev-badge">{translatedDev}</span>}
           </div>
 
           <p className="modal-description">{project.description}</p>
@@ -132,11 +144,11 @@ function ProjectModal({ project, onClose, isClosing }) {
                 rel="noopener noreferrer"
                 className="modal-btn modal-btn--primary"
               >
-                Ver proyecto
+                {translatedView}
               </a>
             ) : (
               <button type="button" className="modal-btn modal-btn--disabled" disabled>
-                Ver proyecto
+                {translatedView}
               </button>
             )}
           </div>
@@ -149,7 +161,21 @@ function ProjectModal({ project, onClose, isClosing }) {
 export default function ProjectsSection() {
   const [activeProject, setActiveProject] = useState(null);
   const [isClosing, setIsClosing] = useState(false);
+  const [lang, setLang] = useState(getCurrentLanguage());
+  const [localizedProjects, setLocalizedProjects] = useState(() => getLocalizedProjects());
   const scrollLockY = useRef(0);
+
+  useEffect(() => {
+    const syncLanguage = () => {
+      const nextLang = getCurrentLanguage();
+      setLang(nextLang);
+      setLocalizedProjects(getLocalizedProjects(nextLang));
+    };
+
+    syncLanguage();
+    window.addEventListener('portfolio:lang-change', syncLanguage);
+    return () => window.removeEventListener('portfolio:lang-change', syncLanguage);
+  }, []);
 
   useEffect(() => {
     if (activeProject === null) return undefined;
@@ -183,12 +209,12 @@ export default function ProjectsSection() {
   }, [activeProject, isClosing]);
 
   const openProject = useCallback((id) => {
-    const project = PROJECTS.find((p) => p.id === id);
+    const project = localizedProjects.find((p) => p.id === id);
     if (project) {
       setIsClosing(false);
       setActiveProject(project);
     }
-  }, []);
+  }, [localizedProjects]);
 
   const closeModal = useCallback(
     (e) => {
@@ -203,7 +229,7 @@ export default function ProjectsSection() {
   return (
     <>
       <div className="projects-folders-row">
-        {PROJECTS.map((project, index) => (
+        {localizedProjects.map((project, index) => (
           <article
             key={project.id}
             className="folder-project-item project-anim"
@@ -223,7 +249,7 @@ export default function ProjectsSection() {
       </div>
 
       {activeProject && (
-        <ProjectModal project={activeProject} onClose={closeModal} isClosing={isClosing} />
+        <ProjectModal project={activeProject} onClose={closeModal} isClosing={isClosing} lang={lang} />
       )}
     </>
   );

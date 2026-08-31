@@ -228,7 +228,7 @@
 
 .folder-project-item,
 .folder-project-name {
-  opacity: 0;
+  opacity: 1;
 }
 
 .folder-project-item.is-revealed .folder {

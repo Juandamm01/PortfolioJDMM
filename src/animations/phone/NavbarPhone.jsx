@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { getCurrentLanguage, getLocalizedText } from '../../logic/translations.js';
 import '../../styles/phone/NavbarPhone.css';
 
 export default function NavbarPhone() {
   const [isOpen, setIsOpen] = useState(false);
   const [langLabel, setLangLabel] = useState('EN');
-
-  const menuItems = [
-    { label: 'Inicio', href: '/#home', i18n: 'nav_home' },
-    { label: 'Proyectos', href: '/#project', i18n: 'nav_project' },
-    { label: 'Stack', href: '/#tech', i18n: 'nav_stack' },
-    { label: 'Experiencia', href: '/#experience', i18n: 'nav_experience' },
-    { label: 'Contacto', href: '/#contact', i18n: 'nav_contact' },
-  ];
+  const [menuItems, setMenuItems] = useState(() => [
+    { label: getLocalizedText('nav_home', getCurrentLanguage()), href: '/#home', i18n: 'nav_home' },
+    { label: getLocalizedText('nav_project', getCurrentLanguage()), href: '/#project', i18n: 'nav_project' },
+    { label: getLocalizedText('nav_stack', getCurrentLanguage()), href: '/#tech', i18n: 'nav_stack' },
+    { label: getLocalizedText('nav_experience', getCurrentLanguage()), href: '/#experience', i18n: 'nav_experience' },
+    { label: getLocalizedText('nav_contact', getCurrentLanguage()), href: '/#contact', i18n: 'nav_contact' },
+  ]);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -29,19 +29,22 @@ export default function NavbarPhone() {
     }
   };
 
-  // Sync initial language label and updates
   useEffect(() => {
-    const desktopToggle = document.getElementById('lang-toggle');
-    if (desktopToggle) {
-      setLangLabel(desktopToggle.textContent || 'EN');
-      
-      const observer = new MutationObserver(() => {
-        setLangLabel(desktopToggle.textContent || 'EN');
-      });
-      observer.observe(desktopToggle, { characterData: true, childList: true });
+    const syncLanguage = () => {
+      const language = getCurrentLanguage();
+      setLangLabel(language === 'es' ? 'EN' : 'ES');
+      setMenuItems([
+        { label: getLocalizedText('nav_home', language), href: '/#home', i18n: 'nav_home' },
+        { label: getLocalizedText('nav_project', language), href: '/#project', i18n: 'nav_project' },
+        { label: getLocalizedText('nav_stack', language), href: '/#tech', i18n: 'nav_stack' },
+        { label: getLocalizedText('nav_experience', language), href: '/#experience', i18n: 'nav_experience' },
+        { label: getLocalizedText('nav_contact', language), href: '/#contact', i18n: 'nav_contact' },
+      ]);
+    };
 
-      return () => observer.disconnect();
-    }
+    syncLanguage();
+    window.addEventListener('portfolio:lang-change', syncLanguage);
+    return () => window.removeEventListener('portfolio:lang-change', syncLanguage);
   }, []);
 
   return (

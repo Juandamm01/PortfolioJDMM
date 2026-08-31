@@ -142,12 +142,17 @@ export function initProjectsInteractive() {
         setInitial(projectSection, [
             '.projects-header .badge',
             '.projects-header h2',
-            '.folder-project-item',
-            '.folder-project-name',
         ]);
+        projectSection.querySelectorAll('.folder-project-item').forEach((item) => {
+            item.style.opacity = '1';
+            item.style.transform = 'scale(0.9)';
+        });
         projectSection.querySelectorAll('.folder-project-item .folder').forEach((folder) => {
-            folder.style.opacity = '0';
+            folder.style.opacity = '1';
             folder.style.willChange = 'transform, opacity';
+        });
+        projectSection.querySelectorAll('.folder-project-name').forEach((name) => {
+            name.style.opacity = '1';
         });
     }
     if (stackSection) {
@@ -167,6 +172,17 @@ export function initProjectsInteractive() {
     let projectPlayed = false;
     let stackPlayed = false;
 
+    const revealVisibleSection = (section, callback, played) => {
+        if (!section || played) return played;
+        const rect = section.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight + 180 && rect.bottom > 0;
+        if (isVisible) {
+            callback(section);
+            return true;
+        }
+        return false;
+    };
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (!entry.isIntersecting) return;
@@ -182,6 +198,16 @@ export function initProjectsInteractive() {
         });
     }, ioOpts);
 
-    if (projectSection) observer.observe(projectSection);
-    if (stackSection) observer.observe(stackSection);
+    if (projectSection) {
+        observer.observe(projectSection);
+        window.requestAnimationFrame(() => {
+            projectPlayed = revealVisibleSection(projectSection, enterProjects, projectPlayed);
+        });
+    }
+    if (stackSection) {
+        observer.observe(stackSection);
+        window.requestAnimationFrame(() => {
+            stackPlayed = revealVisibleSection(stackSection, enterStack, stackPlayed);
+        });
+    }
 }

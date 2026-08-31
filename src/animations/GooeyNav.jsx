@@ -1,13 +1,14 @@
 import { useRef, useEffect, useState } from 'react';
+import { getCurrentLanguage, getLocalizedText } from '../logic/translations.js';
 import '../styles/GooeyNav.css';
 
 const GooeyNav = ({
   items = [
-    { label: "Inicio", href: "/#home", i18n: "nav_home" },
-    { label: "Proyectos", href: "/#project", i18n: "nav_project" },
-    { label: "Stack", href: "/#tech", i18n: "nav_stack" },
-    { label: "Experiencia", href: "/#experience", i18n: "nav_experience" },
-    { label: "Contacto", href: "/#contact", i18n: "nav_contact" }
+    { label: 'Inicio', href: '/#home', i18n: 'nav_home' },
+    { label: 'Proyectos', href: '/#project', i18n: 'nav_project' },
+    { label: 'Stack', href: '/#tech', i18n: 'nav_stack' },
+    { label: 'Experiencia', href: '/#experience', i18n: 'nav_experience' },
+    { label: 'Contacto', href: '/#contact', i18n: 'nav_contact' }
   ],
   animationTime = 600,
   particleCount = 15,
@@ -22,6 +23,29 @@ const GooeyNav = ({
   const filterRef = useRef(null);
   const textRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
+  const [navItems, setNavItems] = useState(() =>
+    (items || []).map((item) => ({
+      ...item,
+      label: getLocalizedText(item.i18n, getCurrentLanguage())
+    }))
+  );
+
+  useEffect(() => {
+    const syncLabels = () => {
+      const lang = getCurrentLanguage();
+      setNavItems((currentItems) =>
+        (currentItems.length ? currentItems : items).map((item) => ({
+          ...item,
+          label: getLocalizedText(item.i18n, lang)
+        }))
+      );
+    };
+
+    syncLabels();
+    window.addEventListener('portfolio:lang-change', syncLabels);
+
+    return () => window.removeEventListener('portfolio:lang-change', syncLabels);
+  }, [items]);
 
   useEffect(() => {
     const isHome = window.location.pathname === '/' || window.location.pathname.endsWith('index.html');
@@ -167,6 +191,10 @@ const GooeyNav = ({
     }
   };
 
+  useEffect(() => {
+    setActiveIndex((current) => (current < 0 ? current : Math.min(current, navItems.length - 1)));
+  }, [navItems.length]);
+
   // ── Effect 1: Runs ONCE on mount. Sets up all global listeners. ──
   useEffect(() => {
     const SECTION_IDS = ['home', 'project', 'tech', 'experience', 'contact'];
@@ -197,14 +225,14 @@ const GooeyNav = ({
       }
       const hash = window.location.hash.replace(/^#/, '');
       if (hash) {
-        const idx = items.findIndex(item => item.href.endsWith(`#${hash}`));
+        const idx = navItems.findIndex(item => item.href.endsWith(`#${hash}`));
         if (idx !== -1) {
           setActiveIndex(idx);
           return;
         }
       }
       const activeId = getActiveSectionId();
-      const newIdx = items.findIndex(item => item.href.endsWith(`#${activeId}`));
+      const newIdx = navItems.findIndex(item => item.href.endsWith(`#${activeId}`));
       if (newIdx !== -1) setActiveIndex(newIdx);
     };
 
@@ -214,7 +242,7 @@ const GooeyNav = ({
       if (!isHomePage()) return; // don't reset on scroll — click already handles it
 
       const activeId = getActiveSectionId();
-      const newIndex = items.findIndex(item => item.href.endsWith(`#${activeId}`));
+      const newIndex = navItems.findIndex(item => item.href.endsWith(`#${activeId}`));
       if (newIndex !== -1) {
         setActiveIndex(prev => {
           if (prev !== newIndex) {
