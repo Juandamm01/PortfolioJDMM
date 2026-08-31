@@ -3,7 +3,6 @@
 import { Image } from 'astro:assets';
 import crehanaImg from '../assets/Certificaciones/Crehana.jpg';
 import cunImg from '../assets/Certificaciones/CUN.jpg';
-import kotlinImg from '../assets/Certificaciones/Kotlin.jpg';
 ---
 
 <section id="certifications" class="cert-section">
@@ -34,28 +33,7 @@ import kotlinImg from '../assets/Certificaciones/Kotlin.jpg';
             </div>
         </article>
 
-        <!-- Cert 2: Udemy -->
-        <article class="cert-card cert-anim">
-            <div class="cert-image-wrapper">
-                <Image 
-                    src={kotlinImg} 
-                    alt="Kotlin Certification" 
-                    class="cert-image" 
-                    format="jpg"
-                    quality="high"
-                />
-            </div>
-            <div class="cert-info">
-                <span class="cert-date" data-i18n="cert2_date">Julio 2025</span>
-                <h3 data-i18n="cert2_title">Kotlin: Apps desde Cero</h3>
-                <span class="entity" data-i18n="cert2_entity">Udemy</span>
-                <p class="description" data-i18n="cert2_desc">
-                    Desarrollo integral de 6 aplicaciones móviles nativas bajo la arquitectura moderna de Android. Aprendizaje profundo de Kotlin, Jetpack Compose, integración de APIs y gestión de estado para aplicaciones robustas y escalables.
-                </p>
-            </div>
-        </article>
-
-        <!-- Cert 3: CUN/MinTIC -->
+        <!-- Cert 2: CUN/MinTIC -->
         <article class="cert-card cert-anim">
             <div class="cert-image-wrapper">
                 <Image 
@@ -75,9 +53,9 @@ import kotlinImg from '../assets/Certificaciones/Kotlin.jpg';
                 </p>
             </div>
         </article>
+
     </div>
 </section>
-
 <script>
     import { initCertificationsInteractive } from '../logic/certifications.js';
     document.addEventListener('astro:page-load', () => {

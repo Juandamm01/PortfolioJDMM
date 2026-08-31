@@ -112,6 +112,17 @@ body {
 /* ── Seamless Section Transitions ── */
 #home, #project, #tech, #experience, #certifications {
   position: relative;
+  scroll-margin-top: 5.5rem;
+}
+
+@media (max-width: 768px) {
+  .projects-section,
+  .stack-section,
+  .exp-section,
+  .cert-section,
+  .badges-section {
+    padding-top: 5.5rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -126,4 +137,4 @@ body {
   html {
     scroll-behavior: auto;
   }
-}
+}
