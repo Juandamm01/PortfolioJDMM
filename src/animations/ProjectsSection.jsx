@@ -58,7 +58,7 @@ export const PROJECTS = [
     stack: ['React', 'Vite', 'TypeScript'],
     isWebPage: true,
     inDevelopment: false,
-    siteUrl: 'https://papeleria-m-949ylb5ou-juan-david-s-projects-1927e4bd.vercel.app/',
+    siteUrl: 'https://papeleria-m-m-ten.vercel.app/',
     accent: '#00f3ff',
   },
 ];
@@ -126,7 +126,10 @@ function ProjectModal({ project, onClose, isClosing, lang }) {
             {project.inDevelopment && <span className="modal-dev-badge">{translatedDev}</span>}
           </div>
 
-          <p className="modal-description">{project.description}</p>
+          <p
+            className="modal-description"
+            dangerouslySetInnerHTML={{ __html: project.description || '' }}
+          />
 
           <div className="modal-stack">
             {project.stack.map((tech) => (
