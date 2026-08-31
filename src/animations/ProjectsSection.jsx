@@ -12,8 +12,8 @@ export const PROJECTS = [
     folderLabel: 'Dra. Camila Henao Odontología',
     title: 'Dra. Camila Henao Odontología',
     description:
-      'Página web profesional y panel administrativo para clínica odontológica. Frontend en React con Next.js y TypeScript, animaciones con Framer Motion y GSAP. Backend con Node.js para la lógica de agendamiento de citas médicas. Prisma como capa de datos para almacenar citas, pacientes y la gestión del panel de administración.',
-    stack: ['React', 'Next.js', 'TypeScript', 'Node.js', 'Prisma', 'Framer Motion', 'GSAP'],
+      'Página web profesional y panel administrativo para clínica odontológica. Aplicación full-stack en Next.js con TypeScript, animaciones con Framer Motion y GSAP. Lógica de agendamiento de citas médicas mediante API Routes de Next.js. Prisma como capa de datos para almacenar citas, pacientes y la gestión del panel de administración.',
+    stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'API Routes', 'Framer Motion', 'GSAP', 'Prisma', 'PostgreSQL', 'Docker'],
     isWebPage: true,
     inDevelopment: false,
     siteUrl: 'https://dra-camila-henao-web.vercel.app/',
