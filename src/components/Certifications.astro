@@ -3,6 +3,7 @@
 import { Image } from 'astro:assets';
 import crehanaImg from '../assets/Certificaciones/Crehana.jpg';
 import cunImg from '../assets/Certificaciones/CUN.jpg';
+import cloudImg from '../assets/Certificaciones/Cloud.png';
 ---
 
 <section id="certifications" class="cert-section">
@@ -51,6 +52,27 @@ import cunImg from '../assets/Certificaciones/CUN.jpg';
                 <p class="description" data-i18n="cert3_desc">
                     El curso Explorador de Talento Tech introduce los fundamentos del desarrollo web, incluyendo HTML y CSS básico, el desarrollo de lógica de programación con <strong>JavaScript (Nivel Intermedio)</strong> y la creación de proyectos prácticos.
                 </p>
+
+                <!-- Cert 3: Cloud Computing -->
+                <article class="cert-card cert-anim">
+                    <div class="cert-image-wrapper">
+                        <Image 
+                            src={cloudImg} 
+                            alt="Cloud Computing Certified Specialist" 
+                            class="cert-image" 
+                            format="png"
+                            quality="high"
+                        />
+                    </div>
+                    <div class="cert-info">
+                        <span class="cert-date" data-i18n="cert0_date">Agosto, 2026</span>
+                        <h3 data-i18n="cert0_title">Cloud Computing Certified Specialist</h3>
+                        <span class="entity" data-i18n="cert0_entity">Exacomit</span>
+                        <p class="description" data-i18n="cert0_desc">
+                            Certificación orientada a la comprensión del ecosistema cloud, incluyendo modelos de servicio como IaaS, PaaS y SaaS. Aprendí sobre infraestructura en la nube, escalabilidad de recursos y buenas prácticas básicas para administrar soluciones cloud de forma eficiente y segura.
+                        </p>
+                    </div>
+                </article>
             </div>
         </article>
 
