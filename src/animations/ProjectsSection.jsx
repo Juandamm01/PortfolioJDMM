@@ -41,6 +41,17 @@ export const PROJECTS = [
     siteUrl: 'https://bcas-iqax.vercel.app/',
     accent: '#5227ff',
   },
+  {
+    id: 'driveden',
+    folderLabel: 'DriveDen',
+    title: 'DriveDen',
+    description:
+      'DriveDen es una aplicación móvil desarrollada en React Native con Expo para la gestión inteligente de vehículos: control de combustible, mantenimientos, recordatorios y estadísticas, con un sistema de registro por voz asistido por IA. Trabajé en el desarrollo completo del frontend, consumiendo la API del backend e integrando toda la lógica de negocio para lograr una experiencia fluida, moderna y coherente en toda la aplicación.',
+    stack: ['React Native', 'Expo', 'TypeScript', 'Expo Router', 'Zustand', 'AsyncStorage'],
+    inDevelopment: false,
+    siteUrl: 'https://driveden.online/',
+    accent: '#4ade80',
+  },
 ];
 
 function ProjectModal({ project, onClose, isClosing }) {
