@@ -1,0 +1,180 @@
+---
+import Icon from '../ui/Icon.astro';
+import Portrait from '../ui/Portrait.astro';
+import WordPrism from '../ui/WordPrism.astro';
+import { useTranslations, type Lang } from '../../i18n/ui';
+import { profile } from '../../data/profile';
+
+type Props = { lang: Lang };
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class="hero" id="inicio" aria-labelledby="hero-name">
+  <div class="hero__grid wrap">
+    <div class="hero__copy">
+      <p class="hero__greeting intro" style="--d:0">{t.hero.greeting}</p>
+      <h1 class="hero__name" id="hero-name">
+        <span class="line"><span class="intro" style="--d:1">{profile.firstNames}</span></span>
+        <span class="line"><span class="intro" style="--d:2">{profile.lastNames}</span></span>
+      </h1>
+      <p class="hero__role intro" style="--d:3">{t.hero.role}</p>
+
+      <div class="hero__prism intro" style="--d:4">
+        <WordPrism lead={t.hero.flipLead} items={t.hero.flipItems} />
+      </div>
+
+      <p class="hero__summary intro" style="--d:5">{t.hero.summary}</p>
+
+      <div class="hero__actions intro" style="--d:6">
+        <ul class="hero__social">
+          <li>
+            <a class="icon-link" href={profile.linkedin.url} target="_blank" rel="noopener noreferrer">
+              <Icon name="linkedin" /><span class="visually-hidden">LinkedIn ({t.a11y.newTab})</span>
+            </a>
+          </li>
+          <li>
+            <a class="icon-link" href={profile.github.url} target="_blank" rel="noopener noreferrer">
+              <Icon name="github" /><span class="visually-hidden">GitHub ({t.a11y.newTab})</span>
+            </a>
+          </li>
+          <li>
+            <a class="icon-link" href={`mailto:${profile.email}`}>
+              <Icon name="mail" /><span class="visually-hidden">{t.contact.email}: {profile.email}</span>
+            </a>
+          </li>
+        </ul>
+        <a class="btn" href={t.hero.cvFile} download>
+          <Icon name="download" />{t.hero.cv}
+        </a>
+        <span class="hero__location">{t.hero.location}</span>
+      </div>
+    </div>
+
+    <div class="hero__stage intro intro--portrait" style="--d:2">
+      <Portrait alt={t.hero.portraitAlt} role={t.hero.role} />
+    </div>
+  </div>
+</section>
+
+<style>
+  /*
+    The hero fits the viewport at 100% zoom: type and portrait scale with the smaller of
+    width and height, so short laptop screens (1366×768) get a composition as complete as tall ones.
+  */
+  .hero {
+    --gap: clamp(0.7rem, 2.2vh, 1.5rem);
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding-block: calc(var(--nav-h) + 1.5rem) 2.5rem;
+  }
+
+  .hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.85fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 5rem);
+  }
+
+  .hero__greeting {
+    font-size: var(--step-1);
+    color: var(--muted);
+    margin-bottom: calc(var(--gap) * 0.4);
+  }
+
+  .hero__name {
+    font-size: clamp(2.5rem, min(6vw, 10.2vh), 6.3rem);
+    font-weight: 760;
+    line-height: 0.92;
+    letter-spacing: -0.05em;
+    margin-left: -0.04em;
+  }
+  .hero__name .line { display: block; overflow: hidden; padding-bottom: 0.06em; white-space: nowrap; }
+  .hero__name .line > span { display: inline-block; }
+
+  .hero__role {
+    margin-top: var(--gap);
+    font-size: clamp(1.25rem, min(1.9vw, 3.4vh), 2rem);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+
+  .hero__prism { margin-top: calc(var(--gap) * 0.9); }
+
+  .hero__summary {
+    max-width: 46ch;
+    margin-top: var(--gap);
+    color: var(--muted);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.9rem 1.2rem;
+    margin-top: calc(var(--gap) * 1.3);
+  }
+  .hero__social { display: flex; gap: 0.5rem; }
+  .icon-link {
+    display: grid;
+    place-items: center;
+    width: 2.9rem;
+    height: 2.9rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    transition: border-color 0.3s, transform 0.4s var(--ease-out);
+  }
+  .icon-link :global(svg) { width: 1.1rem; height: 1.1rem; fill: currentColor; }
+  @media (hover: hover) {
+    .icon-link:hover { border-color: var(--fg); transform: translateY(-2px); }
+  }
+  .hero__location { font-size: var(--step--1); color: var(--muted); }
+
+  /* Portrait height follows the free vertical space; width follows from the photo ratio. */
+  .hero__stage {
+    justify-self: center;
+    width: min(100%, 420px, calc((100svh - var(--nav-h) - 6rem) * 0.7467));
+  }
+
+  /* Page-load sequence: the only orchestrated entrance on the page. */
+  :global(.js:not(.reduced)) .intro {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+    animation: intro-rise 1.3s var(--ease-soft) forwards;
+    animation-delay: calc(var(--d) * 85ms + 120ms);
+  }
+  :global(.js:not(.reduced)) .hero__name .intro {
+    transform: translate3d(0, 100%, 0) rotateX(-32deg);
+    transform-origin: 50% 100%;
+    animation-duration: 1.45s;
+  }
+  :global(.js:not(.reduced)) .intro--portrait {
+    transform: none;
+    filter: none;
+    clip-path: inset(100% 0 0 0 round 200px 200px 6px 6px);
+    animation: intro-portrait 1.7s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    animation-delay: 200ms;
+  }
+  /* Desktop adds a gentle focus pull; phones skip the blur to keep the first paint cheap. */
+  @media (min-width: 1024px) and (hover: hover) {
+    :global(.js:not(.reduced)) .intro:not(.intro--portrait) { filter: blur(6px); }
+  }
+  @keyframes intro-rise {
+    to { opacity: 1; transform: none; filter: none; }
+  }
+  @keyframes intro-portrait {
+    0% { opacity: 1; clip-path: inset(100% 0 0 0 round 200px 200px 6px 6px); }
+    99% { opacity: 1; clip-path: inset(-20% -20% -20% -20% round 0); }
+    100% { opacity: 1; clip-path: none; }
+  }
+
+  @media (max-width: 860px) {
+    .hero { min-height: auto; padding-top: calc(var(--nav-h) + 1.75rem); }
+    .hero__grid { grid-template-columns: 1fr; gap: 2rem; }
+    .hero__stage { order: -1; width: min(66vw, 300px); }
+    .hero__name { font-size: min(10.4vw, 3.4rem); }
+    .hero__role { font-size: 1.3rem; }
+  }
+</style>

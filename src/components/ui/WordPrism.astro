@@ -1,0 +1,114 @@
+---
+type Props = { lead: string; items: string[] };
+const { lead, items } = Astro.props;
+---
+
+<!--
+  A four-sided prism that turns on its X axis to show the next area of work.
+  Faces are recycled, so any number of items can rotate. Screen readers get the full list.
+-->
+<p class="prism-line">
+  <span class="prism-line__lead">{lead}</span>
+  <span class="visually-hidden">{items.join(', ')}.</span>
+  <span class="prism" data-prism data-items={JSON.stringify(items)} aria-hidden="true">
+    <!-- Every item stacked invisibly: the prism takes the width of the longest one. -->
+    <span class="prism__sizer">{items.map((item) => <span>{item}</span>)}</span>
+    <span class="prism__body" data-prism-body>
+      {
+        [0, 1, 2, 3].map((face) => (
+          <span class="prism__face" data-face={face} style={`--face:${face}`}>
+            {items[face % items.length]}
+          </span>
+        ))
+      }
+    </span>
+  </span>
+</p>
+
+<style>
+  .prism-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem 0.9rem;
+    font-size: var(--step-1);
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .prism {
+    --h: 2.85rem;
+    position: relative;
+    display: inline-grid;
+    height: var(--h);
+    perspective: 520px;
+    perspective-origin: 50% 50%;
+    font-size: var(--step-1);
+  }
+
+  .prism__sizer {
+    display: grid;
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+  }
+  .prism__sizer span {
+    grid-area: 1 / 1;
+    padding-inline: 1.25rem;
+    font-weight: 650;
+    white-space: nowrap;
+  }
+
+  .prism__body {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    transform: translateZ(calc(var(--h) / -2)) rotateX(var(--turn, 0deg));
+    /* Anticipation and a soft overshoot give the turn some weight. */
+    transition: transform 0.95s cubic-bezier(0.68, -0.35, 0.27, 1.35);
+  }
+
+  .prism__face {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center start;
+    padding-inline: 1.25rem;
+    border-radius: 9px;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--surface) 100%, #fff 0%), color-mix(in srgb, var(--surface) 88%, var(--fg)));
+    color: var(--fg);
+    font-weight: 650;
+    letter-spacing: -0.015em;
+    white-space: nowrap;
+    box-shadow:
+      inset 0 0 0 1px var(--line),
+      inset 0 -2px 0 color-mix(in srgb, var(--brass-light) 55%, transparent);
+    backface-visibility: hidden;
+    transform: rotateX(calc(var(--face) * 90deg)) translateZ(calc(var(--h) / 2));
+  }
+  /* Faces that are turning away fall into shadow, like a real object under the light. */
+  .prism__face::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: rgb(8 11 20);
+    opacity: 0.55;
+    transition: opacity 0.95s var(--ease-out);
+  }
+  .prism__face.is-front::after { opacity: 0; }
+
+  /* Contact shadow under the prism. */
+  .prism::after {
+    content: '';
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    bottom: -12px;
+    height: 12px;
+    background: radial-gradient(50% 50% at 50% 0, rgb(10 14 25 / 0.28), transparent 70%);
+    pointer-events: none;
+  }
+
+  :global(.prism.is-turning) .prism__face { filter: blur(0.3px); }
+</style>

@@ -1,0 +1,146 @@
+---
+import Icon from '../ui/Icon.astro';
+import { useTranslations, type Lang } from '../../i18n/ui';
+import { profile } from '../../data/profile';
+
+type Props = { lang: Lang };
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const channels = [
+  { label: t.contact.email, value: profile.email, href: `mailto:${profile.email}`, icon: 'mail', external: false },
+  { label: t.contact.linkedin, value: profile.linkedin.handle, href: profile.linkedin.url, icon: 'linkedin', external: true },
+  { label: t.contact.github, value: profile.github.handle, href: profile.github.url, icon: 'github', external: true },
+] as const;
+---
+
+<section class="contact" id="contacto" data-mood="studio" aria-labelledby="contact-title">
+  <div class="wrap">
+    <h2 class="section-title" id="contact-title">{t.contact.title}</h2>
+    <p class="statement contact__statement" data-reveal>{t.contact.statement}</p>
+
+    <ul class="channels">
+      {
+        channels.map((c, i) => (
+          <li data-reveal style={`--i:${i}`}>
+            <a
+              class="channel"
+              href={c.href}
+              data-magnetic
+              {...(c.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            >
+              <span class="channel__label">
+                <Icon name={c.icon} />
+                {c.label}
+              </span>
+              <span class="channel__value">{c.value}</span>
+              <span class="channel__go" aria-hidden="true">
+                <Icon name="external" />
+              </span>
+              {c.external && <span class="visually-hidden">({t.a11y.newTab})</span>}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="contact__extra" data-reveal>
+      <a class="btn btn--ghost" href={t.hero.cvFile} download>
+        <Icon name="download" />{t.contact.cv}
+      </a>
+      <a class="contact__phone ink-link" href={profile.phone.href}>
+        <span class="visually-hidden">{t.contact.phone}: </span>{profile.phone.display}
+      </a>
+      <span class="contact__place">{t.hero.location}</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact { padding-block: var(--section) calc(var(--section) * 0.7); }
+  .contact__statement { max-width: 17ch; margin-top: 1.4rem; }
+
+  .channels {
+    margin-top: clamp(2.5rem, 6vw, 5rem);
+    border-top: 1px solid var(--line);
+  }
+  .channels li { border-bottom: 1px solid var(--line); }
+
+  .channel {
+    --tx: 0px;
+    --ty: 0px;
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(9rem, 0.6fr) minmax(0, 2fr) auto;
+    align-items: center;
+    gap: 1rem;
+    padding-block: clamp(1.2rem, 2.5vw, 2rem);
+    text-decoration: none;
+    isolation: isolate;
+  }
+  /* A sheet of light slides in behind the row on hover. */
+  .channel::before {
+    content: '';
+    position: absolute;
+    inset: 0 calc(-1 * var(--gutter));
+    z-index: -1;
+    background: var(--surface);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.55s var(--ease-out);
+  }
+  .channel__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: var(--step--1);
+    color: var(--muted);
+  }
+  .channel__label :global(svg) { width: 1rem; height: 1rem; fill: currentColor; }
+  .channel__value {
+    font-size: clamp(1.3rem, 0.6rem + 3.5vw, 3.6rem);
+    font-weight: 650;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    overflow-wrap: anywhere;
+    transform: translate3d(var(--tx), var(--ty), 0);
+    transition: transform 0.6s var(--ease-out);
+  }
+  .channel__go {
+    display: grid;
+    place-items: center;
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    transition: transform 0.6s var(--ease-out), background-color 0.4s, border-color 0.4s;
+  }
+  .channel__go :global(svg) { width: 1.1rem; height: 1.1rem; fill: currentColor; }
+
+  @media (hover: hover) {
+    .channel:hover::before { transform: scaleY(1); }
+    .channel:hover .channel__go {
+      background: var(--fg);
+      color: var(--bg);
+      border-color: var(--fg);
+      transform: rotate(45deg);
+    }
+  }
+  .channel:focus-visible { outline-offset: -2px; }
+
+  .contact__extra {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 2rem;
+    margin-top: 2.5rem;
+    color: var(--muted);
+  }
+  .contact__phone { color: var(--fg); }
+
+  @media (max-width: 640px) {
+    .channel { grid-template-columns: 1fr auto; row-gap: 0.4rem; }
+    .channel__label { grid-column: 1 / -1; }
+    .channel__go { width: 2.6rem; height: 2.6rem; }
+  }
+</style>

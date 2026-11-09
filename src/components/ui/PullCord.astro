@@ -1,0 +1,103 @@
+---
+type Props = { labelOff: string; labelOn: string };
+const { labelOff, labelOn } = Astro.props;
+---
+
+<!--
+  The site's only light switch: a cord hanging from the top edge next to the language selector.
+  Its motion (tension, release, swing) is simulated in scripts/cord.ts.
+-->
+<span class="cord-wrap">
+  <button
+    class="cord"
+    type="button"
+    data-cord
+    data-label-on={labelOff}
+    data-label-off={labelOn}
+    aria-label={labelOff}
+  >
+    <svg class="cord__svg" aria-hidden="true" focusable="false">
+      <path class="cord__string" data-cord-string d="M0 0"></path>
+    </svg>
+    <span class="cord__bead" data-cord-bead aria-hidden="true"></span>
+  </button>
+</span>
+
+<style>
+  .cord-wrap {
+    --cord-len: 58;
+    position: relative;
+    align-self: stretch;
+    width: 2.6rem;
+    flex: none;
+  }
+
+  .cord {
+    position: absolute;
+    inset: 0 0 auto;
+    height: calc(var(--cord-len) * 1px + 2.4rem);
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: grab;
+    touch-action: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .cord:active { cursor: grabbing; }
+  .cord:focus-visible { outline: none; }
+  .cord:focus-visible .cord__bead { outline: 2px solid var(--brass-light); outline-offset: 4px; }
+
+  .cord__svg {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 1px;
+    height: 1px;
+    overflow: visible;
+  }
+  .cord__string {
+    fill: none;
+    stroke: var(--fg);
+    stroke-width: 1.2;
+    stroke-linecap: round;
+    opacity: 0.7;
+  }
+
+  .cord__bead {
+    --bx: 0px;
+    --by: calc(var(--cord-len) * 1px);
+    --br: 0rad;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 13px;
+    height: 19px;
+    margin-left: -6.5px;
+    border-radius: 6.5px 6.5px 7px 7px;
+    background:
+      radial-gradient(circle at 35% 28%, #fff3cf 0 12%, transparent 30%),
+      linear-gradient(150deg, #ecd394, #c9a04e 45%, #8c6a25);
+    box-shadow: 0 5px 10px rgb(10 14 25 / 0.35), inset 0 -2px 3px rgb(0 0 0 / 0.25);
+    transform-origin: 50% 0;
+    transform: translate(var(--bx), var(--by)) rotate(var(--br));
+  }
+  /* A small knot where the cord meets the bead. */
+  .cord__bead::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -3px;
+    width: 5px;
+    height: 5px;
+    margin-left: -2.5px;
+    border-radius: 50%;
+    background: #8c6a25;
+  }
+  @media (hover: hover) {
+    .cord:hover .cord__bead { filter: brightness(1.12); }
+  }
+
+  @media (max-width: 860px) {
+    .cord-wrap { --cord-len: 42; width: 2.4rem; }
+  }
+</style>

@@ -1,0 +1,244 @@
+---
+import vader from '../../assets/brand/darth-vader.png';
+import PullCord from '../ui/PullCord.astro';
+import { homePath, useTranslations, type Alternates, type Lang } from '../../i18n/ui';
+import { profile } from '../../data/profile';
+
+type Props = { lang: Lang; alternates: Alternates; onHome: boolean };
+const { lang, alternates, onHome } = Astro.props;
+const t = useTranslations(lang);
+// On project pages the section links point back to the home page.
+const base = onHome ? '' : homePath(lang);
+
+const links = [
+  { id: 'sobre-mi', label: t.nav.about },
+  { id: 'trayectoria', label: t.nav.experience },
+  { id: 'proyectos', label: t.nav.projects },
+  { id: 'contacto', label: t.nav.contact },
+];
+const langs: Lang[] = ['es', 'en'];
+---
+
+<header class="site-header" data-header>
+  <div class="site-header__bar wrap">
+    <a class="brand" href={`${base}#inicio`} aria-label={t.a11y.home}>
+      <span class="brand__mark" style={`--logo:url(${vader.src})`} aria-hidden="true"></span>
+      <span class="brand__name">{profile.name}</span>
+    </a>
+
+    <nav class="site-nav" aria-label={t.a11y.main} id="site-nav">
+      <ul class="site-nav__list">
+        {
+          links.map((link, i) => (
+            <li style={`--i:${i}`}>
+              <a class="site-nav__link" href={`${base}#${link.id}`} data-nav-link={link.id}>
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="site-header__tools">
+      <div class="lang-switch" role="group" aria-label={t.a11y.language}>
+        {
+          langs.map((code) => (
+            <a
+              href={alternates[code]}
+              hreflang={code}
+              lang={code}
+              data-lang-link={code}
+              aria-current={code === lang ? 'true' : undefined}
+            >
+              {code.toUpperCase()}
+            </a>
+          ))
+        }
+      </div>
+      <PullCord labelOff={t.a11y.lightsOff} labelOn={t.a11y.lightsOn} />
+      <button
+        class="menu-btn"
+        type="button"
+        data-menu-toggle
+        aria-expanded="false"
+        aria-controls="site-nav"
+        data-label-open={t.a11y.menuOpen}
+        data-label-close={t.a11y.menuClose}
+        aria-label={t.a11y.menuOpen}
+      >
+        <span class="menu-btn__lines" aria-hidden="true"><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 50;
+    height: var(--nav-h);
+    transition: background-color 0.5s, box-shadow 0.5s;
+  }
+  .site-header.is-scrolled {
+    background-color: color-mix(in srgb, var(--bg) 80%, transparent);
+    box-shadow: 0 1px 0 var(--line);
+    backdrop-filter: blur(14px) saturate(1.2);
+    -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  }
+  :global(.lite) .site-header.is-scrolled {
+    background-color: color-mix(in srgb, var(--bg) 96%, transparent);
+    backdrop-filter: none;
+  }
+
+  .site-header__bar {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    min-width: 0;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    perspective: 300px;
+  }
+  /* The recovered Darth Vader helmet, used as a mask so it takes the theme's ink colour. */
+  .brand__mark {
+    width: 2rem;
+    height: 2rem;
+    flex: none;
+    background: var(--fg);
+    -webkit-mask: var(--logo) center / contain no-repeat;
+    mask: var(--logo) center / contain no-repeat;
+    transition: transform 0.7s var(--ease-out), background-color 0.4s;
+  }
+  @media (hover: hover) {
+    .brand:hover .brand__mark { transform: rotateY(-25deg) translateZ(8px); background: var(--brass); }
+  }
+  .brand__name { font-size: 0.96rem; white-space: nowrap; }
+
+  .site-nav__list { display: flex; gap: 0.25rem; }
+  .site-nav__link {
+    position: relative;
+    display: inline-block;
+    padding: 0.5rem 0.85rem;
+    text-decoration: none;
+    font-size: 0.93rem;
+    font-weight: 500;
+    color: var(--muted);
+    transition: color 0.3s;
+  }
+  .site-nav__link::after {
+    content: '';
+    position: absolute;
+    left: 0.85rem;
+    right: 0.85rem;
+    bottom: 0.3rem;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.45s var(--ease-out);
+  }
+  .site-nav__link:hover,
+  .site-nav__link[aria-current='true'] { color: var(--fg); }
+  .site-nav__link:hover::after,
+  .site-nav__link[aria-current='true']::after { transform: scaleX(1); transform-origin: left; }
+
+  .site-header__tools {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .lang-switch {
+    display: inline-flex;
+    padding: 0.2rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+  }
+  .lang-switch a {
+    display: grid;
+    place-items: center;
+    min-width: 2.4rem;
+    min-height: 2rem;
+    padding: 0 0.55rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--muted);
+    transition: color 0.3s, background-color 0.3s;
+  }
+  .lang-switch a[aria-current='true'] { background: var(--fg); color: var(--bg); }
+  .lang-switch a:not([aria-current]):hover { color: var(--fg); }
+
+  .menu-btn {
+    display: none;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: transparent;
+    cursor: pointer;
+  }
+  .menu-btn__lines { display: grid; gap: 5px; width: 16px; }
+  .menu-btn__lines span {
+    height: 1.5px;
+    background: currentColor;
+    transition: transform 0.4s var(--ease-out);
+  }
+  .menu-btn[aria-expanded='true'] .menu-btn__lines span:first-child { transform: translateY(3.25px) rotate(45deg); }
+  .menu-btn[aria-expanded='true'] .menu-btn__lines span:last-child { transform: translateY(-3.25px) rotate(-45deg); }
+
+  @media (max-width: 1180px) {
+    .brand__name { display: none; }
+  }
+
+  @media (max-width: 860px) {
+    .menu-btn { display: grid; }
+    .site-nav {
+      position: fixed;
+      inset: var(--nav-h) 0 auto;
+      height: calc(100dvh - var(--nav-h));
+      padding: 2rem var(--gutter);
+      background: var(--bg);
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: opacity 0.35s var(--ease-out), transform 0.45s var(--ease-out), visibility 0s 0.45s;
+    }
+    .site-nav.is-open {
+      visibility: visible;
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.35s var(--ease-out), transform 0.45s var(--ease-out);
+    }
+    .site-nav__list { flex-direction: column; gap: 0.25rem; }
+    .site-nav__link {
+      padding: 0.6rem 0;
+      font-family: var(--font-serif);
+      font-size: clamp(2.2rem, 10vw, 3rem);
+      line-height: 1.1;
+      color: var(--fg);
+    }
+    .site-nav__link::after { display: none; }
+    .site-nav.is-open li {
+      animation: menu-in 0.6s var(--ease-out) both;
+      animation-delay: calc(var(--i) * 60ms + 80ms);
+    }
+  }
+  @keyframes menu-in {
+    from { opacity: 0; transform: translateY(14px); }
+  }
+</style>

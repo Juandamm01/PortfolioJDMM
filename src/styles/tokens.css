@@ -1,0 +1,97 @@
+/*
+  Design tokens.
+  Two lighting moods: "studio" (light, cool blue-grey backdrop taken from the portrait)
+  and "night" (deep pinstripe navy). Colour tokens are registered with @property so the
+  whole page can cross-fade between moods instead of snapping.
+*/
+@property --bg { syntax: '<color>'; inherits: true; initial-value: #e3e8ee; }
+@property --surface { syntax: '<color>'; inherits: true; initial-value: #f2f4f7; }
+@property --fg { syntax: '<color>'; inherits: true; initial-value: #141a2b; }
+@property --muted { syntax: '<color>'; inherits: true; initial-value: #535e72; }
+@property --line { syntax: '<color>'; inherits: true; initial-value: rgb(20 26 43 / 0.14); }
+@property --brass { syntax: '<color>'; inherits: true; initial-value: #7f611f; }
+@property --brass-light { syntax: '<color>'; inherits: true; initial-value: #c9a04e; }
+@property --day { syntax: '<number>'; inherits: true; initial-value: 1; }
+@property --glow { syntax: '<color>'; inherits: true; initial-value: #23407f; }
+
+:root {
+  /* Palette */
+  --studio: #e3e8ee;
+  --paper: #f2f4f7;
+  --pinstripe: #141a2b;
+  --midnight: #0c111d;
+  --brass-ink: #7f611f;
+  --brass-leaf: #c9a04e;
+
+  /* Studio mood (default) */
+  --bg: var(--studio);
+  --surface: var(--paper);
+  --fg: var(--pinstripe);
+  --muted: #535e72;
+  --line: rgb(20 26 43 / 0.14);
+  --brass: var(--brass-ink);
+  --brass-light: var(--brass-leaf);
+  --day: 1;
+
+  /* Type */
+  --font-sans: 'Schibsted Grotesk Variable', 'Segoe UI', system-ui, sans-serif;
+  --font-serif: 'Instrument Serif', 'Times New Roman', serif;
+  --step--1: clamp(0.82rem, 0.8rem + 0.1vw, 0.88rem);
+  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+  --step-1: clamp(1.2rem, 1.1rem + 0.45vw, 1.45rem);
+  --step-2: clamp(1.5rem, 1.25rem + 1.1vw, 2.2rem);
+  --step-3: clamp(2.1rem, 1.5rem + 2.8vw, 4.1rem);
+  --step-4: clamp(3.1rem, 1.6rem + 7vw, 8.6rem);
+
+  /* Space & layout */
+  --gutter: clamp(1rem, 0.5rem + 2.4vw, 2.75rem);
+  --section: clamp(5rem, 3.5rem + 6vw, 9rem);
+  --max: 1240px;
+  --nav-h: 4.25rem;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-door: cubic-bezier(0.22, 0.9, 0.24, 1);
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --mood-duration: 1.2s;
+
+  transition:
+    --bg var(--mood-duration) var(--ease-out),
+    --surface var(--mood-duration) var(--ease-out),
+    --fg var(--mood-duration) var(--ease-out),
+    --muted var(--mood-duration) var(--ease-out),
+    --line var(--mood-duration) var(--ease-out),
+    --brass var(--mood-duration) var(--ease-out),
+    --brass-light var(--mood-duration) var(--ease-out),
+    --day var(--mood-duration) var(--ease-out),
+    --glow 1.6s var(--ease-out);
+}
+
+/* Night mood: only the light cord switches it, so every section shares one ambient. */
+:root.lights-off {
+  --bg: var(--midnight);
+  --surface: #151c2c;
+  --fg: #e7eaf0;
+  --muted: #9aa4b7;
+  --line: rgb(231 234 240 / 0.13);
+  --brass: #d6b26a;
+  --brass-light: #dcb873;
+  --day: 0;
+  color-scheme: dark;
+}
+
+:root.reduced,
+:root.theme-swapping { --mood-duration: 0s; }
+
+/*
+  Theme swap: when the browser supports view transitions, the new lighting is revealed
+  as a circle of light that grows from the cord (--cord-x / --cord-y set by the script).
+*/
+:root.theme-swapping::view-transition-old(root) { animation: none; }
+:root.theme-swapping::view-transition-new(root) {
+  animation: light-reveal 0.95s cubic-bezier(0.7, 0, 0.2, 1) both;
+}
+@keyframes light-reveal {
+  from { clip-path: circle(0 at var(--cord-x, 100%) var(--cord-y, 0)); }
+  to { clip-path: circle(150vmax at var(--cord-x, 100%) var(--cord-y, 0)); }
+}

@@ -1,0 +1,62 @@
+---
+// Fixed lighting rig behind every section. Its layers cross-fade with the --day token,
+// so the page moves between studio light and night instead of switching a colour.
+---
+
+<div class="stage" aria-hidden="true">
+  <div class="stage__daylight"></div>
+  <div class="stage__night"></div>
+  <div class="stage__spot"></div>
+  <div class="stage__grain"></div>
+</div>
+
+<style>
+  .stage {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: var(--bg);
+    overflow: hidden;
+  }
+  .stage > div { position: absolute; inset: 0; }
+
+  /* Soft window light from the upper right, like a photo studio backdrop. */
+  .stage__daylight {
+    opacity: var(--day);
+    background:
+      radial-gradient(70% 60% at 78% 8%, rgb(255 255 255 / 0.85), transparent 70%),
+      radial-gradient(50% 50% at 0% 100%, rgb(176 190 210 / 0.45), transparent 75%),
+      linear-gradient(180deg, #e9edf2 0%, #dfe5ec 100%);
+  }
+
+  /* Night: a coloured ambient glow that each timeline entry can tint. */
+  .stage__night {
+    opacity: calc(1 - var(--day));
+    background:
+      radial-gradient(55% 45% at 20% 30%, color-mix(in srgb, var(--glow) 55%, transparent), transparent 72%),
+      radial-gradient(45% 40% at 90% 90%, rgb(201 160 78 / 0.12), transparent 70%),
+      linear-gradient(180deg, #0d1322 0%, #0a0e18 100%);
+  }
+
+  /* Cursor-following light, only visible at night on precise pointers. */
+  .stage__spot {
+    opacity: 0;
+    background: radial-gradient(
+      380px circle at var(--mx, 50%) var(--my, 40%),
+      rgb(220 228 255 / 0.07),
+      transparent 70%
+    );
+    transition: opacity 0.8s;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    :global(:root.lights-off) .stage__spot { opacity: 1; }
+  }
+
+  .stage__grain {
+    opacity: 0.06;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  :global(.lite) .stage__grain { display: none; }
+</style>

@@ -1,0 +1,158 @@
+---
+import Door from '../ui/Door.astro';
+import { projects } from '../../data/projects';
+import { useTranslations, type Lang } from '../../i18n/ui';
+
+type Props = { lang: Lang };
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class="projects" id="proyectos" aria-labelledby="projects-title" data-projects>
+  <div class="wrap projects__head">
+    <h2 class="section-title" id="projects-title">{t.projects.title}</h2>
+    <p class="statement" data-reveal>{t.projects.statement}</p>
+    <p class="projects__hint projects__hint--pointer" data-reveal style="--i:1">{t.projects.hint}</p>
+    <p class="projects__hint projects__hint--touch" data-reveal style="--i:1">{t.projects.hintTouch}</p>
+  </div>
+
+  <!-- On phones this wrapper provides the scroll distance while the hall stays pinned. -->
+  <div class="hall-pin" data-hall-pin style={`--doors:${projects.length}`}>
+    <div class="hall" data-hall>
+      <ul class="hall__doors" data-tilt-stage data-reveal-group data-carousel>
+        {projects.map((project, index) => <Door project={project} lang={lang} index={index} />)}
+      </ul>
+      <div class="hall__floor" aria-hidden="true"></div>
+      <div class="hall__dots" aria-hidden="true">
+        {projects.map((_, i) => <span class:list={['hall__dot', { 'is-current': i === 0 }]} data-carousel-dot={i} />)}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects {
+    padding-block: var(--section);
+    overflow: clip;
+  }
+  /* While a door is being entered, the whole section is pushed towards the camera. */
+  .projects.is-entering {
+    transition: transform 0.85s cubic-bezier(0.7, 0, 0.84, 0), filter 0.85s ease-in;
+    transform: scale(var(--zoom, 2.6));
+    transform-origin: var(--zx, 50%) var(--zy, 50%);
+    filter: brightness(1.15);
+  }
+
+  .projects__head {
+    display: grid;
+    gap: 1.4rem;
+    margin-bottom: clamp(3rem, 7vw, 6rem);
+  }
+  .projects__head .statement { max-width: 15ch; }
+  .projects__hint { max-width: 44ch; color: var(--muted); }
+  .projects__hint--touch { display: none; }
+  @media (hover: none) {
+    .projects__hint--pointer { display: none; }
+    .projects__hint--touch { display: block; }
+  }
+
+  /* The hall: doors stand on a shared floor; the wall leans slightly with the cursor. */
+  .hall {
+    position: relative;
+    perspective: 1600px;
+  }
+  .hall__doors {
+    --rx: 0deg;
+    --ry: 0deg;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: clamp(1.25rem, 3vw, 2.75rem);
+    width: min(100% - 2 * var(--gutter), var(--max));
+    margin-inline: auto;
+    padding-top: 1.5rem;
+    transform: rotateX(var(--rx)) rotateY(var(--ry));
+    transition: transform 1s var(--ease-out);
+  }
+  .hall__floor {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(100% - 7.5rem);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--line) 15%, var(--line) 85%, transparent);
+    pointer-events: none;
+    z-index: -1;
+  }
+  .hall__dots { display: none; }
+
+  /*
+    Tablets and phones: a horizontal walk past the doors. Each door keeps its size,
+    snaps to the centre, and the next one peeks in from the edge.
+  */
+  @media (max-width: 1080px) {
+    .hall { perspective: none; }
+    .hall__doors {
+      justify-content: flex-start;
+      gap: 1.5rem;
+      width: 100%;
+      /* Percentages resolve against the hall, so the current door sits exactly in the middle. */
+      padding: 1.5rem calc(50% - var(--unit) / 2) 1rem;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      transform: none;
+      --unit: min(62vw, 250px);
+    }
+    .hall__doors::-webkit-scrollbar { display: none; }
+    .hall__doors :global(.door-unit) {
+      --w: calc(var(--unit) - 4rem);
+      width: var(--unit);
+      scroll-snap-align: center;
+      display: grid;
+      justify-items: center;
+    }
+    .hall__floor { display: none; }
+    .hall__dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .hall__dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 99px;
+      background: var(--line);
+      transition: width 0.4s var(--ease-out), background-color 0.4s;
+    }
+    .hall__dot.is-current { width: 22px; background: var(--brass-light); }
+  }
+
+  /*
+    Phones: vertical scroll drives the doors horizontally, one door per step.
+    The hall is pinned under the header while the wrapper provides ~55svh of scroll per door;
+    after the last door the page continues normally. (html.doors-pinned is set by scripts/doors.ts.)
+  */
+  @media (max-width: 860px) {
+    /* Phones: smaller doors so a whole door, its caption and the dots fit comfortably. */
+    .hall__doors { --unit: min(52vw, 210px); }
+    .hall__doors :global(.door-unit) { --w: calc(var(--unit) - 5rem); }
+    :global(html.doors-pinned) .hall-pin { height: calc(100svh + (var(--doors) - 1) * 55svh); }
+    :global(html.doors-pinned) .hall {
+      position: sticky;
+      top: var(--nav-h);
+      height: calc(100svh - var(--nav-h));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    :global(html.doors-pinned) .hall__doors {
+      overflow: visible;
+      scroll-snap-type: none;
+      transform: translate3d(var(--track-x, 0px), 0, 0);
+      transition: transform 0.75s var(--ease-door);
+    }
+  }
+</style>

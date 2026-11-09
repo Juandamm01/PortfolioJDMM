@@ -1,0 +1,139 @@
+---
+import { Picture } from 'astro:assets';
+import portrait from '../../assets/images/juan-david-martinez.jpg';
+import { profile } from '../../data/profile';
+
+type Props = { alt: string; role: string };
+const { alt, role } = Astro.props;
+---
+
+<!--
+  The portrait is framed as an arched doorway: the same silhouette as the project doors.
+  Layers sit at different depths and the rig tilts slightly with the cursor; the photo
+  itself is never scaled or skewed.
+-->
+<figure class="portrait" data-tilt data-tilt-max="6">
+  <div class="portrait__rig">
+    <div class="portrait__shadow" aria-hidden="true"></div>
+    <div class="portrait__jamb" aria-hidden="true"></div>
+    <div class="portrait__photo">
+      <Picture
+        src={portrait}
+        alt={alt}
+        formats={['avif', 'webp']}
+        widths={[360, 540, 720, 896]}
+        sizes="(max-width: 860px) 78vw, 420px"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <span class="portrait__glare" aria-hidden="true"></span>
+    </div>
+    <figcaption class="portrait__plate">
+      <span class="portrait__plate-name">{profile.name}</span>
+      <span class="portrait__plate-role">{role}</span>
+    </figcaption>
+  </div>
+</figure>
+
+<style>
+  .portrait {
+    --rx: 0deg;
+    --ry: 0deg;
+    --px: 50%;
+    --py: 30%;
+    position: relative;
+    width: 100%;
+    perspective: 1100px;
+  }
+
+  .portrait__rig {
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(var(--rx)) rotateY(var(--ry));
+    transition: transform 0.9s var(--ease-out);
+  }
+  .portrait[data-tilting] .portrait__rig { transition-duration: 0.25s; }
+
+  .portrait__photo,
+  .portrait__jamb,
+  .portrait__shadow {
+    border-radius: 50% 50% 6px 6px / 37% 37% 6px 6px;
+  }
+
+  .portrait__photo {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 896 / 1200;
+    background: #dfe6ee;
+    transform: translateZ(0);
+    box-shadow: 0 0 0 1px rgb(20 26 43 / 0.08);
+  }
+  .portrait__photo :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.96) contrast(1.02);
+  }
+
+  /* Frame behind the photo: the doorway jamb, pushed back in depth. */
+  .portrait__jamb {
+    position: absolute;
+    inset: -14px -14px 0;
+    transform: translateZ(-40px);
+    border: 1px solid color-mix(in srgb, var(--brass-light) 65%, transparent);
+    background: linear-gradient(160deg, color-mix(in srgb, var(--surface) 70%, transparent), transparent 60%);
+  }
+
+  .portrait__shadow {
+    position: absolute;
+    inset: 8% 4% -2%;
+    transform: translateZ(-90px) translateY(24px);
+    background: rgb(20 26 43 / 0.35);
+    filter: blur(36px);
+    opacity: calc(0.4 + var(--day) * 0.4);
+  }
+
+  /* A soft light sheen that follows the pointer. */
+  .portrait__glare {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(60% 45% at var(--px) var(--py), rgb(255 255 255 / 0.22), transparent 70%);
+    mix-blend-mode: soft-light;
+    opacity: 0;
+    transition: opacity 0.6s;
+  }
+  .portrait[data-tilting] .portrait__glare { opacity: 1; }
+
+  /* Brass nameplate floating in front of the photo, like the plates on the doors. */
+  .portrait__plate {
+    position: absolute;
+    left: 50%;
+    bottom: 1.4rem;
+    display: grid;
+    gap: 0.1rem;
+    padding: 0.6rem 1.1rem 0.65rem;
+    border-radius: 6px;
+    text-align: center;
+    white-space: nowrap;
+    color: #2b2210;
+    background: linear-gradient(135deg, #e7cd8b 0%, #c9a04e 45%, #a9822f 100%);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.55),
+      inset 0 -1px 0 rgb(0 0 0 / 0.2),
+      0 18px 30px -12px rgb(20 26 43 / 0.55);
+    transform: translateX(-50%) translateZ(60px);
+  }
+  .portrait__plate-name { font-weight: 700; font-size: 0.92rem; letter-spacing: -0.005em; }
+  .portrait__plate-role { font-size: 0.72rem; font-weight: 500; opacity: 0.8; }
+
+  /* Lights off: a warm rim light separates the portrait from the dark room. */
+  .portrait__photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 1px rgb(220 184 115 / 0.35), inset 0 -80px 120px -60px rgb(12 17 29 / 0.55);
+    opacity: calc(1 - var(--day));
+    pointer-events: none;
+  }
+</style>

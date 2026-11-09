@@ -1,0 +1,306 @@
+---
+import { Picture } from 'astro:assets';
+import cutout from '../../assets/images/desarrollador-cutout.png';
+import { useTranslations, type Lang } from '../../i18n/ui';
+
+type Props = { lang: Lang };
+const t = useTranslations(Astro.props.lang);
+---
+
+<!--
+  Desktop: a sticky stage scrubbed by scroll (scripts/scenes.ts) — entrance, depth, a slow camera
+  zoom, the composition sliding right, then a downward exit into the next section.
+  Mobile and reduced motion: the same content in normal flow.
+-->
+<section class="about" id="sobre-mi" aria-labelledby="about-title" data-about>
+  <div class="about__stage" data-about-stage>
+    <div class="about__floor" data-about-floor aria-hidden="true"></div>
+
+    <div class="about__inner wrap" data-about-inner>
+      <div class="about__copy">
+        <h2 class="section-title" id="about-title" data-about-reveal>{t.about.title}</h2>
+        <p class="statement about__statement" data-about-reveal>{t.about.statement}</p>
+        <div class="about__body">
+          {t.about.body.map((paragraph) => <p data-about-reveal>{paragraph}</p>)}
+        </div>
+      </div>
+
+      <figure class="about__figure" data-about-figure>
+        <span class="about__halo" data-about-halo aria-hidden="true"></span>
+        <Picture
+          src={cutout}
+          alt={t.about.figureAlt}
+          formats={['avif', 'webp']}
+          widths={[420, 665]}
+          sizes="(max-width: 1023px) 86vw, 46vw"
+          loading="lazy"
+          class="about__photo"
+        />
+        <span class="about__shadow" aria-hidden="true"></span>
+
+        <!-- Easter egg: the headphones in the photo (and the vinyl) play/pause the track. -->
+        <button class="headphones-hit" type="button" data-audio-toggle tabindex="-1" aria-hidden="true"></button>
+        <button
+          class="egg egg--music"
+          type="button"
+          data-audio-toggle
+          data-audio-src="/audio/how-to-pray.mp3"
+          data-label-play={t.about.musicPlay}
+          data-label-pause={t.about.musicPause}
+          data-label-error={t.about.musicError}
+          aria-pressed="false"
+          aria-label={t.about.musicPlay}
+        >
+          <span class="vinyl" aria-hidden="true"><span class="vinyl__label">K.DOT</span></span>
+          <span class="eq" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+          <span class="egg__tip" aria-hidden="true" data-audio-tip>{t.about.music}</span>
+        </button>
+      </figure>
+    </div>
+
+    <!-- Easter egg: a fine web in the corner, with one red and one blue thread. -->
+    <span class="egg egg--web" tabindex="0" role="note" aria-label={t.about.web}>
+      <svg viewBox="0 0 120 120" aria-hidden="true">
+        <g class="web__spokes">
+          <path d="M0 0 L120 6" /><path d="M0 0 L112 46" /><path d="M0 0 L86 86" />
+          <path d="M0 0 L46 112" /><path d="M0 0 L6 120" />
+        </g>
+        <g class="web__rings">
+          <path d="M28 1.4 Q25 12 26 10.8 Q22 20 19.8 19.8 Q12 22 10.8 26 Q4 26 1.4 28" />
+          <path d="M56 2.8 Q50 22 51.7 21 Q42 38 39.6 39.6 Q22 44 21 51.7 Q8 52 2.8 56" />
+          <path class="web__red" d="M84 4.2 Q75 33 77.6 31.5 Q63 57 59.4 59.4 Q33 66 31.5 77.6 Q12 78 4.2 84" />
+          <path class="web__blue" d="M110 5.5 Q100 44 101.6 41.2 Q83 74 77.8 77.8 Q44 86 41.2 101.6 Q16 102 5.5 110" />
+        </g>
+      </svg>
+      <span class="egg__tip" aria-hidden="true">{t.about.web}</span>
+    </span>
+  </div>
+</section>
+
+<style>
+  .about { position: relative; padding-block: var(--section); }
+
+  .about__stage { position: relative; }
+
+  .about__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 5rem);
+  }
+
+  .about__copy { display: grid; gap: 1.4rem; position: relative; z-index: 2; }
+  .about__statement { max-width: 17ch; }
+  .about__body {
+    display: grid;
+    gap: 1.1rem;
+    max-width: 54ch;
+    color: var(--muted);
+    font-size: var(--step-1);
+    line-height: 1.55;
+  }
+  .about__body p:first-child { color: var(--fg); }
+
+  .about__figure {
+    position: relative;
+    justify-self: center;
+    width: min(100%, 560px);
+    transform-style: preserve-3d;
+  }
+  .about__figure :global(.about__photo) {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 30px 40px rgb(10 14 25 / 0.28));
+  }
+  /* Studio light behind the figure. */
+  .about__halo {
+    position: absolute;
+    inset: 4% 6% 14%;
+    border-radius: 50%;
+    background:
+      radial-gradient(closest-side, color-mix(in srgb, var(--brass-light) 34%, transparent), transparent 75%),
+      radial-gradient(closest-side at 70% 40%, rgb(120 150 220 / 0.25), transparent 80%);
+    filter: blur(10px);
+  }
+  .about__shadow {
+    position: absolute;
+    left: 14%;
+    right: 14%;
+    bottom: -2%;
+    height: 7%;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgb(10 14 25 / 0.35), transparent);
+  }
+
+  /* Perspective floor that gives the stage a sense of depth. */
+  .about__floor {
+    position: absolute;
+    left: -10%;
+    right: -10%;
+    bottom: -8%;
+    height: 60%;
+    transform: perspective(700px) rotateX(72deg);
+    transform-origin: 50% 100%;
+    background:
+      linear-gradient(to top, transparent, var(--bg) 85%),
+      repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 80px),
+      repeating-linear-gradient(0deg, var(--line) 0 1px, transparent 1px 80px);
+    -webkit-mask-image: radial-gradient(70% 90% at 50% 100%, #000 30%, transparent 75%);
+    mask-image: radial-gradient(70% 90% at 50% 100%, #000 30%, transparent 75%);
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  /* ---------- Easter eggs: quiet until explored ---------- */
+  .egg { position: absolute; z-index: 3; outline-offset: 6px; }
+  .egg__tip {
+    position: absolute;
+    white-space: nowrap;
+    padding: 0.4rem 0.7rem;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--bg);
+    background: var(--fg);
+    opacity: 0;
+    transform: translateY(6px) rotateX(-30deg);
+    transform-origin: 50% 0;
+    transition: opacity 0.35s, transform 0.5s var(--ease-out);
+    pointer-events: none;
+  }
+  .egg:hover .egg__tip,
+  .egg:focus-visible .egg__tip { opacity: 1; transform: none; }
+
+  .egg--web {
+    top: 0;
+    left: max(0px, calc((100% - var(--max)) / 2 - 3rem));
+    width: 110px;
+    height: 110px;
+    color: var(--fg);
+  }
+  .egg--web svg { width: 100%; height: 100%; overflow: visible; }
+  .egg--web path { fill: none; stroke: currentColor; stroke-width: 0.7; opacity: 0.3; transition: opacity 0.5s; }
+  .egg--web .web__red { stroke: #c8343a; opacity: 0.55; }
+  .egg--web .web__blue { stroke: #2f5bd0; opacity: 0.55; }
+  .egg--web:hover path,
+  .egg--web:focus-visible path { opacity: 0.5; }
+  .egg--web .egg__tip { left: 70px; top: 70px; }
+
+  .egg--music {
+    right: 2%;
+    bottom: 22%;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.3rem;
+    border: 0;
+    border-radius: 999px;
+    background: none;
+    color: inherit;
+    cursor: pointer;
+  }
+  /* Invisible hit area over the headphones in the photo. */
+  .headphones-hit {
+    position: absolute;
+    z-index: 2;
+    left: 24%;
+    top: 26%;
+    width: 18%;
+    height: 12%;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: none;
+    cursor: pointer;
+  }
+  .vinyl {
+    position: relative;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle, #c8343a 0 26%, transparent 27%),
+      repeating-radial-gradient(circle, #121318 0 1.4px, #23252c 1.4px 2.4px);
+    box-shadow: 0 6px 14px rgb(0 0 0 / 0.35);
+    animation: vinyl-spin 6s linear infinite paused;
+  }
+  .vinyl__label {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-size: 4.5px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: #fff;
+  }
+  .vinyl::after {
+    content: '';
+    position: absolute;
+    inset: calc(50% - 1.5px);
+    border-radius: 50%;
+    background: #0c0d11;
+  }
+  .eq { display: flex; align-items: flex-end; gap: 2px; height: 14px; opacity: 0; transition: opacity 0.3s; }
+  .eq span { width: 2px; height: 30%; background: #c8343a; animation: eq 0.9s ease-in-out infinite paused; }
+  .eq span:nth-child(2) { animation-delay: -0.3s; }
+  .eq span:nth-child(3) { animation-delay: -0.6s; background: var(--fg); }
+  .eq span:nth-child(4) { animation-delay: -0.15s; }
+  .egg--music:hover .vinyl,
+  .egg--music:focus-visible .vinyl,
+  .egg--music:hover .eq span,
+  .egg--music:focus-visible .eq span,
+  .egg--music.is-playing .vinyl,
+  .egg--music.is-playing .eq span { animation-play-state: running; }
+  .egg--music:hover .eq,
+  .egg--music:focus-visible .eq,
+  .egg--music.is-playing .eq { opacity: 1; }
+  .egg--music.is-playing .vinyl { box-shadow: 0 0 0 3px color-mix(in srgb, #c8343a 45%, transparent), 0 6px 14px rgb(0 0 0 / 0.35); }
+  .egg--music.has-error .egg__tip { opacity: 1; transform: none; }
+  .egg--music .egg__tip { right: 0; top: calc(100% + 0.4rem); }
+  @keyframes vinyl-spin { to { transform: rotate(1turn); } }
+  @keyframes eq { 0%, 100% { height: 25%; } 50% { height: 100%; } }
+
+  /* ---------- Desktop: contained proportions (what 75 % zoom used to show) ---------- */
+  @media (min-width: 1024px) {
+    .about__inner {
+      width: min(100% - 2 * var(--gutter), 1000px);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+      gap: clamp(2rem, 3.5vw, 3.5rem);
+    }
+    .about__copy { gap: 1.05rem; }
+    .about__statement { font-size: clamp(2rem, 1.1rem + 1.6vw, 3.1rem); }
+    .about__body { font-size: var(--step-0); max-width: 46ch; gap: 0.85rem; }
+    .about__figure { width: min(100%, 420px); }
+  }
+
+  /* ---------- Desktop scroll scene ---------- */
+  @media (min-width: 1024px) {
+    :global(html.scenes) .about { height: 270vh; padding-block: 0; }
+    :global(html.scenes) .about__stage {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      perspective: 1400px;
+    }
+    :global(html.scenes) .about__inner { padding-top: var(--nav-h); }
+    :global(html.scenes) .about__figure { width: min(100%, 420px, 50vh); }
+    :global(html.scenes) [data-about-reveal] { opacity: 0; }
+    :global(html.scenes) .egg--web { top: calc(var(--nav-h) + 1rem); }
+  }
+
+  @media (max-width: 1023px) {
+    .about__inner { grid-template-columns: 1fr; }
+    .about__figure { order: -1; width: min(88vw, 460px); }
+    .about__floor { display: none; }
+    .egg--web { top: 0; left: auto; right: 0; width: 72px; height: 72px; }
+    .egg--web svg { transform: scaleX(-1); }
+    .egg--web .egg__tip { left: auto; right: 0; top: 100%; }
+    .egg--music { bottom: 8%; }
+  }
+</style>

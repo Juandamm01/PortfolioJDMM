@@ -1,0 +1,275 @@
+---
+import { Image } from 'astro:assets';
+import Icon from '../ui/Icon.astro';
+import { projects, type Project } from '../../data/projects';
+import { pick } from '../../data/localized';
+import { homePath, projectPath, useTranslations, type Lang } from '../../i18n/ui';
+
+type Props = { project: Project; lang: Lang };
+const { project, lang } = Astro.props;
+const t = useTranslations(lang);
+const study = project.featured;
+const next = projects[(projects.findIndex((p) => p.id === project.id) + 1) % projects.length];
+---
+
+<article class="project" style={`--paint:${project.paint.base};--shade:${project.paint.shade}`}>
+  <div class="wrap project__top">
+    <a class="project__back" href={`${homePath(lang)}#proyectos`}>
+      <Icon name="arrowUp" class="project__back-icon" />
+      {t.projects.back}
+    </a>
+  </div>
+
+  <header class="wrap project__head">
+    <p class="project__category" data-enter style="--i:0">{pick(project.category, lang)}</p>
+    <h1 class="project__title" data-enter style="--i:1">{project.name}</h1>
+    {study && <p class="project__award" data-enter style="--i:2">{pick(study.award, lang)}</p>}
+  </header>
+
+  <!-- Shares its view-transition name with the door preview, so it grows out of the door. -->
+  <figure class="wrap project__media">
+    <div class="project__frame">
+      <Image
+        src={project.preview}
+        alt=""
+        widths={[720, 1080, 1440, 1800]}
+        sizes="(max-width: 1240px) 92vw, 1180px"
+        loading="eager"
+        fetchpriority="high"
+        style={`view-transition-name: project-${project.id}`}
+      />
+    </div>
+  </figure>
+
+  <div class="wrap project__body">
+    <div class="project__main">
+      {
+        study ? (
+          <>
+            <section class="block" data-enter style="--i:3">
+              <h2>{t.projects.challenge}</h2>
+              <p class="project__question">{pick(study.challenge, lang)}</p>
+            </section>
+            <section class="block" data-enter style="--i:4">
+              <h2>{t.projects.solution}</h2>
+              <p class="project__lede">{pick(study.solution, lang)}</p>
+            </section>
+            <section class="block" data-enter style="--i:5">
+              <h2>{t.projects.includes}</h2>
+              <ul class="features">
+                {pick(study.features, lang).map((feature) => (
+                  <li>{feature}</li>
+                ))}
+              </ul>
+            </section>
+            <section class="block" data-enter style="--i:6">
+              <h2>{t.projects.communities}</h2>
+              <ul class="houses">
+                {study.communities.map((c) => (
+                  <li class="house" style={`--tone:${c.tone}`}>
+                    <span class="house__roof" aria-hidden="true" />
+                    <span class="house__name">
+                      {t.projects.house} {c.house}
+                    </span>
+                    <span class="house__ages">
+                      {c.ages} {t.projects.years}
+                    </span>
+                    <span class="house__season">{pick(c.season, lang)}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+            <p class="project__note" data-enter style="--i:7">{pick(study.note, lang)}</p>
+          </>
+        ) : (
+          <p class="project__lede" data-enter style="--i:3">{pick(project.summary, lang)}</p>
+        )
+      }
+    </div>
+
+    <aside class="project__side" data-enter style="--i:4">
+      <h2>{t.projects.stack}</h2>
+      <ul class="project__stack">{project.stack.map((tech) => <li>{tech}</li>)}</ul>
+      <a class="btn project__visit" href={project.url} target="_blank" rel="noopener noreferrer">
+        {t.projects.visit}
+        <Icon name="external" />
+        <span class="visually-hidden">({t.a11y.newTab})</span>
+      </a>
+    </aside>
+  </div>
+
+  <nav class="wrap project__next" aria-label={t.projects.next}>
+    <a href={projectPath(lang, next.id)} style={`--paint:${next.paint.base}`}>
+      <span class="project__next-label">{t.projects.next}</span>
+      <span class="project__next-name">{next.name}</span>
+      <span class="project__next-door" aria-hidden="true"></span>
+    </a>
+  </nav>
+</article>
+
+<style>
+  .project { padding-block: calc(var(--nav-h) + 1.5rem) var(--section); }
+
+  .project__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--step--1);
+    font-weight: 600;
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .project__back:hover { color: var(--fg); }
+  .project__back :global(.project__back-icon) {
+    width: 1rem;
+    height: 1rem;
+    fill: currentColor;
+    transform: rotate(-90deg);
+    transition: transform 0.4s var(--ease-out);
+  }
+  .project__back:hover :global(.project__back-icon) { transform: rotate(-90deg) translateY(-3px); }
+
+  .project__head { display: grid; gap: 0.8rem; margin-top: clamp(1.5rem, 4vw, 3rem); }
+  .project__category { color: var(--muted); font-size: var(--step--1); }
+  .project__title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: var(--step-4);
+    line-height: 0.95;
+    letter-spacing: -0.015em;
+  }
+  .project__award {
+    justify-self: start;
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    font-size: var(--step--1);
+    font-weight: 650;
+    color: #2b2210;
+    background: linear-gradient(135deg, #ecd394, #c9a04e 55%, #ad8533);
+  }
+
+  .project__media { margin-top: clamp(2rem, 4vw, 3.5rem); }
+  .project__frame {
+    position: relative;
+    overflow: hidden;
+    border-radius: clamp(80px, 22vw, 320px) clamp(80px, 22vw, 320px) 14px 14px / clamp(60px, 14vw, 200px) clamp(60px, 14vw, 200px) 14px 14px;
+    border: 1px solid var(--line);
+    background: #05070c;
+    box-shadow:
+      0 0 0 10px color-mix(in srgb, var(--paint) 40%, transparent),
+      0 60px 100px -50px rgb(10 14 25 / 0.6);
+  }
+  .project__frame :global(img) { width: 100%; aspect-ratio: 16 / 9.4; object-fit: cover; object-position: 50% 0; }
+
+  .project__body {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 0.8fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    margin-top: clamp(2.5rem, 5vw, 4.5rem);
+  }
+  .project__main { display: grid; gap: 2.4rem; align-content: start; }
+  .block { display: grid; gap: 0.7rem; }
+  .block h2, .project__side h2 { font-size: var(--step--1); font-weight: 600; color: var(--muted); }
+  .project__lede { font-size: var(--step-1); line-height: 1.6; max-width: 62ch; }
+  .project__question { font-family: var(--font-serif); font-size: var(--step-2); line-height: 1.18; max-width: 30ch; }
+
+  .features { display: grid; gap: 0.6rem; }
+  .features li { position: relative; padding-left: 1.35rem; max-width: 60ch; }
+  .features li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 0.55rem;
+    height: 0.6rem;
+    border-radius: 50% 50% 1px 1px;
+    background: var(--brass-light);
+  }
+
+  .houses { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.7rem; max-width: 640px; }
+  .house {
+    display: grid;
+    gap: 0.1rem;
+    padding: 0 0.8rem 0.85rem;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    background: color-mix(in srgb, var(--tone) 12%, transparent);
+    font-size: 0.9rem;
+    line-height: 1.35;
+    transition: transform 0.5s var(--ease-out);
+  }
+  .house:hover { transform: translateY(-4px); }
+  .house__roof { height: 16px; margin: 0 -0.8rem 0.6rem; background: var(--tone); clip-path: polygon(0 100%, 50% 0, 100% 100%); }
+  .house__name { font-weight: 700; }
+  .house__ages { color: var(--muted); }
+  .house__season { color: var(--tone); font-weight: 600; filter: brightness(1.15); }
+
+  .project__note {
+    max-width: 62ch;
+    padding: 1rem 1.1rem;
+    border-left: 2px solid var(--brass-light);
+    background: color-mix(in srgb, var(--brass-light) 10%, transparent);
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+
+  .project__side {
+    position: sticky;
+    top: calc(var(--nav-h) + 1.5rem);
+    align-self: start;
+    display: grid;
+    gap: 0.9rem;
+    padding: 1.5rem;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    background: color-mix(in srgb, var(--surface) 60%, transparent);
+  }
+  .project__stack { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; font-weight: 500; }
+  .project__visit { justify-self: start; margin-top: 0.4rem; }
+
+  .project__next { margin-top: var(--section); }
+  .project__next a {
+    position: relative;
+    display: grid;
+    gap: 0.3rem;
+    padding-block: 2rem;
+    border-top: 1px solid var(--line);
+    text-decoration: none;
+  }
+  .project__next-label { font-size: var(--step--1); color: var(--muted); }
+  .project__next-name { font-family: var(--font-serif); font-size: var(--step-3); line-height: 1; transition: transform 0.6s var(--ease-out); }
+  .project__next-door {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 56px;
+    height: 104px;
+    margin-top: -52px;
+    border-radius: 28px 28px 3px 3px;
+    background: var(--paint);
+    box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.25);
+    transform: perspective(400px) rotateY(0deg);
+    transform-origin: 0 50%;
+    transition: transform 0.7s var(--ease-door);
+  }
+  @media (hover: hover) {
+    .project__next a:hover .project__next-name { transform: translateX(10px); }
+    .project__next a:hover .project__next-door { transform: perspective(400px) rotateY(-60deg); }
+  }
+
+  /* Content steps in after the view transition has carried the image into place. */
+  :global(.js:not(.reduced)) [data-enter] {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+    animation: enter 0.9s var(--ease-out) forwards;
+    animation-delay: calc(var(--i) * 80ms + 200ms);
+  }
+  @keyframes enter { to { opacity: 1; transform: none; } }
+
+  @media (max-width: 860px) {
+    .project__body { grid-template-columns: 1fr; }
+    .project__side { position: static; }
+    .houses { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .project__next-door { width: 40px; height: 76px; margin-top: -38px; }
+  }
+</style>

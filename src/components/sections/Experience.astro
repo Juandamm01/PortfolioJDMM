@@ -1,0 +1,318 @@
+---
+import { useTranslations, type Lang } from '../../i18n/ui';
+import { experience } from '../../data/experience';
+import { pick } from '../../data/localized';
+
+type Props = { lang: Lang };
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const firstYear = String(experience[0].year).split('');
+const digits = Array.from({ length: 10 }, (_, n) => n);
+---
+
+<section class="experience" id="trayectoria" aria-labelledby="experience-title">
+  <div class="wrap experience__grid">
+    <div class="experience__aside">
+      <div class="experience__pin">
+        <div class="experience__intro">
+          <h2 class="section-title" id="experience-title">{t.experience.title}</h2>
+          <p class="statement experience__statement">{t.experience.statement}</p>
+        </div>
+
+        <!-- Odometer: each digit is a strip of 0–9 that rolls to the year of the entry in focus. -->
+        <div class="experience__meter" aria-hidden="true">
+          <div class="odometer" data-odometer>
+            {
+              firstYear.map((digit) => (
+                <span class="odometer__digit" style={`--d:${digit}`}>
+                  <span class="odometer__strip">
+                    {digits.map((n) => (
+                      <span>{n}</span>
+                    ))}
+                  </span>
+                </span>
+              ))
+            }
+          </div>
+          <p class="experience__kind" data-odometer-kind>{pick(experience[0].kind, lang)}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline" data-timeline>
+      <span class="timeline__rail" aria-hidden="true"><span class="timeline__fill" data-timeline-fill></span></span>
+      <ol class="timeline__list">
+        {
+          experience.map((entry, i) => (
+            <li
+              class:list={['entry', { 'is-active': i === 0 }]}
+              data-entry
+              data-year={entry.year}
+              data-glow={entry.glow}
+              data-kind={pick(entry.kind, lang)}
+            >
+              <span class="entry__dot" aria-hidden="true" />
+              <div class="entry__card">
+                <p class="entry__meta">
+                  <span class="entry__kind">{pick(entry.kind, lang)}</span>
+                  <span class="entry__period">{pick(entry.period, lang)}</span>
+                </p>
+                <h3 class="entry__role">{pick(entry.role, lang)}</h3>
+                <p class="entry__org">
+                  {entry.badge ? (
+                    <span class="org-tag" tabindex="0">
+                      <strong>{entry.org}</strong>
+                      <span class="org-tag__badge">
+                        <span class="visually-hidden">, </span>
+                        {pick(entry.badge, lang)}
+                      </span>
+                    </span>
+                  ) : (
+                    <strong>{entry.org}</strong>
+                  )}
+                  <span>{pick(entry.place, lang)}</span>
+                </p>
+                {entry.summary && <p class="entry__summary">{pick(entry.summary, lang)}</p>}
+                {entry.stack && (
+                  <p class="entry__stack">
+                    <span class="visually-hidden">{t.experience.stack}: </span>
+                    {entry.stack.map((tech) => (
+                      <span>{tech}</span>
+                    ))}
+                  </p>
+                )}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .experience { padding-block: var(--section); }
+
+  .experience__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: var(--gutter);
+  }
+
+  .experience__pin {
+    position: sticky;
+    top: calc(var(--nav-h) + 2rem);
+    display: grid;
+    gap: 1.5rem;
+  }
+  .experience__intro { display: grid; gap: 1.4rem; }
+  .experience__statement { max-width: 12ch; }
+
+  .odometer {
+    display: flex;
+    font-size: clamp(5rem, 2rem + 8vw, 10.5rem);
+    font-weight: 780;
+    letter-spacing: -0.06em;
+    line-height: 1;
+    height: 1em;
+    overflow: hidden;
+    font-variant-numeric: tabular-nums;
+    color: var(--fg);
+    -webkit-mask-image: linear-gradient(180deg, #000 35%, rgb(0 0 0 / 0.25));
+    mask-image: linear-gradient(180deg, #000 35%, rgb(0 0 0 / 0.25));
+    margin-top: 0.5rem;
+  }
+  .odometer__digit { display: block; height: 1em; overflow: hidden; }
+  .odometer__strip {
+    display: flex;
+    flex-direction: column;
+    transform: translateY(calc(var(--d) * -1em));
+    transition: transform 1s var(--ease-out);
+  }
+  .odometer__strip span { display: block; height: 1em; }
+
+  .experience__kind {
+    margin-top: 0.6rem;
+    font-size: var(--step-1);
+    color: var(--brass);
+    font-weight: 600;
+    transition: opacity 0.3s;
+  }
+  .experience__kind.is-swapping { opacity: 0; }
+
+  /* ---------- Timeline ---------- */
+  .timeline {
+    position: relative;
+    padding-left: clamp(1.75rem, 3vw, 3rem);
+    perspective: 1400px;
+  }
+  .timeline__list { display: grid; }
+  .timeline__rail {
+    position: absolute;
+    left: 0;
+    top: 0.6rem;
+    bottom: 0;
+    width: 1px;
+    background: var(--line);
+  }
+  .timeline__fill {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, var(--brass-light), color-mix(in srgb, var(--brass-light) 30%, transparent));
+    transform-origin: top;
+    transform: scaleY(var(--progress, 0));
+  }
+
+  .entry {
+    position: relative;
+    display: grid;
+    align-content: center;
+    min-height: 66vh;
+    padding-block: 2.5rem;
+    transform-style: preserve-3d;
+  }
+  /* Entries out of focus recede in depth; the active one comes forward. */
+  .entry__card {
+    display: grid;
+    gap: 0.7rem;
+    padding: 1.6rem 1.8rem;
+    margin-left: -1.8rem;
+    border-radius: 16px;
+    border: 1px solid transparent;
+    transform-origin: 0 50%;
+    transform: translateZ(-90px) rotateY(9deg) rotateX(4deg);
+    opacity: 0.32;
+    transition:
+      transform 1.1s var(--ease-out),
+      opacity 0.8s var(--ease-out),
+      background-color 0.6s,
+      border-color 0.6s,
+      box-shadow 0.6s;
+  }
+  .entry.is-active .entry__card {
+    transform: none;
+    opacity: 1;
+    background: color-mix(in srgb, var(--surface) 55%, transparent);
+    border-color: var(--line);
+    box-shadow: 0 40px 70px -45px rgb(10 14 25 / 0.55);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .entry.is-active .entry__card:hover { transform: translateZ(18px) rotateY(-2deg); }
+  }
+  :global(.reduced) .entry__card, :global(html:not(.js)) .entry__card { transform: none; opacity: 1; }
+
+  .entry__dot {
+    position: absolute;
+    left: calc(-1 * clamp(1.75rem, 3vw, 3rem) - 5px);
+    top: calc(50% - 5px);
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1px solid var(--muted);
+    transition: background-color 0.5s, border-color 0.5s, box-shadow 0.5s;
+  }
+  .entry.is-active .entry__dot {
+    background: var(--brass-light);
+    border-color: var(--brass-light);
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--brass-light) 20%, transparent);
+  }
+
+  .entry__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.2rem;
+    font-size: var(--step--1);
+    color: var(--muted);
+  }
+  .entry__kind { color: var(--brass); font-weight: 600; }
+
+  .entry__role {
+    font-size: var(--step-3);
+    font-weight: 650;
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+    max-width: 16ch;
+    text-wrap: balance;
+  }
+  .entry__org { display: grid; gap: 0.15rem; color: var(--muted); }
+  .entry__org strong { color: var(--fg); font-weight: 600; font-size: var(--step-1); }
+
+  /* The internship label unfolds from the company name on hover or keyboard focus. */
+  .org-tag {
+    position: relative;
+    justify-self: start;
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.7rem;
+    cursor: default;
+    perspective: 500px;
+    border-radius: 4px;
+  }
+  .org-tag strong {
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0% 1px no-repeat;
+    transition: background-size 0.5s var(--ease-out);
+  }
+  .org-tag__badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.28rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 650;
+    white-space: nowrap;
+    color: #2b2210;
+    background: linear-gradient(135deg, #ecd394, #c9a04e 55%, #ad8533);
+    box-shadow: 0 8px 18px -8px rgb(10 14 25 / 0.5);
+    transform-origin: 0 50%;
+    transform: rotateY(-75deg) translateX(-8px);
+    opacity: 0;
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s;
+  }
+  .org-tag:hover .org-tag__badge,
+  .org-tag:focus-visible .org-tag__badge { transform: none; opacity: 1; }
+  .org-tag:hover strong,
+  .org-tag:focus-visible strong { background-size: 100% 1px; }
+  /* Touch screens have no hover: show the label directly. */
+  @media (hover: none) {
+    .org-tag__badge { transform: none; opacity: 1; }
+  }
+
+  .entry__summary { max-width: 54ch; color: var(--muted); }
+
+  .entry__stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem 1.1rem;
+    font-size: var(--step--1);
+    font-weight: 500;
+  }
+
+  /* ---------- Mobile: the odometer becomes a compact sticky bar ---------- */
+  @media (max-width: 860px) {
+    .experience__grid { grid-template-columns: minmax(0, 1fr); gap: 0; }
+    .experience__aside { display: contents; }
+    .experience__pin { display: contents; }
+    .experience__intro { margin-bottom: 1.5rem; }
+    .experience__meter {
+      position: sticky;
+      top: var(--nav-h);
+      z-index: 3;
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-inline: calc(-1 * var(--gutter));
+      padding: 0.4rem var(--gutter) 0.6rem;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .odometer { font-size: 3.2rem; margin: 0; }
+    .experience__kind { margin: 0; font-size: 1rem; }
+    .entry { min-height: 62vh; padding-block: 1.5rem; }
+    .entry__card { margin-left: 0; padding: 1.2rem; transform: translateZ(-40px) rotateX(6deg); }
+    .entry__dot { top: 3rem; }
+  }
+</style>

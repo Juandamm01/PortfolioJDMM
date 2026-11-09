@@ -1,0 +1,305 @@
+---
+import { Image } from 'astro:assets';
+import type { Project } from '../../data/projects';
+import { pick } from '../../data/localized';
+import { projectPath, useTranslations, type Lang } from '../../i18n/ui';
+
+type Props = { project: Project; lang: Lang; index: number };
+const { project, lang, index } = Astro.props;
+const t = useTranslations(lang);
+const featured = Boolean(project.featured);
+---
+
+<li
+  class:list={['door-unit', { 'door-unit--featured': featured }]}
+  style={`--paint:${project.paint.base};--shade:${project.paint.shade};--i:${index}`}
+  data-reveal
+>
+  <a class="door" href={projectPath(lang, project.id)} data-door={project.id}>
+    <span class="door__scene" aria-hidden="true">
+      {featured && <span class="door__medal">1.º</span>}
+      <span class="door__frame">
+        <span class="door__room">
+          <Image
+            src={project.preview}
+            alt=""
+            widths={[280, 440]}
+            sizes="(max-width: 860px) 60vw, 220px"
+            class="door__preview"
+            style={`view-transition-name: project-${project.id}`}
+            loading="lazy"
+          />
+          <span class="door__light"></span>
+        </span>
+        <span class="door__leaf">
+          <span class="door__face">
+            <span class="door__panel door__panel--top"></span>
+            <span class="door__panel door__panel--bottom"></span>
+            <span class="door__plate">{project.name}</span>
+            <span class="door__hardware"><span class="door__knob"></span></span>
+          </span>
+          <span class="door__edge"></span>
+        </span>
+        <span class="door__gap"></span>
+      </span>
+      <span class="door__shadow"></span>
+      <span class="door__spill"></span>
+    </span>
+
+    <span class="door__caption">
+      <span class="visually-hidden">{t.projects.enter} </span>
+      <span class="door__name">{project.name}</span>
+      <span class="door__category">{pick(project.category, lang)}</span>
+      {project.featured && <span class="door__award">{pick(project.featured.award, lang)}</span>}
+    </span>
+  </a>
+</li>
+
+<style>
+  .door-unit {
+    --w: clamp(132px, 12vw, 176px);
+    --h: calc(var(--w) * 2.05);
+    --trim: 11px;
+    --arch: calc(var(--w) / 2);
+    flex: none;
+    list-style: none;
+  }
+  .door-unit--featured { --w: clamp(150px, 14vw, 204px); }
+
+  .door {
+    display: grid;
+    justify-items: center;
+    gap: 1.3rem;
+    color: inherit;
+    text-align: center;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .door:focus-visible { outline: none; }
+  .door:focus-visible .door__caption { outline: 2px solid var(--brass-light); outline-offset: 6px; border-radius: 6px; }
+
+  .door__scene {
+    position: relative;
+    display: block;
+    width: calc(var(--w) + var(--trim) * 2);
+    height: calc(var(--h) + var(--trim));
+    perspective: 820px;
+    perspective-origin: 72% 42%;
+  }
+
+  /* Door casing: a painted moulding with a bevel. */
+  .door__frame {
+    position: absolute;
+    inset: 0;
+    border-radius: calc(var(--arch) + var(--trim)) calc(var(--arch) + var(--trim)) 3px 3px;
+    background:
+      linear-gradient(90deg, rgb(0 0 0 / 0.08), transparent 20%, transparent 80%, rgb(0 0 0 / 0.12)),
+      linear-gradient(180deg, color-mix(in srgb, var(--surface) 92%, #fff), var(--surface));
+    box-shadow:
+      inset 0 0 0 1px var(--line),
+      inset 0 2px 0 rgb(255 255 255 / 0.25),
+      0 50px 60px -45px rgb(0 0 0 / 0.75);
+  }
+
+  /* Behind the door: the project preview, lit from inside. */
+  .door__room {
+    position: absolute;
+    inset: var(--trim) var(--trim) 0;
+    overflow: hidden;
+    border-radius: var(--arch) var(--arch) 0 0;
+    background: #05070c;
+    box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.4);
+  }
+  .door__room :global(.door__preview) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 28% 30%;
+    filter: brightness(0.22) saturate(0.6);
+    transform: scale(1.16);
+    transition: filter 0.9s var(--ease-out), transform 1.2s var(--ease-out);
+  }
+  .door__light {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(90% 45% at 50% 0%, color-mix(in srgb, var(--paint) 50%, #ffe3a6), transparent 70%),
+      linear-gradient(90deg, rgb(0 0 0 / 0.6), transparent 40%);
+    mix-blend-mode: screen;
+    opacity: 0.5;
+    transition: opacity 0.9s;
+  }
+
+  .door__leaf {
+    position: absolute;
+    inset: var(--trim) var(--trim) 0;
+    transform-origin: 0 50%;
+    transform-style: preserve-3d;
+    transform: rotateY(var(--open, 0deg));
+    transition: transform 1.05s var(--ease-door);
+  }
+  /* Painted wood: vertical grain under a satin sheen. */
+  .door__face {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--arch) var(--arch) 0 0;
+    background:
+      linear-gradient(100deg, rgb(255 255 255 / 0.14), transparent 28%, transparent 62%, rgb(0 0 0 / 0.22)),
+      repeating-linear-gradient(91deg, rgb(0 0 0 / 0.06) 0 1px, transparent 1px 5px, rgb(255 255 255 / 0.03) 5px 6px, transparent 6px 11px),
+      var(--paint);
+    box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.25), inset -8px 0 14px -8px rgb(0 0 0 / 0.4);
+    backface-visibility: hidden;
+  }
+  .door__panel {
+    position: absolute;
+    left: 15%;
+    right: 15%;
+    background:
+      repeating-linear-gradient(91deg, rgb(0 0 0 / 0.05) 0 1px, transparent 1px 6px),
+      var(--shade);
+    box-shadow:
+      inset 2px 2px 0 rgb(0 0 0 / 0.28),
+      inset -1px -1px 0 rgb(255 255 255 / 0.16),
+      0 0 0 3px color-mix(in srgb, var(--paint) 80%, #fff 20%),
+      0 0 0 4px rgb(0 0 0 / 0.18);
+  }
+  .door__panel--top { top: 10%; height: 32%; border-radius: calc(var(--arch) * 0.7) calc(var(--arch) * 0.7) 2px 2px; }
+  .door__panel--bottom { top: 56%; bottom: 7%; border-radius: 2px; }
+
+  .door__plate {
+    position: absolute;
+    left: 50%;
+    top: 48%;
+    max-width: 80%;
+    width: max-content;
+    padding: 0.28rem 0.5rem;
+    transform: translate(-50%, -50%);
+    border-radius: 3px;
+    text-wrap: balance;
+    line-height: 1.15;
+    font-size: clamp(0.56rem, 0.45rem + 0.35vw, 0.7rem);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: #2b2210;
+    background: linear-gradient(135deg, #f1dc9f, #c9a04e 50%, #a47d2c);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.55), 0 2px 4px rgb(0 0 0 / 0.45);
+  }
+  .door__hardware {
+    position: absolute;
+    right: 7%;
+    top: 55%;
+    width: calc(var(--w) * 0.09);
+    height: calc(var(--w) * 0.22);
+    border-radius: 99px;
+    background: linear-gradient(90deg, #8c6a25, #e3c47c 50%, #8c6a25);
+    box-shadow: 0 2px 4px rgb(0 0 0 / 0.45);
+  }
+  .door__knob {
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    width: 150%;
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #fff1c6, #c9a04e 45%, #6f531c);
+    box-shadow: 0 3px 5px rgb(0 0 0 / 0.5);
+  }
+  .door__edge {
+    position: absolute;
+    right: 0;
+    top: var(--arch);
+    bottom: 0;
+    width: 10px;
+    transform-origin: 100% 50%;
+    transform: rotateY(-90deg);
+    background: linear-gradient(90deg, var(--shade), color-mix(in srgb, var(--shade) 65%, #000));
+  }
+
+  /* Light leaking through the gap under the closed door. */
+  .door__gap {
+    position: absolute;
+    left: var(--trim);
+    right: var(--trim);
+    bottom: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ffd98a 30%, #ffd98a 70%, transparent);
+    filter: blur(1px);
+    opacity: 0.35;
+    transition: opacity 0.6s;
+  }
+
+  /* Cast shadow on the floor and the light spilling out when the door opens. */
+  .door__shadow {
+    position: absolute;
+    left: 6%;
+    right: -18%;
+    bottom: -18px;
+    height: 26px;
+    background: radial-gradient(50% 50% at 45% 40%, rgb(0 0 0 / 0.45), transparent 70%);
+    transform: skewX(-38deg);
+    filter: blur(3px);
+  }
+  .door__spill {
+    position: absolute;
+    left: 12%;
+    right: -40%;
+    bottom: -30px;
+    height: 60px;
+    background: radial-gradient(50% 50% at 35% 45%, color-mix(in srgb, #ffe2a8 60%, var(--paint)), transparent 70%);
+    transform: skewX(-30deg);
+    filter: blur(6px);
+    opacity: 0;
+    transition: opacity 0.9s var(--ease-out);
+  }
+
+  .door__medal {
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: #2b2210;
+    background: radial-gradient(circle at 35% 30%, #f6e2a6, #c9a04e 55%, #8c6a25);
+    box-shadow: 0 6px 16px rgb(0 0 0 / 0.35), inset 0 0 0 2px rgb(255 255 255 / 0.25);
+  }
+
+  .door__caption {
+    display: grid;
+    align-content: start;
+    gap: 0.2rem;
+    min-height: 6.2rem;
+    max-width: calc(var(--w) + 4rem);
+  }
+  .door__name { font-weight: 650; font-size: 1.02rem; letter-spacing: -0.015em; }
+  .door__category { font-size: var(--step--1); color: var(--muted); }
+  .door__award { font-size: var(--step--1); color: var(--brass); font-weight: 600; }
+
+  /* Peek: hover or keyboard focus opens the door partway. */
+  .door:focus-visible { --open: 34deg; }
+  @media (hover: hover) and (pointer: fine) {
+    .door:hover { --open: 34deg; }
+    .door:hover .door__preview { filter: brightness(0.85) saturate(0.9); transform: scale(1.06); }
+    .door:hover .door__spill { opacity: 0.6; }
+    .door:hover .door__gap { opacity: 0; }
+  }
+  .door:focus-visible .door__preview { filter: brightness(0.85) saturate(0.9); transform: scale(1.06); }
+
+  /* Entering: the door swings wide and the room is fully lit (scripts/doors.ts). */
+  .door.is-entering { --open: 105deg; }
+  .door.is-entering .door__leaf { transition-duration: 0.75s; }
+  .door.is-entering .door__preview { filter: none; transform: scale(1); }
+  .door.is-entering .door__light { opacity: 0; }
+  .door.is-entering .door__spill { opacity: 1; }
+  .door.is-entering .door__gap { opacity: 0; }
+
+  :global(.reduced) .door__leaf { transition: none; }
+  :global(.lite) .door__spill, :global(.lite) .door__shadow { filter: none; }
+</style>
