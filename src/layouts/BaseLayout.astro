@@ -1,0 +1,86 @@
+---
+import '@fontsource-variable/schibsted-grotesk/wght.css';
+import '@fontsource/instrument-serif/latin-400.css';
+import '../styles/tokens.css';
+import '../styles/base.css';
+import { getImage } from 'astro:assets';
+import portrait from '../assets/images/juan-david-martinez.jpg';
+import vader from '../assets/brand/darth-vader.png';
+import AmbientStage from '../components/layout/AmbientStage.astro';
+import SiteHeader from '../components/layout/SiteHeader.astro';
+import SiteFooter from '../components/layout/SiteFooter.astro';
+import { homeAlternates, languages, useTranslations, type Alternates, type Lang } from '../i18n/ui';
+
+type Props = { lang: Lang; title?: string; description?: string; alternates?: Alternates };
+const { lang, alternates = homeAlternates } = Astro.props;
+const t = useTranslations(lang);
+const title = Astro.props.title ?? t.meta.title;
+const description = Astro.props.description ?? t.meta.description;
+const onHome = alternates === homeAlternates;
+const site = Astro.site ?? new URL(Astro.url.origin);
+const canonical = new URL(alternates[lang], site);
+const ogImage = await getImage({ src: portrait, width: 900, format: 'jpg' });
+const favicon = await getImage({ src: vader, width: 64, height: 64, format: 'png' });
+const touchIcon = await getImage({ src: vader, width: 180, height: 180, format: 'png' });
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#e3e8ee" />
+    <link rel="canonical" href={canonical} />
+    {
+      (Object.keys(languages) as Lang[]).map((code) => (
+        <link rel="alternate" hreflang={code} href={new URL(alternates[code], site)} />
+      ))
+    }
+    <link rel="alternate" hreflang="x-default" href={new URL(alternates.es, site)} />
+    <link rel="icon" href={favicon.src} type="image/png" />
+    <link rel="apple-touch-icon" href={touchIcon.src} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(ogImage.src, site)} />
+    <meta property="og:locale" content={lang === 'es' ? 'es_CO' : 'en_US'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Runs before first paint: restores the light switch, language choice and capability flags. -->
+    <script is:inline define:vars={{ pageLang: lang, englishPath: alternates.en }}>
+      (() => {
+        const root = document.documentElement;
+        root.classList.add('js');
+        try {
+          const stored = localStorage.getItem('jdm-lang');
+          if (stored === 'en' && pageLang === 'es' && !location.search.includes('lang=es')) {
+            location.replace(englishPath + location.hash);
+            return;
+          }
+          if (localStorage.getItem('jdm-lights') === 'off') root.classList.add('lights-off');
+        } catch (_) {}
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) root.classList.add('reduced');
+        const cores = navigator.hardwareConcurrency || 8;
+        const memory = navigator.deviceMemory || 8;
+        const coarse = matchMedia('(pointer: coarse)').matches;
+        if (cores <= 4 || memory <= 4 || (coarse && cores <= 6)) root.classList.add('lite');
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{t.a11y.skip}</a>
+    <AmbientStage />
+    <SiteHeader lang={lang} alternates={alternates} onHome={onHome} />
+    <main id="main">
+      <slot />
+    </main>
+    <SiteFooter lang={lang} alternates={alternates} />
+    <script>
+      import '../scripts/main';
+    </script>
+  </body>
+</html>

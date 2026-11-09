@@ -1,0 +1,23 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectDetail from '../../components/sections/ProjectDetail.astro';
+import { projects } from '../../data/projects';
+import { pick } from '../../data/localized';
+import { projectPath, useTranslations } from '../../i18n/ui';
+
+export const getStaticPaths = (() => projects.map((project) => ({ params: { slug: project.id }, props: { project } }))) satisfies GetStaticPaths;
+
+const { project } = Astro.props;
+const lang = 'es';
+const t = useTranslations(lang);
+---
+
+<BaseLayout
+  lang={lang}
+  title={t.projects.detailTitle(project.name)}
+  description={pick(project.summary, lang)}
+  alternates={{ es: projectPath('es', project.id), en: projectPath('en', project.id) }}
+>
+  <ProjectDetail project={project} lang={lang} />
+</BaseLayout>
