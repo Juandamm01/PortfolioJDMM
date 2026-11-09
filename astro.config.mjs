@@ -1,9 +1,11 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
-import react from '@astrojs/react';
-
 // https://astro.build/config
 export default defineConfig({
-  integrations: [react()]
+  site: 'https://portfolio-jdmm.vercel.app',
+  // The certificates page was retired; keep old shared links working.
+  redirects: {
+    '/certificaciones': '/',
+  },
 });
