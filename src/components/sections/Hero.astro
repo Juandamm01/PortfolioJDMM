@@ -19,7 +19,7 @@ const t = useTranslations(lang);
         <span class="hero__name-desktop hidden md:block">
           <TechText
             text="Juan David Martínez Medina"
-            fontSize={85}
+            fontSize={80}
             fontWeight={700}
             reveal="letter"
             clickKick={true}
@@ -168,8 +168,19 @@ const t = useTranslations(lang);
       width: min(100% - 2 * var(--gutter), 1080px);
       padding-inline: clamp(1rem, 2vw, 1.75rem);
       gap: clamp(3rem, 6vw, 5rem);
+      align-items: start;
     }
+    .hero__copy {
+      --gap: clamp(0.4rem, 1.1vh, 0.7rem);
+      align-self: start;
+      transform: translateY(-2.5rem);
+    }
+    .hero__stage { align-self: start; }
+    .hero__greeting { margin-bottom: calc(var(--gap) * 0.2); }
     .hero__name { font-size: clamp(3rem, min(5.5vw, 9.5vh), 5.3rem); }
+    .hero__prism { margin-top: calc(var(--gap) * 0.5); }
+    .hero__summary { margin-top: calc(var(--gap) * 0.5); font-size: 0.96rem; }
+    .hero__actions { margin-top: calc(var(--gap) * 0.65); }
   }
 
   /* Page-load sequence: the only orchestrated entrance on the page. */
