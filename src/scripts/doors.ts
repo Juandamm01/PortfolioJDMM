@@ -124,8 +124,73 @@ const initPinnedDoors = () => {
   setup();
 };
 
+/** Phones: vertical scroll pins the process cards and glides the track in either direction. */
+const initPinnedProcess = () => {
+  const pin = document.querySelector<HTMLElement>('[data-process-pin]');
+  const stage = pin?.querySelector<HTMLElement>('[data-process-stage]');
+  const track = pin?.querySelector<HTMLElement>('[data-process-world] .process__list');
+  if (!pin || !stage || !track) return;
+
+  const panes = [...track.children] as HTMLElement[];
+  const phone = window.matchMedia('(max-width: 860px)');
+  let current = -1;
+  let frame = 0;
+
+  const show = (index: number) => {
+    if (index === current) return;
+    current = index;
+    track.style.setProperty('--track-x', `${-(panes[index].offsetLeft - panes[0].offsetLeft)}px`);
+    panes.forEach((pane, i) => pane.classList.toggle('is-lit', i === index));
+  };
+
+  const progress = () => {
+    const box = pin.getBoundingClientRect();
+    const stuck = stage.getBoundingClientRect();
+    return clamp((stuck.top - box.top) / Math.max(box.height - stuck.height, 1), 0, 0.9999);
+  };
+
+  const update = () => {
+    frame = 0;
+    if (root.classList.contains('process-pinned')) show(Math.floor(progress() * panes.length));
+  };
+
+  const setup = () => {
+    const on = phone.matches && !isReduced();
+    root.classList.toggle('process-pinned', on);
+    current = -1;
+    if (on) update();
+    else {
+      track.style.removeProperty('--track-x');
+      panes.forEach((pane) => pane.classList.remove('is-lit'));
+    }
+  };
+
+  window.addEventListener('scroll', () => {
+    if (!frame) frame = requestAnimationFrame(update);
+  }, { passive: true });
+  phone.addEventListener('change', setup);
+  window.addEventListener('resize', () => {
+    current = -1;
+    update();
+  });
+
+  panes.forEach((pane, i) => {
+    pane.addEventListener('focusin', () => {
+      if (!root.classList.contains('process-pinned')) return;
+      const box = pin.getBoundingClientRect();
+      const distance = box.height - stage.getBoundingClientRect().height;
+      const stickyTop = parseFloat(getComputedStyle(stage).top) || 0;
+      const top = window.scrollY + box.top - stickyTop + (distance * (i + 0.5)) / panes.length;
+      window.scrollTo({ top, behavior: 'instant' });
+    });
+  });
+
+  setup();
+};
+
 export const initDoors = () => {
   initPinnedDoors();
+  initPinnedProcess();
   document.querySelectorAll<HTMLAnchorElement>('a[data-door]').forEach((door) => {
     door.addEventListener('click', (event) => enterDoor(door, event));
   });

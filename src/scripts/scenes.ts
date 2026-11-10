@@ -55,8 +55,6 @@ const processScene = (gsap: Gsap) => {
   const world = $('[data-process-world]');
   if (!section || !stage || !world) return;
   const panes = $$('[data-pane]', section);
-  const current = $('[data-process-current]', section);
-  const fill = $('[data-process-fill]', section);
   const depths = panes.map((_, i) => -i * PANE_SPACING);
 
   const layout = () => {
@@ -68,15 +66,6 @@ const processScene = (gsap: Gsap) => {
       pane.style.setProperty('--x', `${xs[i]}px`);
       pane.style.setProperty('--y', `${ys[i]}px`);
       pane.style.setProperty('--z', `${depths[i]}px`);
-      const thread = $('[data-pane-thread]', pane);
-      if (!thread || i === panes.length - 1) return;
-      const dx = xs[i + 1] - xs[i];
-      const dy = ys[i + 1] - ys[i];
-      const dz = depths[i + 1] - depths[i];
-      const len = Math.hypot(dx, dy, dz);
-      thread.style.setProperty('--len', `${len}px`);
-      thread.style.setProperty('--angle', `${(Math.atan2(-dz, dx) * 180) / Math.PI}deg`);
-      thread.style.setProperty('--tilt', `${(Math.asin(dy / len) * 180) / Math.PI}deg`);
     });
   };
   layout();
@@ -95,8 +84,6 @@ const processScene = (gsap: Gsap) => {
       if (Math.abs(z) < Math.abs(depths[closest] + camera.z)) closest = i;
     });
     panes[closest]?.classList.add('is-lit');
-    if (current) current.textContent = String(closest + 1).padStart(2, '0');
-    fill?.style.setProperty('--progress', (camera.z / ((panes.length - 1) * PANE_SPACING)).toFixed(3));
   };
 
   gsap.to(camera, {

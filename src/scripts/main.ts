@@ -1,4 +1,3 @@
-import { initAudio } from './audio';
 import { initCord } from './cord';
 import { initDoors } from './doors';
 import { initHeader } from './header';
@@ -16,4 +15,3 @@ initTimeline();
 initDoors();
 initPointer();
 initScenes();
-initAudio();
