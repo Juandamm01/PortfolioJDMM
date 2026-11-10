@@ -9,12 +9,12 @@ const total = t.process.stages.length;
 <!--
   The four stages are planes placed at increasing depth. On desktop the scroll moves a camera
   through them (scripts/scenes.ts); a thread joins the planes so they read as one process.
-  On mobile they stack vertically and rise in 3D as they enter.
+  Tablets use native horizontal snap scrolling; phones pin the stage to vertical page scroll.
 -->
-<section class="process" aria-labelledby="process-title" data-process>
+<section class="process" aria-labelledby="process-title" data-process data-process-pin style={`--panes:${total}`}>
   <div class="process__stage" data-process-stage>
     <header class="process__head wrap">
-      <h2 class="section-title" id="process-title">{t.process.title}</h2>
+      <h2 class="section-title process__title" id="process-title">{t.process.title}</h2>
       <p class="process__lead">{t.process.lead}</p>
     </header>
 
@@ -23,7 +23,6 @@ const total = t.process.stages.length;
         {
           t.process.stages.map((stage, i) => (
             <li class="pane" data-pane style={`--i:${i}`}>
-              <span class="pane__thread" data-pane-thread aria-hidden="true" />
               <div class="pane__card">
                 <div class="pane__art" aria-hidden="true">
                   {i === 0 && (
@@ -94,16 +93,13 @@ const total = t.process.stages.length;
       </ol>
     </div>
 
-    <div class="process__hud" aria-hidden="true">
-      <span class="process__count"><span data-process-current>01</span> / {String(total).padStart(2, '0')}</span>
-      <span class="process__rail"><span class="process__rail-fill" data-process-fill></span></span>
-    </div>
   </div>
 </section>
 
 <style>
   .process { position: relative; padding-block: calc(var(--section) * 0.6) var(--section); }
 
+  .process__title::before { content: none; }
   .process__head { display: grid; gap: 0.8rem; margin-bottom: clamp(2rem, 5vw, 3.5rem); }
   .process__lead { max-width: 44ch; font-size: var(--step-1); color: var(--muted); }
 
@@ -178,30 +174,85 @@ const total = t.process.stages.length;
   .pane__step { font-size: var(--step--1); font-weight: 600; color: var(--brass); font-variant-numeric: tabular-nums; }
   .pane__name { font-size: var(--step-2); font-weight: 650; letter-spacing: -0.03em; line-height: 1.05; }
 
-  .pane__thread { display: none; }
-  .process__hud { display: none; }
-
-  /* ---------- Mobile / tablet: vertical stack, panes rise in 3D ---------- */
+  /* ---------- Mobile / tablet: native horizontal snap carousel ---------- */
   @media (max-width: 1023px) {
-    .process__list::before {
-      content: '';
-      position: absolute;
-      left: 1.6rem;
-      top: 0;
-      bottom: 0;
-      width: 1px;
-      background: linear-gradient(var(--brass-light), var(--line));
+    .process__world {
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      scroll-padding-inline: max(var(--gutter), calc((100vw - min(78vw, 360px)) / 2));
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
     }
-    :global(.js:not(.reduced)) .pane {
-      perspective: 900px;
+    .process__world::-webkit-scrollbar { display: none; }
+    .process__list {
+      display: flex;
+      align-items: stretch;
+      gap: 1rem;
+      width: max-content;
+      margin: 0;
+      padding: 0 max(var(--gutter), calc((100vw - min(78vw, 360px)) / 2)) 2rem;
     }
-    :global(.js:not(.reduced)) .pane__card {
-      opacity: 0;
-      transform: rotateX(-22deg) translate3d(0, 40px, -60px);
-      transform-origin: 50% 0;
-      transition: opacity 0.8s var(--ease-out), transform 1s var(--ease-out);
+    .pane { flex: 0 0 min(78vw, 360px); scroll-snap-align: center; }
+    .pane__card { height: 100%; }
+  }
+
+  /* Phones: vertical page scroll pins the cards and glides the track one stage at a time. */
+  @media (max-width: 860px) {
+    :global(html.process-pinned) .process {
+      height: calc(100svh + (var(--panes) - 1) * 55svh);
+      padding-block: 0;
     }
-    :global(.js:not(.reduced)) .pane.is-lit .pane__card { opacity: 1; transform: none; }
+    :global(html.process-pinned) .process__stage {
+      position: sticky;
+      top: var(--nav-h);
+      height: calc(100svh - var(--nav-h));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+    }
+    :global(html.process-pinned) .process__head {
+      flex: none;
+      margin-bottom: clamp(1.5rem, 5vh, 3rem);
+    }
+    :global(html.process-pinned) .process__world {
+      flex: none;
+      overflow: visible;
+      scroll-snap-type: none;
+      touch-action: pan-y;
+    }
+    :global(html.process-pinned) .process__list {
+      width: max-content;
+      padding: 0 calc((100vw - min(82vw, 400px)) / 2);
+      gap: 1.25rem;
+      transform: translate3d(var(--track-x, 0px), 0, 0);
+      transition: transform 0.75s var(--ease-door);
+      will-change: transform;
+    }
+    :global(html.process-pinned) .pane { width: min(82vw, 400px); }
+    :global(html.process-pinned) .pane__card {
+      height: auto;
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+      box-shadow:
+        0 1px 0 rgb(255 255 255 / 0.25) inset,
+        0 28px 48px -42px rgb(10 14 25 / 0.28);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .pane,
+    .pane__card {
+      opacity: 1 !important;
+      visibility: visible !important;
+      filter: none !important;
+    }
+
+    .pane__card {
+      background: var(--surface);
+      box-shadow: 0 1px 0 rgb(255 255 255 / 0.25) inset, 0 12px 28px -24px rgb(10 14 25 / 0.22);
+    }
   }
 
   /* ---------- Desktop camera flight ---------- */
@@ -245,41 +296,6 @@ const total = t.process.stages.length;
       transform-style: preserve-3d;
       transform: translate3d(var(--x, 0px), var(--y, 0px), var(--z, 0px));
     }
-    :global(html.scenes) .pane__thread {
-      display: block;
-      position: absolute;
-      left: 200px;
-      top: 150px;
-      width: var(--len, 0px);
-      height: 1px;
-      transform-origin: 0 50%;
-      transform: rotateY(var(--angle, 0deg)) rotateZ(var(--tilt, 0deg));
-      background: linear-gradient(90deg, var(--brass-light), color-mix(in srgb, var(--brass-light) 20%, transparent));
-      box-shadow: 0 0 8px color-mix(in srgb, var(--brass-light) 60%, transparent);
-    }
-    :global(html.scenes) .pane:last-child .pane__thread { display: none; }
     :global(html.scenes) .pane__card { backface-visibility: hidden; }
-
-    :global(html.scenes) .process__hud {
-      position: absolute;
-      left: max(var(--gutter), calc((100vw - var(--max)) / 2));
-      bottom: 2.5rem;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      font-size: var(--step--1);
-      font-weight: 600;
-      color: var(--muted);
-      font-variant-numeric: tabular-nums;
-    }
-    .process__rail { position: relative; width: 160px; height: 1px; background: var(--line); }
-    .process__rail-fill {
-      position: absolute;
-      inset: 0;
-      background: var(--brass-light);
-      transform-origin: 0 50%;
-      transform: scaleX(var(--progress, 0));
-    }
   }
 </style>

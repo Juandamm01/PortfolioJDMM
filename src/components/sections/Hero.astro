@@ -1,6 +1,7 @@
 ---
 import Icon from '../ui/Icon.astro';
 import Portrait from '../ui/Portrait.astro';
+import TechText from '../ui/TechText.astro';
 import WordPrism from '../ui/WordPrism.astro';
 import { useTranslations, type Lang } from '../../i18n/ui';
 import { profile } from '../../data/profile';
@@ -15,8 +16,21 @@ const t = useTranslations(lang);
     <div class="hero__copy">
       <p class="hero__greeting intro" style="--d:0">{t.hero.greeting}</p>
       <h1 class="hero__name" id="hero-name">
-        <span class="line"><span class="intro" style="--d:1">{profile.firstNames}</span></span>
-        <span class="line"><span class="intro" style="--d:2">{profile.lastNames}</span></span>
+        <span class="hero__name-desktop hidden md:block">
+          <TechText
+            text="Juan David Martínez Medina"
+            fontSize={85}
+            fontWeight={700}
+            reveal="letter"
+            clickKick={true}
+            guides={false}
+            color="currentColor"
+          />
+        </span>
+        <span class="hero__name-mobile block md:hidden">
+          <span class="line"><span class="intro" style="--d:1">{profile.firstNames}</span></span>
+          <span class="line"><span class="intro" style="--d:2">{profile.lastNames}</span></span>
+        </span>
       </h1>
       <p class="hero__role intro" style="--d:3">{t.hero.role}</p>
 
@@ -93,6 +107,16 @@ const t = useTranslations(lang);
   }
   .hero__name .line { display: block; overflow: hidden; padding-bottom: 0.06em; white-space: nowrap; }
   .hero__name .line > span { display: inline-block; }
+  .hero__name-desktop { display: none; }
+  .hero__name-mobile { display: block; }
+  .hidden { display: none; }
+  .block { display: block; }
+  .hero__name-desktop :global(.tech-text) {
+    display: block;
+    max-width: 100%;
+    line-height: 0.98;
+    letter-spacing: -0.05em;
+  }
 
   .hero__role {
     margin-top: var(--gap);
@@ -138,6 +162,16 @@ const t = useTranslations(lang);
     width: min(100%, 420px, calc((100svh - var(--nav-h) - 6rem) * 0.7467));
   }
 
+  @media (min-width: 861px) {
+    .hero { padding-block: calc(var(--nav-h) + 2.5rem) 4rem; }
+    .hero__grid {
+      width: min(100% - 2 * var(--gutter), 1080px);
+      padding-inline: clamp(1rem, 2vw, 1.75rem);
+      gap: clamp(3rem, 6vw, 5rem);
+    }
+    .hero__name { font-size: clamp(3rem, min(5.5vw, 9.5vh), 5.3rem); }
+  }
+
   /* Page-load sequence: the only orchestrated entrance on the page. */
   :global(.js:not(.reduced)) .intro {
     opacity: 0;
@@ -171,10 +205,31 @@ const t = useTranslations(lang);
   }
 
   @media (max-width: 860px) {
-    .hero { min-height: auto; padding-top: calc(var(--nav-h) + 1.75rem); }
-    .hero__grid { grid-template-columns: 1fr; gap: 2rem; }
-    .hero__stage { order: -1; width: min(66vw, 300px); }
+    .hero {
+      min-height: 100svh;
+      align-items: stretch;
+      padding-top: calc(var(--nav-h) + 0.5rem);
+      padding-bottom: 0;
+    }
+    .hero__grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: minmax(calc(100svh - var(--nav-h) - 0.5rem), auto) auto;
+      gap: 0;
+    }
+    .hero__stage {
+      order: -1;
+      align-self: center;
+      width: min(78vw, 360px, calc((100svh - var(--nav-h) - 4rem) * 0.7467));
+    }
+    .hero__copy { padding-top: clamp(2.5rem, 10vw, 4.5rem); }
     .hero__name { font-size: min(10.4vw, 3.4rem); }
     .hero__role { font-size: 1.3rem; }
+  }
+
+  @media (min-width: 861px) {
+    .hero__name-desktop,
+    .md\:block { display: block; }
+    .hero__name-mobile,
+    .md\:hidden { display: none; }
   }
 </style>

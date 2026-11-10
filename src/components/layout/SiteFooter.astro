@@ -1,13 +1,12 @@
 ---
 import Icon from '../ui/Icon.astro';
-import { useTranslations, type Alternates, type Lang } from '../../i18n/ui';
+import { useTranslations, type Lang } from '../../i18n/ui';
 import { profile } from '../../data/profile';
 
-type Props = { lang: Lang; alternates: Alternates };
-const { lang, alternates } = Astro.props;
+type Props = { lang: Lang };
+const { lang } = Astro.props;
 const t = useTranslations(lang);
 const year = new Date().getFullYear();
-const langs: Lang[] = ['es', 'en'];
 ---
 
 <footer class="site-footer">
@@ -39,15 +38,6 @@ const langs: Lang[] = ['es', 'en'];
       </ul>
 
       <div class="site-footer__end">
-        <div class="site-footer__lang" role="group" aria-label={t.a11y.language}>
-          {
-            langs.map((code) => (
-              <a href={alternates[code]} hreflang={code} lang={code} data-lang-link={code} aria-current={code === lang ? 'true' : undefined}>
-                {code.toUpperCase()}
-              </a>
-            ))
-          }
-        </div>
         <a class="site-footer__top" href="#main">
           {t.footer.top}
           <Icon name="arrowUp" />
@@ -116,20 +106,7 @@ const langs: Lang[] = ['es', 'en'];
   .site-footer__links a:hover :global(svg) { transform: translateY(-2px) rotate(-6deg); }
   .site-footer__top:hover :global(svg) { transform: translateY(-3px); }
 
-  .site-footer__end { display: flex; align-items: center; gap: 1.2rem; }
-  .site-footer__lang { display: inline-flex; padding: 0.2rem; border: 1px solid var(--line); border-radius: 999px; }
-  .site-footer__lang a {
-    display: grid;
-    place-items: center;
-    min-width: 2.6rem;
-    min-height: 2.2rem;
-    border-radius: 999px;
-    text-decoration: none;
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: var(--muted);
-  }
-  .site-footer__lang a[aria-current='true'] { background: var(--fg); color: var(--bg); }
+  .site-footer__end { display: flex; align-items: center; }
 
   .site-footer__legal { font-size: var(--step--1); color: var(--muted); }
 

@@ -4,7 +4,11 @@ import cutout from '../../assets/images/desarrollador-cutout.png';
 import { useTranslations, type Lang } from '../../i18n/ui';
 
 type Props = { lang: Lang };
-const t = useTranslations(Astro.props.lang);
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const musicQuote = lang === 'es'
+  ? 'Sé tú mismo, y te aseguro que te va a encantar ser tú mismo.'
+  : "Just be yourself, and I promise you, you'll love being yourself.";
 ---
 
 <!--
@@ -38,23 +42,22 @@ const t = useTranslations(Astro.props.lang);
         />
         <span class="about__shadow" aria-hidden="true"></span>
 
-        <!-- Easter egg: the headphones in the photo (and the vinyl) play/pause the track. -->
-        <button class="headphones-hit" type="button" data-audio-toggle tabindex="-1" aria-hidden="true"></button>
+        <!-- Easter egg: clicking the record reveals a quote. -->
         <button
           class="egg egg--music"
           type="button"
-          data-audio-toggle
-          data-audio-src="/audio/how-to-pray.mp3"
-          data-label-play={t.about.musicPlay}
-          data-label-pause={t.about.musicPause}
-          data-label-error={t.about.musicError}
-          aria-pressed="false"
-          aria-label={t.about.musicPlay}
+          aria-expanded="false"
+          aria-controls="music-quote"
+          aria-label={lang === 'es' ? 'Mostrar frase de Kendrick Lamar' : 'Show Kendrick Lamar quote'}
+          data-music-quote-trigger
         >
           <span class="vinyl" aria-hidden="true"><span class="vinyl__label">K.DOT</span></span>
           <span class="eq" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
-          <span class="egg__tip" aria-hidden="true" data-audio-tip>{t.about.music}</span>
         </button>
+        <blockquote class="music-quote" id="music-quote" data-music-quote role="tooltip" hidden>
+          <q>{musicQuote}</q>
+          <cite>— Kendrick Lamar</cite>
+        </blockquote>
       </figure>
     </div>
 
@@ -76,6 +79,35 @@ const t = useTranslations(Astro.props.lang);
     </span>
   </div>
 </section>
+
+<script>
+  const trigger = document.querySelector<HTMLButtonElement>('[data-music-quote-trigger]');
+  const quote = document.querySelector<HTMLElement>('[data-music-quote]');
+
+  if (trigger && quote) {
+    const closeQuote = () => {
+      quote.hidden = true;
+      trigger.setAttribute('aria-expanded', 'false');
+    };
+
+    trigger.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+      quote.hidden = isOpen;
+      trigger.setAttribute('aria-expanded', String(!isOpen));
+    });
+
+    document.addEventListener('click', (event) => {
+      if (event.target instanceof Node && !trigger.contains(event.target) && !quote.contains(event.target)) {
+        closeQuote();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeQuote();
+    });
+  }
+</script>
 
 <style>
   .about { position: relative; padding-block: var(--section); }
@@ -201,20 +233,6 @@ const t = useTranslations(Astro.props.lang);
     color: inherit;
     cursor: pointer;
   }
-  /* Invisible hit area over the headphones in the photo. */
-  .headphones-hit {
-    position: absolute;
-    z-index: 2;
-    left: 24%;
-    top: 26%;
-    width: 18%;
-    height: 12%;
-    padding: 0;
-    border: 0;
-    border-radius: 50%;
-    background: none;
-    cursor: pointer;
-  }
   .vinyl {
     position: relative;
     width: 38px;
@@ -250,16 +268,47 @@ const t = useTranslations(Astro.props.lang);
   .eq span:nth-child(4) { animation-delay: -0.15s; }
   .egg--music:hover .vinyl,
   .egg--music:focus-visible .vinyl,
+  .egg--music[aria-expanded='true'] .vinyl,
   .egg--music:hover .eq span,
   .egg--music:focus-visible .eq span,
-  .egg--music.is-playing .vinyl,
-  .egg--music.is-playing .eq span { animation-play-state: running; }
+  .egg--music[aria-expanded='true'] .eq span { animation-play-state: running; }
   .egg--music:hover .eq,
   .egg--music:focus-visible .eq,
-  .egg--music.is-playing .eq { opacity: 1; }
-  .egg--music.is-playing .vinyl { box-shadow: 0 0 0 3px color-mix(in srgb, #c8343a 45%, transparent), 0 6px 14px rgb(0 0 0 / 0.35); }
-  .egg--music.has-error .egg__tip { opacity: 1; transform: none; }
-  .egg--music .egg__tip { right: 0; top: calc(100% + 0.4rem); }
+  .egg--music[aria-expanded='true'] .eq { opacity: 1; }
+  .egg--music[aria-expanded='true'] .vinyl { box-shadow: 0 0 0 3px color-mix(in srgb, #c8343a 45%, transparent), 0 6px 14px rgb(0 0 0 / 0.35); }
+  .music-quote {
+    position: absolute;
+    z-index: 4;
+    right: 2%;
+    bottom: calc(22% + 3.5rem);
+    width: min(19rem, 78vw);
+    margin: 0;
+    padding: 1rem 1.15rem;
+    border: 1px solid var(--line);
+    border-radius: 0.75rem;
+    background: color-mix(in srgb, var(--surface) 92%, #0c111d);
+    color: var(--fg);
+    box-shadow: 0 16px 40px rgb(0 0 0 / 0.2);
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    line-height: 1.35;
+    animation: music-quote-enter 260ms var(--ease-out) both;
+  }
+  .music-quote cite {
+    display: block;
+    margin-top: 0.55rem;
+    color: var(--brass-light);
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-style: normal;
+    font-weight: 600;
+    text-align: right;
+  }
+  .music-quote[hidden] { display: none; }
+  @keyframes music-quote-enter {
+    from { opacity: 0; transform: translate3d(0, 8px, 0); }
+    to { opacity: 1; transform: translate3d(0, 0, 0); }
+  }
   @keyframes vinyl-spin { to { transform: rotate(1turn); } }
   @keyframes eq { 0%, 100% { height: 25%; } 50% { height: 100%; } }
 
@@ -302,5 +351,15 @@ const t = useTranslations(Astro.props.lang);
     .egg--web svg { transform: scaleX(-1); }
     .egg--web .egg__tip { left: auto; right: 0; top: 100%; }
     .egg--music { bottom: 8%; }
+    .music-quote { bottom: calc(8% + 3.5rem); }
+  }
+
+  @media (max-width: 860px) {
+    .about { padding-block: clamp(3.5rem, 10vw, 5rem); }
+    .about__inner { gap: clamp(1.5rem, 6vw, 2.25rem); }
+    .about__copy { gap: 1rem; }
+    .about__statement { max-width: 22ch; font-size: clamp(2rem, 7.8vw, 3rem); }
+    .about__body { gap: 0.9rem; font-size: 1rem; line-height: 1.65; }
+    .about__figure { width: min(84vw, 380px); }
   }
 </style>

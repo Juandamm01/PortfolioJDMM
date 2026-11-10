@@ -6,9 +6,16 @@
 <div class="stage" aria-hidden="true">
   <div class="stage__daylight"></div>
   <div class="stage__night"></div>
+  <canvas class="stage__dots"></canvas>
   <div class="stage__spot"></div>
   <div class="stage__grain"></div>
 </div>
+
+<script>
+  import { initBlinkingDots } from '../../scripts/blinking-dots';
+
+  initBlinkingDots();
+</script>
 
 <style>
   .stage {
@@ -20,6 +27,17 @@
     overflow: hidden;
   }
   .stage > div { position: absolute; inset: 0; }
+  .stage__dots {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: rgb(0 0 0 / 0.12);
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+  }
+  :global(:root.lights-off) .stage__dots { color: rgb(255 255 255 / 0.15); }
 
   /* Soft window light from the upper right, like a photo studio backdrop. */
   .stage__daylight {
