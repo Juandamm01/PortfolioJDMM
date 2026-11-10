@@ -1,0 +1,107 @@
+---
+type Props = {
+  text: string;
+  fontSize?: number;
+  fontWeight?: number;
+  reveal?: 'letter';
+  clickKick?: boolean;
+  guides?: boolean;
+  color?: string;
+};
+
+const {
+  text,
+  fontSize = 90,
+  fontWeight = 700,
+  reveal = 'letter',
+  clickKick = false,
+  guides = false,
+  color = 'currentColor',
+} = Astro.props;
+const words = text.trim().split(/\s+/);
+let letterIndex = 0;
+---
+
+<span
+  class:list={['tech-text', { 'tech-text--guides': guides }]}
+  aria-label={text}
+  data-tech-text
+  data-click-kick={clickKick}
+  data-reveal-mode={reveal}
+  style={`--tech-font-size:${fontSize}px;--tech-font-weight:${fontWeight};color:${color}`}
+>
+  {
+    words.map((word) => (
+        <span class="tech-text__word" aria-hidden="true">
+          {
+            Array.from(word).map((letter, index) => (
+              <span class="tech-text__letter" style={`--letter-index:${letterIndex++}`}>
+                {letter}
+              </span>
+            ))
+          }
+        </span>
+      ))
+  }
+</span>
+
+<style>
+  .tech-text {
+    display: inline-block;
+    max-width: 100%;
+    font-size: var(--tech-font-size);
+    font-weight: var(--tech-font-weight);
+    white-space: normal;
+    perspective: 700px;
+  }
+
+  .tech-text__word {
+    display: inline-block;
+    margin-inline-end: 0.22em;
+    white-space: nowrap;
+  }
+
+  .tech-text__letter {
+    display: inline-block;
+    transform-origin: 50% 100%;
+    animation: tech-text-reveal 700ms var(--ease-out) both;
+    animation-delay: calc(var(--letter-index) * 18ms);
+  }
+
+  .tech-text--guides .tech-text__letter {
+    outline: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+  }
+
+  [data-click-kick='true'].is-kicked .tech-text__letter {
+    animation: tech-text-kick 650ms var(--ease-out) both;
+    animation-delay: calc(var(--letter-index) * 10ms);
+  }
+
+  @keyframes tech-text-reveal {
+    from { opacity: 0; transform: translate3d(0, 0.45em, 0) rotateX(-35deg); }
+    to { opacity: 1; transform: translate3d(0, 0, 0) rotateX(0); }
+  }
+
+  @keyframes tech-text-kick {
+    35% { transform: translate3d(0, -0.22em, 0) rotate(-7deg); }
+    70% { transform: translate3d(0, 0.08em, 0) rotate(4deg); }
+    100% { transform: translate3d(0, 0, 0) rotate(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tech-text__letter { animation: none; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-tech-text][data-click-kick="true"]').forEach((element) => {
+    let kickTimeout = 0;
+    element.addEventListener('click', () => {
+      window.clearTimeout(kickTimeout);
+      element.classList.remove('is-kicked');
+      void element.offsetWidth;
+      element.classList.add('is-kicked');
+      kickTimeout = window.setTimeout(() => element.classList.remove('is-kicked'), 1200);
+    });
+  });
+</script>

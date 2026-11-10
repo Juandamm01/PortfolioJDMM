@@ -49,10 +49,6 @@ const es = {
     ],
     figureAlt: 'Juan David Martínez Medina trabajando en su portátil frente a un atril',
     web: 'Tu desarrollador amigable del vecindario.',
-    music: 'En los audífonos: Kendrick Lamar.',
-    musicPlay: 'Reproducir “how to pray” de Kendrick Lamar',
-    musicPause: 'Pausar “how to pray” de Kendrick Lamar',
-    musicError: 'No se pudo reproducir el audio.',
   },
   process: {
     title: 'Etapas en las que participo',
@@ -148,10 +144,6 @@ const en: Dict = {
     ],
     figureAlt: 'Juan David Martínez Medina working on his laptop at a lectern',
     web: 'Your friendly neighborhood developer.',
-    music: 'On the headphones: Kendrick Lamar.',
-    musicPlay: 'Play “how to pray” by Kendrick Lamar',
-    musicPause: 'Pause “how to pray” by Kendrick Lamar',
-    musicError: 'The audio could not be played.',
   },
   process: {
     title: 'Stages I work across',

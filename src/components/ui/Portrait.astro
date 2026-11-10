@@ -26,6 +26,7 @@ const { alt, role } = Astro.props;
         loading="eager"
         fetchpriority="high"
       />
+      <canvas class="portrait__lens" aria-hidden="true"></canvas>
       <span class="portrait__glare" aria-hidden="true"></span>
     </div>
     <figcaption class="portrait__plate">
@@ -34,6 +35,127 @@ const { alt, role } = Astro.props;
     </figcaption>
   </div>
 </figure>
+
+<script>
+  type TrailPoint = { x: number; y: number; createdAt: number };
+  const portraits = document.querySelectorAll<HTMLElement>('.portrait');
+  const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
+  const controller = new AbortController();
+  const { signal } = controller;
+  const persistence = 2500;
+  const fadeDuration = 700;
+  const radius = 56;
+  let disposed = false;
+  const cleanupPortraits: Array<() => void> = [];
+
+  portraits.forEach((portrait) => {
+    const photo = portrait.querySelector<HTMLElement>('.portrait__photo');
+    const image = photo?.querySelector('img');
+    const canvas = photo?.querySelector<HTMLCanvasElement>('.portrait__lens');
+    const context = canvas?.getContext('2d');
+    const mask = document.createElement('canvas');
+    const maskContext = mask.getContext('2d');
+    if (!photo || !image || !canvas || !context || !maskContext) return;
+
+    const points: TrailPoint[] = [];
+    let frame = 0;
+    let previous: { x: number; y: number } | null = null;
+    let width = 0;
+    let height = 0;
+    let pixelRatio = 1;
+
+    const draw = (time: number) => {
+      frame = 0;
+      if (disposed || !image.complete || !image.naturalWidth) return;
+
+      for (let index = points.length - 1; index >= 0; index -= 1) {
+        if (time - points[index].createdAt >= persistence + fadeDuration) points.splice(index, 1);
+      }
+
+      maskContext.clearRect(0, 0, width, height);
+      for (const point of points) {
+        const age = time - point.createdAt;
+        const opacity = age <= persistence ? 1 : 1 - (age - persistence) / fadeDuration;
+        const gradient = maskContext.createRadialGradient(
+          point.x, point.y, 0,
+          point.x, point.y, radius,
+        );
+        gradient.addColorStop(0, `rgba(255, 255, 255, ${opacity})`);
+        gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        maskContext.fillStyle = gradient;
+        maskContext.fillRect(point.x - radius, point.y - radius, radius * 2, radius * 2);
+      }
+
+      context.clearRect(0, 0, width, height);
+      context.filter = 'grayscale(1) saturate(0.96) contrast(1.02)';
+      context.drawImage(image, 0, 0, width, height);
+      context.filter = 'none';
+      context.globalCompositeOperation = 'destination-in';
+      context.drawImage(mask, 0, 0, width, height);
+      context.globalCompositeOperation = 'source-over';
+
+      if (points.length) frame = requestAnimationFrame(draw);
+    };
+
+    const queueDraw = () => {
+      if (!frame) frame = requestAnimationFrame(draw);
+    };
+
+    const resize = () => {
+      const bounds = photo.getBoundingClientRect();
+      width = bounds.width;
+      height = bounds.height;
+      pixelRatio = Math.min(window.devicePixelRatio || 1, 1.25);
+      canvas.width = mask.width = Math.round(width * pixelRatio);
+      canvas.height = mask.height = Math.round(height * pixelRatio);
+      context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+      maskContext.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+      queueDraw();
+    };
+
+    photo.addEventListener('pointermove', (event) => {
+      if (!finePointer.matches || disposed) return;
+
+      const bounds = photo.getBoundingClientRect();
+      const current = { x: event.clientX - bounds.left, y: event.clientY - bounds.top };
+
+      if (!previous) {
+        points.push({ ...current, createdAt: performance.now() });
+      } else {
+        const distance = Math.hypot(current.x - previous.x, current.y - previous.y);
+        const steps = Math.ceil(distance / 26);
+        for (let step = 1; step <= steps; step += 1) {
+          const progress = step / steps;
+          points.push({
+            x: previous.x + (current.x - previous.x) * progress,
+            y: previous.y + (current.y - previous.y) * progress,
+            createdAt: performance.now(),
+          });
+        }
+      }
+
+      previous = current;
+      queueDraw();
+    }, { passive: true, signal });
+
+    photo.addEventListener('pointerleave', () => { previous = null; }, { signal });
+    const resizeObserver = new ResizeObserver(resize);
+    resizeObserver.observe(photo);
+    if (!image.complete) image.addEventListener('load', queueDraw, { once: true, signal });
+    resize();
+    cleanupPortraits.push(() => {
+      resizeObserver.disconnect();
+      if (frame) cancelAnimationFrame(frame);
+      context.clearRect(0, 0, canvas.width, canvas.height);
+    });
+  });
+
+  document.addEventListener('astro:before-swap', () => {
+    disposed = true;
+    controller.abort();
+    cleanupPortraits.forEach((cleanup) => cleanup());
+  }, { once: true, signal });
+</script>
 
 <style>
   .portrait {
@@ -73,6 +195,17 @@ const { alt, role } = Astro.props;
     height: 100%;
     object-fit: cover;
     filter: saturate(0.96) contrast(1.02);
+  }
+
+  .portrait__lens {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    pointer-events: none;
   }
 
   /* Frame behind the photo: the doorway jamb, pushed back in depth. */
