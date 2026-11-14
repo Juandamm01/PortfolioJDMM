@@ -37,7 +37,7 @@ const es = {
       'Construyo sistemas funcionales, eficientes y bien estructurados, desde el diseño de la solución hasta la interfaz que usa cada persona.',
     location: 'Villavicencio, Colombia',
     cv: 'Descargar CV',
-    cvFile: '/pdf/CV_Español.pdf',
+    cvFile: '/pdf/CV_Juan_David_Martinez_ES.pdf',
     portraitAlt: 'Retrato profesional de Juan David Martínez Medina con traje oscuro de rayas y camisa blanca',
   },
   about: {
@@ -132,7 +132,7 @@ const en: Dict = {
       'I build functional, efficient and well-structured systems, from the design of the solution to the interface each person uses.',
     location: 'Villavicencio, Colombia',
     cv: 'Download CV',
-    cvFile: '/pdf/CV_English.pdf',
+    cvFile: '/pdf/CV_Juan_David_Martinez_EN.pdf',
     portraitAlt: 'Professional portrait of Juan David Martínez Medina wearing a dark pinstripe suit and a white shirt',
   },
   about: {
